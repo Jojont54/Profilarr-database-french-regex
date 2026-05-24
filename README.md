@@ -87,7 +87,11 @@ Les scores restent dans les profils, pas dans les regex. Cela conserve la logiqu
 2160p Remux FR
 720p Quality FR
 Anime 1080p FR
+Anime 1080p VOSTFR FR
 ```
+
+`Anime 1080p FR` priorise `MULTi` > `VOSTFR` > `VF`.
+`Anime 1080p VOSTFR FR` priorise uniquement les releases `VOSTFR`.
 
 ## Media management
 

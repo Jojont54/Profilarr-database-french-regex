@@ -1,0 +1,156 @@
+name: Anime 1080p VOSTFR FR
+description: |-
+  Anime 1080p VOSTFR FR cible uniquement les releases anime en version originale
+  sous-titree francaise tout en conservant la logique de tiers anime de Dictionarry.
+
+  - Accepte VOSTFR uniquement
+  - Rejette MULTi, VF, VFQ, les groupes FR de faible qualite et les releases sans marqueur francais explicite
+  - Utilise les tiers BluRay et WEB-DL anime existants de Dictionarry
+tags:
+- Anime
+- 1080p
+- French
+- Radarr
+- Sonarr
+upgradesAllowed: true
+minCustomFormatScore: 0
+upgradeUntilScore: 10000
+minScoreIncrement: 1
+custom_formats:
+- name: Anime Bluray Tier 1
+  score: 1400
+- name: Anime Bluray Tier 2
+  score: 1300
+- name: Anime Bluray Tier 3
+  score: 1200
+- name: Anime Bluray Tier 4
+  score: 1100
+- name: Anime Bluray Tier 5
+  score: 1000
+- name: Anime WEB-DL Tier 1
+  score: 600
+- name: Anime WEB-DL Tier 2
+  score: 500
+- name: FR Anime Tier 01
+  score: 101000
+- name: FR Anime Tier 02
+  score: 100000
+- name: FR Anime Tier 03
+  score: 99000
+- name: FR Anime FanSub
+  score: 98000
+- name: French MULTi
+  score: -999999
+- name: French VOSTFR
+  score: 100000
+- name: French VF
+  score: -999999
+- name: FR Scene Groups
+  score: 99000
+- name: FR Global Tier 01
+  score: 101000
+- name: FR Global Tier 02
+  score: 100000
+- name: FR HDLight Tier
+  score: 50
+- name: CR
+  score: 7
+- name: DSNP
+  score: 6
+- name: NF
+  score: 5
+- name: AMZN
+  score: 4
+- name: Dolby Digital +
+  score: 50
+- name: Dolby Digital
+  score: 25
+- name: DTS
+  score: 25
+- name: AAC
+  score: 10
+- name: French VFQ
+  score: -999999
+- name: FR LQ
+  score: -999999
+- name: French Missing
+  score: -999999
+- name: AV1
+  score: -999999
+- name: German DL
+  score: -999999
+- name: VP9
+  score: -999999
+- name: VVC
+  score: -999999
+- name: Xvid
+  score: -999999
+custom_formats_radarr:
+- name: FR Movie HD Bluray Tier 01
+  score: 1400
+- name: FR Movie HD Bluray Tier 02
+  score: 1300
+- name: FR Movie WEB Tier 01
+  score: 600
+- name: FR Movie WEB Tier 02
+  score: 500
+custom_formats_sonarr:
+- name: FR TV HD Bluray Tier 01
+  score: 1400
+- name: FR TV WEB Tier 01
+  score: 600
+- name: FR TV WEB Tier 02
+  score: 500
+- name: FR TV WEB Tier 03
+  score: 400
+- name: Season Pack
+  score: 10
+qualities:
+- id: -5
+  name: Bluray/REMUX 1080p
+  description: ''
+  qualities:
+  - id: 8
+    name: Remux-1080p
+  - id: 10
+    name: Bluray-1080p
+- id: -2
+  name: WEB 1080p
+  description: ''
+  qualities:
+  - id: 9
+    name: WEBDL-1080p
+  - id: 11
+    name: WEBRip-1080p
+  - id: 12
+    name: HDTV-1080p
+- id: 13
+  name: Bluray-720p
+- id: -3
+  name: WEB 720p
+  description: ''
+  qualities:
+  - id: 14
+    name: WEBDL-720p
+  - id: 15
+    name: WEBRip-720p
+  - id: 16
+    name: HDTV-720p
+- id: 18
+  name: Bluray-480p
+- id: -4
+  name: WEB 480p
+  description: ''
+  qualities:
+  - id: 20
+    name: WEBRip-480p
+  - id: 19
+    name: WEBDL-480p
+- id: 22
+  name: DVD
+- id: 24
+  name: SDTV
+upgrade_until:
+  id: -5
+  name: Bluray/REMUX 1080p
+language: any
