@@ -635,4 +635,29 @@ conditions:
   pattern: ZiRCON
   required: false
   type: release_group
+- name: AKLHD
+  negate: false
+  pattern: AKLHD
+  required: false
+  type: release_group
+- name: N0Z00M
+  negate: false
+  pattern: N0Z00M
+  required: false
+  type: release_group
+- name: PHoQUE
+  negate: false
+  pattern: PHoQUE
+  required: false
+  type: release_group
+- name: SharpHD
+  negate: false
+  pattern: SharpHD
+  required: false
+  type: release_group
+- name: USURY
+  negate: false
+  pattern: USURY
+  required: false
+  type: release_group
 tests: []

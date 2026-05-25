@@ -445,11 +445,6 @@ conditions:
   pattern: ZT
   required: false
   type: release_group
-- name: AKLHD
-  negate: false
-  pattern: AKLHD
-  required: false
-  type: release_group
 - name: ARKRiL
   negate: false
   pattern: ARKRiL
