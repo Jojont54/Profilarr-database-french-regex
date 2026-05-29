@@ -80,8 +80,9 @@ INSERT INTO custom_formats (name, description) VALUES ('FR TV Remux Tier 01', 'M
 INSERT INTO custom_formats (name, description) VALUES ('FR TV WEB Tier 01', 'Matches French TV release groups who fall under WEB Tier 01');
 INSERT INTO custom_formats (name, description) VALUES ('FR TV WEB Tier 02', 'Matches French TV release groups who fall under WEB Tier 02');
 INSERT INTO custom_formats (name, description) VALUES ('FR TV WEB Tier 03', 'Matches French TV release groups who fall under WEB Tier 03');
-INSERT INTO custom_formats (name, description) VALUES ('French Missing', 'Rejects releases without an explicit French MULTi, VF, VOSTFR, or VFQ marker.');
+INSERT INTO custom_formats (name, description) VALUES ('French Missing', 'Rejects releases without an explicit French MULTi, French Original, VF, VOSTFR, or VFQ marker.');
 INSERT INTO custom_formats (name, description) VALUES ('French MULTi', 'Prioritizes French MULTi releases without also matching VFQ or VOSTFR.');
+INSERT INTO custom_formats (name, description) VALUES ('French Original Marker', 'Priorise les releases marquees VOF ou VOQ comme version originale francophone.');
 INSERT INTO custom_formats (name, description) VALUES ('French VF', 'Prioritizes French dubbed releases when they are not MULTi, VOSTFR, or VFQ.');
 INSERT INTO custom_formats (name, description) VALUES ('French VFQ', 'Rejects Quebec French releases from French profiles.');
 INSERT INTO custom_formats (name, description) VALUES ('French VOSTFR', 'Allows lower-priority original-audio releases with French subtitles when they are not MULTi or VF.');
@@ -878,6 +879,10 @@ FROM custom_formats cf
 WHERE cf.name = 'FR Anime Tier 01';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT cf.name, 'TANOSHii', 'release_title', 'all', 0, 0
+FROM custom_formats cf
+WHERE cf.name = 'FR Anime Tier 01';
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT cf.name, 'TenmaLand', 'release_title', 'all', 0, 0
 FROM custom_formats cf
 WHERE cf.name = 'FR Anime Tier 01';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
@@ -2849,6 +2854,10 @@ SELECT cf.name, 'Not French VFQ', 'release_title', 'all', 1, 1
 FROM custom_formats cf
 WHERE cf.name = 'French Missing';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT cf.name, 'Not French Original Marker', 'release_title', 'all', 1, 1
+FROM custom_formats cf
+WHERE cf.name = 'French Missing';
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT cf.name, 'French MULTi', 'release_title', 'all', 0, 1
 FROM custom_formats cf
 WHERE cf.name = 'French MULTi';
@@ -2877,7 +2886,15 @@ SELECT cf.name, 'Not French VFQ', 'release_title', 'all', 1, 1
 FROM custom_formats cf
 WHERE cf.name = 'French VF';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT cf.name, 'Not French Original Marker', 'release_title', 'all', 1, 1
+FROM custom_formats cf
+WHERE cf.name = 'French VF';
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT cf.name, 'French VFQ', 'release_title', 'all', 0, 1
+FROM custom_formats cf
+WHERE cf.name = 'French VFQ';
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT cf.name, 'Not French Original Marker', 'release_title', 'all', 1, 1
 FROM custom_formats cf
 WHERE cf.name = 'French VFQ';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
@@ -2896,6 +2913,14 @@ INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, 
 SELECT cf.name, 'Not French VFQ', 'release_title', 'all', 1, 1
 FROM custom_formats cf
 WHERE cf.name = 'French VOSTFR';
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT cf.name, 'Not French Original Marker', 'release_title', 'all', 1, 1
+FROM custom_formats cf
+WHERE cf.name = 'French VOSTFR';
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT cf.name, 'French Original Marker', 'release_title', 'all', 0, 1
+FROM custom_formats cf
+WHERE cf.name = 'French Original Marker';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT cf.name, 'Full Disc', 'release_title', 'all', 0, 1
 FROM custom_formats cf
@@ -4047,6 +4072,14 @@ WHERE cf.name = 'French MULTi' AND t.name = 'Language';
 INSERT INTO custom_format_tags (custom_format_name, tag_name)
 SELECT cf.name, t.name
 FROM custom_formats cf, tags t
+WHERE cf.name = 'French Original Marker' AND t.name = 'French';
+INSERT INTO custom_format_tags (custom_format_name, tag_name)
+SELECT cf.name, t.name
+FROM custom_formats cf, tags t
+WHERE cf.name = 'French Original Marker' AND t.name = 'Language';
+INSERT INTO custom_format_tags (custom_format_name, tag_name)
+SELECT cf.name, t.name
+FROM custom_formats cf, tags t
 WHERE cf.name = 'French VF' AND t.name = 'French';
 INSERT INTO custom_format_tags (custom_format_name, tag_name)
 SELECT cf.name, t.name
@@ -4868,6 +4901,10 @@ INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expr
 SELECT 'FR Anime Tier 01', 'TANOSHii', re.name
 FROM regular_expressions re
 WHERE re.name = 'TANOSHii';
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
+SELECT 'FR Anime Tier 01', 'TenmaLand', re.name
+FROM regular_expressions re
+WHERE re.name = 'TenmaLand';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'FR Anime Tier 01', 'Tsundere-Raws', re.name
 FROM regular_expressions re
@@ -6737,6 +6774,10 @@ SELECT 'French Missing', 'Not French VFQ', re.name
 FROM regular_expressions re
 WHERE re.name = 'French VFQ';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
+SELECT 'French Missing', 'Not French Original Marker', re.name
+FROM regular_expressions re
+WHERE re.name = 'French Original Marker';
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'French MULTi', 'French MULTi', re.name
 FROM regular_expressions re
 WHERE re.name = 'French MULTi';
@@ -6765,9 +6806,17 @@ SELECT 'French VF', 'Not French VFQ', re.name
 FROM regular_expressions re
 WHERE re.name = 'French VFQ';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
+SELECT 'French VF', 'Not French Original Marker', re.name
+FROM regular_expressions re
+WHERE re.name = 'French Original Marker';
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'French VFQ', 'French VFQ', re.name
 FROM regular_expressions re
 WHERE re.name = 'French VFQ';
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
+SELECT 'French VFQ', 'Not French Original Marker', re.name
+FROM regular_expressions re
+WHERE re.name = 'French Original Marker';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'French VOSTFR', 'French VOSTFR', re.name
 FROM regular_expressions re
@@ -6784,6 +6833,14 @@ INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expr
 SELECT 'French VOSTFR', 'Not French VFQ', re.name
 FROM regular_expressions re
 WHERE re.name = 'French VFQ';
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
+SELECT 'French VOSTFR', 'Not French Original Marker', re.name
+FROM regular_expressions re
+WHERE re.name = 'French Original Marker';
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
+SELECT 'French Original Marker', 'French Original Marker', re.name
+FROM regular_expressions re
+WHERE re.name = 'French Original Marker';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'Full Disc', 'Full Disc', re.name
 FROM regular_expressions re
@@ -7499,3 +7556,50 @@ INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, 
 INSERT INTO condition_sources (custom_format_name, condition_name, source) VALUES ('SKST', 'WEBRip', 'webrip');
 INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'SKST' AND t.name = 'Streaming Service';
 INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'SKST' AND t.name = 'WEB-DL';
+
+-- Dictionarry V2 language custom formats without release-group tier logic
+INSERT INTO custom_formats (name, description) VALUES ('Nordic', 'Matches releases explicitly marked Nordic.');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('Nordic', 'Nordic', 'release_title', 'all', 0, 1);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('Nordic', 'Nordic', 'Nordic');
+INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'Nordic' AND t.name = 'Language';
+
+INSERT INTO custom_formats (name, description) VALUES ('Dual Audio', 'Matches releases explicitly tagged as Dual Audio.');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('Dual Audio', 'Dual Audio', 'release_title', 'all', 0, 1);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('Dual Audio', 'Dual Audio', 'Dual Audio');
+INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'Dual Audio' AND t.name = 'Language';
+
+-- Native French content is already in the desired language and does not need a dubbing marker.
+-- MULTi is excluded here to keep a native MULTi release from receiving two language bonuses.
+INSERT INTO custom_formats (name, description) VALUES ('French Original', 'Priorise les contenus dont la langue originale est le francais, sans exiger de marqueur MULTi ou VF.');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('French Original', 'Original', 'language', 'all', 0, 1);
+INSERT INTO condition_languages (custom_format_name, condition_name, language_name, except_language) VALUES ('French Original', 'Original', 'Original', 0);
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('French Original', 'French', 'language', 'all', 0, 1);
+INSERT INTO condition_languages (custom_format_name, condition_name, language_name, except_language) VALUES ('French Original', 'French', 'French', 0);
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('French Original', 'Not French MULTi', 'release_title', 'all', 1, 1);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('French Original', 'Not French MULTi', 'French MULTi');
+INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'French Original' AND t.name IN ('French', 'Language');
+
+-- An original French or Quebec release must not be downgraded as VF/VFQ/VOSTFR.
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('French VF', 'Not Original', 'language', 'all', 1, 1);
+INSERT INTO condition_languages (custom_format_name, condition_name, language_name, except_language) VALUES ('French VF', 'Not Original', 'Original', 0);
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('French VFQ', 'Not Original', 'language', 'all', 1, 1);
+INSERT INTO condition_languages (custom_format_name, condition_name, language_name, except_language) VALUES ('French VFQ', 'Not Original', 'Original', 0);
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('French VOSTFR', 'Not Original', 'language', 'all', 1, 1);
+INSERT INTO condition_languages (custom_format_name, condition_name, language_name, except_language) VALUES ('French VOSTFR', 'Not Original', 'Original', 0);
+
+-- Dictionarry V2 source formats required by the revised technical score ladder
+INSERT INTO custom_formats (name, description) VALUES ('576p WEB-DL', 'Matches 576p WEB-DLs.');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('576p WEB-DL', '576p', 'resolution', 'all', 0, 1);
+INSERT INTO condition_resolutions (custom_format_name, condition_name, resolution) VALUES ('576p WEB-DL', '576p', '576p');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('576p WEB-DL', 'WEB-DL', 'source', 'all', 0, 1);
+INSERT INTO condition_sources (custom_format_name, condition_name, source) VALUES ('576p WEB-DL', 'WEB-DL', 'web_dl');
+INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = '576p WEB-DL' AND t.name = 'Source';
+
+INSERT INTO custom_formats (name, description) VALUES ('1080p Bluray (Efficient)', 'Matches 1080p x264 Blurays as an Efficient movie fallback.');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('1080p Bluray (Efficient)', '1080p', 'resolution', 'all', 0, 1);
+INSERT INTO condition_resolutions (custom_format_name, condition_name, resolution) VALUES ('1080p Bluray (Efficient)', '1080p', '1080p');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('1080p Bluray (Efficient)', 'Bluray', 'source', 'all', 0, 1);
+INSERT INTO condition_sources (custom_format_name, condition_name, source) VALUES ('1080p Bluray (Efficient)', 'Bluray', 'bluray');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('1080p Bluray (Efficient)', 'x264', 'release_title', 'all', 0, 1);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('1080p Bluray (Efficient)', 'x264', 'AVC');
+INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = '1080p Bluray (Efficient)' AND t.name = 'Source';

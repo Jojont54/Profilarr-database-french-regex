@@ -10,49 +10,36 @@
   </a>
 </p>
 
-# Dictionarry Database FR
+# Dictionarry Database FR Template
 
-Cette base est une adaptation francaise de la [base officielle Dictionarry](https://github.com/Dictionarry-Hub/database) pour Profilarr, Radarr et Sonarr.
+Cette base est un template français basé sur la [base officielle Dictionarry](https://github.com/Dictionarry-Hub/database) pour Profilarr, Radarr et Sonarr.
 
-L'objectif est de garder une base propre, maintenable et facile a rebase depuis Dictionarry, tout en ajoutant une couche FR dediee aux releases francophones.
+L'objectif est de fournir des briques FR propres et réutilisables: regex atomiques, Custom Formats techniques, Custom Formats de langue, tiers de teams FR simples, et profils de départ peu opinionated.
+
+## Principe du template
+
+Cette base n'impose pas une logique de scoring finale. Elle fournit plutôt une grille de départ claire, où les Custom Formats sont rangés par importance dans les profils pour que chaque utilisateur puisse ajuster les scores selon son usage.
+
+Les profils `Basic` utilisent des Custom Formats groupés pour aller vite, tout en gardant les signaux importants séparés: langue FR, résolutions, `AV1`, `h264`, `h265`, audio groupé, source groupée, HDR groupé, encodes light et tiers de teams.
+
+Les profils `Expert` exposent les Custom Formats atomiques pour scorer plus finement: `FLAC`, `TrueHD`, `WEB-DL`, `WEBRip`, `h265`, `Dolby Vision`, `HDR10+`, `HDLight`, `4KLight`, etc.
+
+L'idée est simple: l'utilisateur ouvre un profil, voit les blocs déjà triés dans un ordre logique, puis met les points qu'il veut sur chaque signal.
+
+Les profils de départ utilisent une échelle maximale de `10000` points. Les langues françaises et les tiers de teams portent l'essentiel du score, tandis que les détails techniques restent volontairement faibles pour servir de réglages fins.
 
 ## Ce qui change
 
 - Ajout de regex atomiques pour les teams FR.
-- Ajout de Custom Formats FR avec une tier list inspiree de plusieurs sources francophones.
-- Ajout de profils FR bases sur la logique Dictionarry, avec les memes tags que les profils originaux.
-- Ajout d'une priorisation langue: `MULTi` > `VF` > `VOSTFR` pour les profils classiques, et `MULTi` > `VOSTFR` > `VF` pour le profil anime.
-- Interdiction des releases `VFQ` dans les profils FR.
-- Conservation de la logique Media Management Dictionarry, avec ses mises a jour V2 recentes.
-- Publication V2 recentree sur les profils FR: les profils originaux non FR et les tiers de release groups anglophones ne sont pas embarques.
-- Conservation des Custom Formats techniques utiles de Dictionarry: sources, codecs, audio, HDR, editions et qualites.
-
-## Profilarr V2
-
-La branche principale et la branche `develop` publient exclusivement la version Profilarr V2 au format PCD SQL. La source YAML compatible Profilarr V1 est conservee sur la branche `Profilarr-V1`.
-
-La version SQL V2 est volontairement allegee: elle contient uniquement les profils FR listes ci-dessous, leurs Custom Formats FR, et les dependances techniques Dictionarry necessaires a leur fonctionnement.
-
-Les evolutions V2 communes de Dictionarry restent integrees lorsqu'elles sont utiles a nos profils: harmonisation des formats techniques (`Extras`, `Upscale`, `Remux`, HDR, editions, noir et blanc, audio description), conservation des plateformes dans le renommage et ordre explicite des qualites. Les regroupements d'affichage propres aux profils non FR ne sont pas importes.
-
-Les operations SQL V2 sont separees pour garder le projet lisible et maintenable:
-
-```text
-ops/
-  0.core-regex-patterns.sql
-  1.custom-formats.sql
-  2.quality-profiles.sql
-  3.media-management.sql
-  4.delay-profiles.sql
-```
-
-⚠️ Attention : la premiere version V2 publiee utilisait un unique fichier `ops/0.jojont54-fr.sql`. Ce fichier a ete remplace par la structure ci-dessus avant stabilisation de la V2.
-
-Si vous aviez deja lie la DB V2 avant ce changement, Profilarr applique les nouvelles operations lors de la synchronisation. En cas de probleme d'import uniquement, supprimez puis ajoutez a nouveau la DB. Les utilisateurs de la branche `Profilarr-V1` ne sont pas concernes.
+- Ajout de Custom Formats FR de langue: `French MULTi`, `French Original`, `French VF`, `French VOSTFR`, `French VFQ`, `French Missing`.
+- Ajout de Custom Formats techniques utiles: sources, codecs, audio, HDR, éditions, qualités, `HDLight`, `4KLight`, etc.
+- Ajout de tiers FR volontairement simples: media, anime, fansub, scène non classée et groupes à bannir.
+- Conservation de la logique Media Management Dictionarry.
+- Conservation des opérations techniques utiles de Dictionarry V2.
 
 ## Sources FR
 
-Les listes de teams, les tiers et les choix de scoring FR sont inspires et recoupes avec:
+Les listes de teams et les tiers FR sont inspirés et recoupés avec:
 
 - [TRaSH Guides - French HQ Source Groups](https://trash-guides.info/Radarr/Radarr-collection-of-custom-formats/#french-hq-source-groups)
 - [leof28/profilarr-dbFR](https://github.com/leof28/profilarr-dbFR)
@@ -63,61 +50,96 @@ Les listes de teams, les tiers et les choix de scoring FR sont inspires et recou
 
 ### Regex patterns
 
-Chaque team FR est representee par une regex atomique integree aux operations PCD. Cette approche evite les gros blocs regex difficiles a maintenir et permet de brancher les teams proprement dans plusieurs Custom Formats.
+Chaque team FR est représentée par une regex atomique intégrée aux opérations PCD.
+
+Le principe est volontairement simple:
+
+- une regex détecte une seule team ou un seul marqueur technique;
+- une regex ne porte aucun score;
+- une regex peut être réutilisée dans plusieurs Custom Formats;
+- les scores restent dans les profils, pas dans les regex;
+- les tiers regroupent des teams, tandis que les CF techniques décrivent la source, la résolution, le codec, le HDR, l'audio ou les encodes light.
+
+Cette séparation permet de construire des profils très différents sans modifier les regex de base.
 
 ### Custom Formats FR
 
-Les Custom Formats FR sont separes par usage:
+Les Custom Formats FR sont séparés par usage.
 
-- `FR Global Tier 01/02`
-- `FR Scene Groups`
-- `FR HDLight Tier`
-- `FR LQ`
-- `FR Anime Tier 01/02/03`
+Tiers de teams:
+
+- `FR Media Tier 1`
+- `FR Media Tier 2`
+- `FR Media Tier 3`
+- `FR Anime Tier 1`
+- `FR Anime Tier 2`
+- `FR Anime Tier 3`
 - `FR Anime FanSub`
-- `FR Movie ...`
-- `FR TV ...`
+- `FR Scene Unranked`
+- `FR Low Quality / Banned`
+
+Langue:
+
 - `French MULTi`
+- `French Original`
+- `French Original Marker`
 - `French VF`
 - `French VOSTFR`
 - `French VFQ`
 - `French Missing`
 
-Les scores restent dans les profils, pas dans les regex. Cela conserve la logique Dictionarry: les regex detectent, les Custom Formats regroupent, les profils priorisent.
+Technique:
 
-## Profils FR ajoutes
+- Sources, résolutions, codecs, HDR, audio et éditions issus de Dictionarry.
+- Sources génériques: `Bluray`, `WEB-DL`, `WEBRip`, `BDRip / BRRip`, `Rip`, `HDTV`.
+- Résolutions génériques: `480p` couvre aussi `SD`, `576p` couvre aussi `PAL`, `720p` couvre aussi `HD`, `1080p` couvre aussi `FHD` / `Full HD`, et `2160p` couvre aussi `UHD` / `4K`.
+- Codecs génériques: `AV1`, `h264`, `h265`. Le CF `h264` couvre aussi `AVC` / `x264`, et le CF `h265` couvre aussi `HEVC` / `x265`.
+- HDR atomique: `HDR`, `HDR10+`, `HDR10`, `HLG`, `PQ`, `Dolby Vision`.
+- HDR groupé: `HDR / DV`, qui couvre `HDR`, `HDR10`, `HLG`, `PQ`, `DV` et `Dolby Vision`.
+- Audio générique: `Lossless Audio`, utilisable sur toutes les résolutions et incluant `FLAC`, `TrueHD`, `DTS-HD MA`, `DTS-X` et `PCM`.
+- Audio compressé: `Lossy Audio`, couvrant `AAC`, `Dolby Digital`, `Dolby Digital +`, `DTS`, `DTS-ES`, `DTS-HD HRA`, `Opus` et `MP3`.
+- Canaux audio: `2.0 Stereo`, `5.1 Surround` et `7.1 Surround`.
+- `HDLight` et `4KLight` comme marqueurs techniques dédiés.
+- Groupes pratiques pour profils simples: `WEB Source`, `Disc Source`, `Rip Source`, `Modern Codec`, `Legacy Codec`, `Light Encode`, `French Accepted`.
 
-```text
-1080p Balanced FR
-1080p Compact FR
-1080p Efficient FR
-1080p Quality FR
-1080p Quality HDR FR
-1080p Remux FR
-2160p Balanced FR
-2160p Efficient FR
-2160p Quality FR
-2160p Remux FR
-720p Quality FR
-Anime 1080p FR
-Anime 1080p VOSTFR FR
-```
+Les alias techniques sont volontairement stricts pour éviter les faux positifs: `HD` ne matche pas `HDLight` / `HDTV` / `HD-DVD`, `UHD` ne matche pas `UHDLight`, `4K` ne matche pas `4KLight`, `WEB` ne matche pas `WEBRip` / `WEBLight`, et `BD` / `BluRay` ne matche pas `BDRip` / `BDLight`.
 
-`Anime 1080p FR` priorise `MULTi` > `VOSTFR` > `VF`.
-`Anime 1080p VOSTFR FR` priorise uniquement les releases `VOSTFR`.
+Les scores restent dans les profils, pas dans les regex. Cela conserve la logique Dictionarry: les regex détectent, les Custom Formats regroupent, les profils priorisent.
+
+## Profils
+
+Cette branche sert de base template. Les anciens profils opinionated sont remplacés par quelques profils génériques, peu scorés et faciles à adapter.
+
+Profils Basic:
+
+- `Template Basic 1080p FR`
+- `Template Basic 2160p FR`
+
+Les profils Basic utilisent surtout les Custom Formats groupés, mais gardent les langues, résolutions, codecs et encodes light visibles séparément: `French MULTi`, `French Original`, `French VF`, `French VOSTFR`, `AV1`, `h264`, `h265`, `HDLight`, `4KLight`, audio groupé, source groupée, HDR groupé et tiers FR.
+
+Profils Expert:
+
+- `Template Expert 1080p FR`
+- `Template Expert 2160p FR`
+
+Les profils Expert utilisent les Custom Formats atomiques pour permettre un scoring plus fin. La logique de départ reste volontairement lisible sur `10000` points: audio autour de `1`, résolution autour de `2`, source autour de `2` à `3`, codec autour de `4`, HDR autour de `5`, encodes light autour de `6`, langue autour de `1000` à `2000`, puis tiers FR autour de `2500` à `4000`.
+
+Dans les profils fournis, `-99999` est la valeur prévue pour bannir strictement un terme, une langue ou un groupe.
+
+Exemple: mettre `1080p` à `+1000` permet de valoriser la 1080p; mettre `2160p` à `-99999` permet d'interdire la 4K.
 
 ## Media management
 
-Les operations SQL V2 integrent les evolutions Dictionarry:
+Les opérations SQL V2 intègrent les évolutions Dictionarry:
 
 - presets renommes `Radarr` et `Sonarr` au lieu de `default`;
 - preset supplementaire `Radarr / Editionless`;
-- Delay Profiles `Radarr` et `Sonarr` en `prefer_torrent`, avec un delai de `360` minutes;
+- Delay Profiles `Radarr` et `Sonarr` en `prefer_torrent`, avec un délai de `360` minutes;
 - protection `Full Disc` contre les correspondances de source `HDTV`.
 
 ## Support
 
-Pour un probleme lie a cette adaptation FR, ouvre une issue avec le template adapte:
+Pour un problème lié à cette adaptation FR, ouvre une issue avec le template adapté:
 
 - Bug
 - Add Team

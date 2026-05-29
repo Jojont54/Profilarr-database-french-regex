@@ -221,7 +221,8 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('FRATERNiTY
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FREAMON', '(?<=^|[\s.-])FREAMON\b', 'Matches "FREAMON" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FReeZeR', '(?<=^|[\s.-])FReeZeR\b', 'Matches "FReeZeR" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('French MULTi', '(?i)(?<=^|[\s.-])(?:MULTI(?:[ ._-]?(?:VFI|VFF|VFQ|VF2|VFQ2|VFF2|VFI2|\d+))?|FR\s*\+\s*[A-Z]{2}|[A-Z]{2}\s*\+\s*FR)(?![ ._-]?SUBS?)(?=$|[\s.-])', 'Matches French scene-style MULTi releases and FR+XX language-pair tags.');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('French VF', '(?i)(?<=^|[\s.-])(?:VF(?!Q)|VFI|VFF2?|VF2|TRUE[ ._-]?FR(?:ENCH)?|FRENCH(?![ ._-]?(?:SUBS?|CANADIAN))|FRANCAIS|FRANÇAIS|VOF|FRA)(?=$|[\s.-])', 'Matches French dubbed releases while keeping subtitles, MULTi, and Quebec French variants separate.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('French VF', '(?i)(?<=^|[\s.-])(?:VF(?!Q)|VFI|VFF2?|VF2|TRUE[ ._-]?FR(?:ENCH)?|FRENCH(?![ ._-]?(?:SUBS?|CANADIAN))|FRANCAIS|FRANÇAIS|FRA)(?=$|[\s.-])', 'Matches French dubbed releases while keeping subtitles, MULTi, and Quebec French variants separate.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('French Original Marker', '(?i)(?<=^|[\s.-])(?:VOF|VOQ)(?=$|[\s.-])', 'Matches French original-version markers VOF and VOQ.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('French VFQ', '(?i)(?<=^|[\s.-])(?:VFQ2?|VQ|FRENCH[ ._-]?CANADIAN|CANADIAN[ ._-]?FRENCH|QUEBECOIS)(?=$|[\s.-])', 'Matches Quebec French variants that should be rejected by French profiles.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('French VOSTFR', '(?i)(?<=^|[\s.-])(?:VOST(?:[ ._-]?FR)?|SUB[ ._-]?(?:FR|FRENCH)|FRENCH[ ._-]?SUBS?|FR[ ._-]?SUBS?)(?=$|[\s.-])', 'Matches original-audio releases with French subtitles.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FRENCHDEADPOOL2', '(?<=^|[\s.-])FRENCHDEADPOOL2\b', 'Matches "FRENCHDEADPOOL2" when preceded by whitespace, a hyphen or dot');
@@ -521,6 +522,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('TANOSHii',
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('TAT', '(?<=^|[\s.-])TAT\b', 'Matches "TAT" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('TeamSuW', '(?<=^|[\s.-])TeamSuW\b', 'Matches "TeamSuW" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Tezcat74', '(?<=^|[\s.-])Tezcat74\b', 'Matches "Tezcat74" when preceded by whitespace, a hyphen or dot');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('TenmaLand', '(?<=^|[\s.-])TenmaLand\b', 'Matches "TenmaLand" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('TFA', '(?<=^|[\s.-])TFA\b', 'Matches "TFA" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('tFR', '(?<=^|[\s.-])tFR\b', 'Matches "tFR" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Theatrical Edition', '(?<=\b[12]\d{3}\b).*\b(Theatrical)(\b|\d)', 'Matches any type of theatrical edition.
@@ -2004,6 +2006,14 @@ INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
 WHERE re.name = 'French VF' AND t.name = 'Language';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'French Original Marker' AND t.name = 'French';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'French Original Marker' AND t.name = 'Language';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
@@ -4835,6 +4845,22 @@ WHERE re.name = 'Tezcat74' AND t.name = 'Remux';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
+WHERE re.name = 'TenmaLand' AND t.name = 'Anime';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'TenmaLand' AND t.name = 'French';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'TenmaLand' AND t.name = 'Release Group';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'TenmaLand' AND t.name = 'WEB-DL';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
 WHERE re.name = 'TFA' AND t.name = 'French';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
@@ -5673,3 +5699,8 @@ INSERT INTO regular_expression_tags (regular_expression_name, tag_name) SELECT r
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name) SELECT re.name, t.name FROM regular_expressions re, tags t WHERE re.name = 'German DL' AND t.name = 'Language';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name) SELECT re.name, t.name FROM regular_expressions re, tags t WHERE re.name = 'HDTV' AND t.name = 'Source';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name) SELECT re.name, t.name FROM regular_expressions re, tags t WHERE re.name = 'UHD Bluray' AND t.name = 'UHD Bluray';
+
+-- Dictionarry V2 language markers retained independently of release groups
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('Nordic', '\b(Nordic)\b', 'Matches releases explicitly marked Nordic.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('Dual Audio', '\bDual[ ._-]?(Audio)?\b|\b(JA|ZH|KO)(?= ?\+ ?.*?\b(EN))|\b(EN)(?= ?\+ ?.*?\b(JA|ZH|KO))\b', 'Matches explicitly tagged dual-audio releases and common Asian language plus English pairs.');
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name) SELECT re.name, t.name FROM regular_expressions re, tags t WHERE re.name IN ('Nordic', 'Dual Audio') AND t.name = 'Language';
