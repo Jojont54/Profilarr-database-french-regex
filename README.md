@@ -94,7 +94,7 @@ Technique:
 - Sources génériques: `Bluray`, `WEB-DL`, `WEBRip`, `BDRip / BRRip`, `Rip`, `HDTV`.
 - Résolutions génériques: `480p` couvre aussi `SD`, `576p` couvre aussi `PAL`, `720p` couvre aussi `HD`, `1080p` couvre aussi `FHD` / `Full HD`, et `2160p` couvre aussi `UHD` / `4K`.
 - Codecs génériques: `AV1`, `h264`, `h265`. Le CF `h264` couvre aussi `AVC` / `x264`, et le CF `h265` couvre aussi `HEVC` / `x265`.
-- HDR atomique: `HDR`, `HDR10+`, `HDR10`, `HLG`, `PQ`, `Dolby Vision`.
+- HDR et présentation: `HDR`, `HDR10+`, `HDR10`, `HLG`, `PQ`, `Dolby Vision`, `IMAX`.
 - HDR groupé: `HDR / DV`, qui couvre `HDR`, `HDR10`, `HLG`, `PQ`, `DV` et `Dolby Vision`.
 - Audio générique: `Lossless Audio`, utilisable sur toutes les résolutions et incluant `FLAC`, `TrueHD`, `DTS-HD MA`, `DTS-X` et `PCM`.
 - Audio compressé: `Lossy Audio`, couvrant `AAC`, `Dolby Digital`, `Dolby Digital +`, `DTS`, `DTS-ES`, `DTS-HD HRA`, `Opus` et `MP3`.

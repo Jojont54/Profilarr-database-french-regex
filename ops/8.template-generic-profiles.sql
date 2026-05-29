@@ -65,6 +65,7 @@ FROM (
     SELECT 'HDR10' AS name, 'Matches HDR10 markers.' AS description
     UNION ALL SELECT 'HLG', 'Matches HLG HDR markers.'
     UNION ALL SELECT 'PQ', 'Matches PQ and PQ10 HDR markers.'
+    UNION ALL SELECT 'IMAX', 'Matches IMAX release markers.'
     UNION ALL SELECT '480p', 'Matches 480p and SD resolution markers.'
     UNION ALL SELECT '576p', 'Matches 576p and PAL resolution markers.'
     UNION ALL SELECT '720p', 'Matches 720p and HD resolution markers.'
@@ -105,6 +106,17 @@ WHERE cf.name IN ('HDR10', 'HLG', 'PQ')
 INSERT INTO custom_format_tags (custom_format_name, tag_name)
 SELECT cf.name, t.name
 FROM custom_formats cf, tags t
+WHERE cf.name = 'IMAX'
+  AND t.name IN ('Aspect Ratio', 'Enhancement')
+  AND NOT EXISTS (
+    SELECT 1 FROM custom_format_tags existing
+    WHERE existing.custom_format_name = cf.name
+      AND existing.tag_name = t.name
+  );
+
+INSERT INTO custom_format_tags (custom_format_name, tag_name)
+SELECT cf.name, t.name
+FROM custom_formats cf, tags t
 WHERE cf.name IN ('480p', '576p', '720p', '1080p', '2160p')
   AND t.name IN ('480p', '576p', '720p', '1080p', '2160p', 'Quality')
   AND (cf.name = t.name OR t.name = 'Quality')
@@ -120,6 +132,7 @@ FROM (
     SELECT 'HDR10' AS cf_name, 'HDR10' AS condition_name
     UNION ALL SELECT 'HLG', 'HLG'
     UNION ALL SELECT 'PQ', 'PQ'
+    UNION ALL SELECT 'IMAX', 'IMAX'
     UNION ALL SELECT '480p', '480p'
     UNION ALL SELECT '576p', '576p'
     UNION ALL SELECT '720p', '720p'
@@ -138,6 +151,7 @@ FROM (
     SELECT 'HDR10' AS cf_name, 'HDR10' AS condition_name, 'HDR10' AS regex_name
     UNION ALL SELECT 'HLG', 'HLG', 'HLG'
     UNION ALL SELECT 'PQ', 'PQ', 'PQ'
+    UNION ALL SELECT 'IMAX', 'IMAX', 'IMAX'
     UNION ALL SELECT '480p', '480p', '480p'
     UNION ALL SELECT '576p', '576p', '576p'
     UNION ALL SELECT '720p', '720p', '720p'
@@ -574,6 +588,7 @@ JOIN (
     UNION ALL SELECT 'h264', 'all', 4
     UNION ALL SELECT 'h265', 'all', 4
     UNION ALL SELECT 'HDR / DV', 'all', 5
+    UNION ALL SELECT 'IMAX', 'all', 5
     UNION ALL SELECT 'HDLight', 'all', 6
     UNION ALL SELECT '4KLight', 'all', 6
     UNION ALL SELECT 'FR Media Tier 1', 'all', 4000
@@ -639,6 +654,7 @@ JOIN (
     UNION ALL SELECT 'HLG', 'all', 5
     UNION ALL SELECT 'PQ', 'all', 5
     UNION ALL SELECT 'Dolby Vision', 'all', 5
+    UNION ALL SELECT 'IMAX', 'all', 5
     UNION ALL SELECT 'HDLight', 'all', 6
     UNION ALL SELECT '4KLight', 'all', 6
     UNION ALL SELECT 'FR Media Tier 1', 'all', 4000
