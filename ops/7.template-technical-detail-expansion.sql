@@ -1,3 +1,10 @@
+-- @operation: export
+-- @entity: batch
+-- @name: template technical detail expansion
+-- @exportedAt: 2026-05-30T00:00:00.000Z
+-- @opIds: 9007
+
+-- --- BEGIN op 9007 ( batch template technical detail expansion )
 -- ============================================================================
 -- Template technical detail expansion
 --
@@ -274,3 +281,4 @@ WHERE EXISTS (
       AND condition_name = 'FLAC'
       AND regular_expression_name = 'FLAC'
   );
+-- --- END op 9007

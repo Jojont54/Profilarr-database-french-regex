@@ -1,3 +1,10 @@
+-- @operation: export
+-- @entity: batch
+-- @name: template fr base tiers
+-- @exportedAt: 2026-05-30T00:00:00.000Z
+-- @opIds: 9005
+
+-- --- BEGIN op 9005 ( batch template fr base tiers )
 -- ============================================================================
 -- Template FR base tiers
 --
@@ -173,3 +180,4 @@ DELETE FROM custom_formats
 WHERE name IN (SELECT old_name FROM template_tier_map);
 
 DROP TABLE template_tier_map;
+-- --- END op 9005
