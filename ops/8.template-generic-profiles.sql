@@ -373,6 +373,28 @@ DELETE FROM custom_format_conditions
 WHERE custom_format_name = 'h265'
   AND name = 'Not 2160p';
 
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT 'French Original', 'Not French Original Marker', 'release_title', 'all', 1, 1
+WHERE EXISTS (SELECT 1 FROM custom_formats WHERE name = 'French Original')
+  AND NOT EXISTS (
+    SELECT 1 FROM custom_format_conditions
+    WHERE custom_format_name = 'French Original'
+      AND name = 'Not French Original Marker'
+  );
+
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
+SELECT 'French Original', 'Not French Original Marker', 'French Original Marker'
+WHERE EXISTS (
+    SELECT 1 FROM custom_format_conditions
+    WHERE custom_format_name = 'French Original'
+      AND name = 'Not French Original Marker'
+  )
+  AND NOT EXISTS (
+    SELECT 1 FROM condition_patterns
+    WHERE custom_format_name = 'French Original'
+      AND condition_name = 'Not French Original Marker'
+  );
+
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'h265', re.name, re.name
 FROM regular_expressions re
@@ -982,6 +1004,7 @@ FROM quality_profiles qp
 JOIN (
     SELECT 'French MULTi' AS custom_format_name, 'all' AS arr_type, 2000 AS score
     UNION ALL SELECT 'French Original', 'all', 2000
+    UNION ALL SELECT 'French Original Marker', 'all', 2000
     UNION ALL SELECT 'French VF', 'all', 1500
     UNION ALL SELECT 'French VOSTFR', 'all', 1000
     UNION ALL SELECT 'French VFQ', 'all', 1500

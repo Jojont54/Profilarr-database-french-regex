@@ -86,7 +86,7 @@ Langue:
 
 - `French MULTi`
 - `French Original`
-- `French Original Marker`
+- `French Original Marker` pour `VOF` / `VOQ`, scoré comme `French Original` mais séparé techniquement pour éviter les faux positifs
 - `French VF`
 - `French VOSTFR`
 - `French VFQ`
