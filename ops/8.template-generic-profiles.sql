@@ -996,20 +996,21 @@ JOIN (
     UNION ALL SELECT '720p', 'all', 2
     UNION ALL SELECT '1080p', 'all', 2
     UNION ALL SELECT '2160p', 'all', 2
-    UNION ALL SELECT 'Bluray', 'all', 6
-    UNION ALL SELECT 'UHD Bluray', 'all', 6
-    UNION ALL SELECT 'Remux', 'all', 6
-    UNION ALL SELECT 'Full Disc', 'all', 6
-    UNION ALL SELECT 'WEB-DL', 'all', 6
-    UNION ALL SELECT 'WEBRip', 'all', 3
-    UNION ALL SELECT 'Rip Source', 'all', 2
-    UNION ALL SELECT 'AV1', 'all', 4
-    UNION ALL SELECT 'h264', 'all', 4
-    UNION ALL SELECT 'h265', 'all', 4
-    UNION ALL SELECT 'HDR / DV', 'all', 5
-    UNION ALL SELECT 'IMAX', 'all', 5
-    UNION ALL SELECT 'HDLight', 'all', 6
-    UNION ALL SELECT '4KLight', 'all', 6
+    UNION ALL SELECT 'Bluray', 'all', 5
+    UNION ALL SELECT 'UHD Bluray', 'all', 5
+    UNION ALL SELECT 'Remux', 'all', 5
+    UNION ALL SELECT 'Full Disc', 'all', 5
+    UNION ALL SELECT 'WEB-DL', 'all', 5
+    UNION ALL SELECT 'WEBRip', 'all', 5
+    UNION ALL SELECT 'BDRip / BRRip', 'all', 5
+    UNION ALL SELECT 'HDTV', 'all', 5
+    UNION ALL SELECT 'AV1', 'all', 3
+    UNION ALL SELECT 'h264', 'all', 3
+    UNION ALL SELECT 'h265', 'all', 3
+    UNION ALL SELECT 'HDR / DV', 'all', 4
+    UNION ALL SELECT 'IMAX', 'all', 4
+    UNION ALL SELECT 'HDLight', 'all', 5
+    UNION ALL SELECT '4KLight', 'all', 5
     UNION ALL SELECT 'FR Media Tier 1', 'all', 4000
     UNION ALL SELECT 'FR Media Tier 2', 'all', 3500
     UNION ALL SELECT 'FR Media Tier 3', 'all', 3000
@@ -1058,27 +1059,26 @@ JOIN (
     UNION ALL SELECT '720p', 'all', 2
     UNION ALL SELECT '1080p', 'all', 2
     UNION ALL SELECT '2160p', 'all', 2
-    UNION ALL SELECT 'Bluray', 'all', 6
-    UNION ALL SELECT 'UHD Bluray', 'all', 6
-    UNION ALL SELECT 'Remux', 'all', 6
-    UNION ALL SELECT 'Full Disc', 'all', 6
-    UNION ALL SELECT 'WEB-DL', 'all', 6
-    UNION ALL SELECT 'WEBRip', 'all', 3
-    UNION ALL SELECT 'BDRip / BRRip', 'all', 2
-    UNION ALL SELECT 'Rip', 'all', 2
-    UNION ALL SELECT 'HDTV', 'all', 2
-    UNION ALL SELECT 'AV1', 'all', 4
-    UNION ALL SELECT 'h264', 'all', 4
-    UNION ALL SELECT 'h265', 'all', 4
-    UNION ALL SELECT 'HDR', 'all', 5
-    UNION ALL SELECT 'HDR10+', 'all', 5
-    UNION ALL SELECT 'HDR10', 'all', 5
-    UNION ALL SELECT 'HLG', 'all', 5
-    UNION ALL SELECT 'PQ', 'all', 5
-    UNION ALL SELECT 'Dolby Vision', 'all', 5
-    UNION ALL SELECT 'IMAX', 'all', 5
-    UNION ALL SELECT 'HDLight', 'all', 6
-    UNION ALL SELECT '4KLight', 'all', 6
+    UNION ALL SELECT 'Bluray', 'all', 5
+    UNION ALL SELECT 'UHD Bluray', 'all', 5
+    UNION ALL SELECT 'Remux', 'all', 5
+    UNION ALL SELECT 'Full Disc', 'all', 5
+    UNION ALL SELECT 'WEB-DL', 'all', 5
+    UNION ALL SELECT 'WEBRip', 'all', 5
+    UNION ALL SELECT 'BDRip / BRRip', 'all', 5
+    UNION ALL SELECT 'HDTV', 'all', 5
+    UNION ALL SELECT 'AV1', 'all', 3
+    UNION ALL SELECT 'h264', 'all', 3
+    UNION ALL SELECT 'h265', 'all', 3
+    UNION ALL SELECT 'HDR', 'all', 4
+    UNION ALL SELECT 'HDR10+', 'all', 4
+    UNION ALL SELECT 'HDR10', 'all', 4
+    UNION ALL SELECT 'HLG', 'all', 4
+    UNION ALL SELECT 'PQ', 'all', 4
+    UNION ALL SELECT 'Dolby Vision', 'all', 4
+    UNION ALL SELECT 'IMAX', 'all', 4
+    UNION ALL SELECT 'HDLight', 'all', 5
+    UNION ALL SELECT '4KLight', 'all', 5
     UNION ALL SELECT 'FR Media Tier 1', 'all', 4000
     UNION ALL SELECT 'FR Media Tier 2', 'all', 3500
     UNION ALL SELECT 'FR Media Tier 3', 'all', 3000
