@@ -2,9 +2,9 @@
 -- @entity: batch
 -- @name: template technical cf cleanup
 -- @exportedAt: 2026-05-30T00:00:00.000Z
--- @opIds: 9006
+-- @opIds: 9106
 
--- --- BEGIN op 9006 ( batch template technical cf cleanup )
+-- --- BEGIN op 9106 ( batch template technical cf cleanup )
 -- ============================================================================
 -- Template technical custom format cleanup
 --
@@ -220,4 +220,4 @@ DELETE FROM regular_expressions
 WHERE name = 'UHD Bluray (Efficient)';
 
 DROP TABLE template_technical_drop;
--- --- END op 9006
+-- --- END op 9106

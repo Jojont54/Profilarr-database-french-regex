@@ -2,9 +2,9 @@
 -- @entity: batch
 -- @name: template generic profiles
 -- @exportedAt: 2026-05-30T00:00:00.000Z
--- @opIds: 9008
+-- @opIds: 9108
 
--- --- BEGIN op 9008 ( batch template generic profiles )
+-- --- BEGIN op 9108 ( batch template generic profiles )
 -- ============================================================================
 -- PCD 2.0 French Template - Generic grouped CFs and starter profiles
 -- ============================================================================
@@ -464,34 +464,10 @@ DELETE FROM quality_profiles;
 
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES
-('Template Basic 1080p FR', 'Profil template 1080p simple avec une echelle maximale de 10000 points.
-
-Les Custom Formats sont deja tries par familles pour servir de grille de depart: langue, audio, resolution, source, codec, HDR, encodes light et tiers de teams.
-
-Modifiez les scores selon votre usage. Un score de -99999 sert a bannir strictement un terme ou un groupe.
-
-Exemple: mettre 1080p a +1000 pour valoriser la 1080p, ou 2160p a -99999 pour interdire la 4K.', 1, 0, 10000, 1),
-('Template Basic 2160p FR', 'Profil template 2160p simple avec une echelle maximale de 10000 points.
-
-Les Custom Formats sont deja tries par familles pour servir de grille de depart: langue, audio, resolution, source, codec, HDR, encodes light et tiers de teams.
-
-Modifiez les scores selon votre usage. Un score de -99999 sert a bannir strictement un terme ou un groupe.
-
-Exemple: mettre 1080p a +1000 pour valoriser la 1080p, ou 2160p a -99999 pour interdire la 4K.', 1, 0, 10000, 1),
-('Template Expert 1080p FR', 'Profil template 1080p detaille avec une echelle maximale de 10000 points.
-
-Les Custom Formats atomiques permettent de ponderer separement audio, resolution, source, codec, HDR, encodes light, langue et tiers de teams.
-
-Modifiez les scores selon votre usage. Un score de -99999 sert a bannir strictement un terme ou un groupe.
-
-Exemple: mettre 1080p a +1000 pour valoriser la 1080p, ou 2160p a -99999 pour interdire la 4K.', 1, 0, 10000, 1),
-('Template Expert 2160p FR', 'Profil template 2160p detaille avec une echelle maximale de 10000 points.
-
-Les Custom Formats atomiques permettent de ponderer separement audio, resolution, source, codec, HDR, encodes light, langue et tiers de teams.
-
-Modifiez les scores selon votre usage. Un score de -99999 sert a bannir strictement un terme ou un groupe.
-
-Exemple: mettre 1080p a +1000 pour valoriser la 1080p, ou 2160p a -99999 pour interdire la 4K.', 1, 0, 10000, 1);
+('Template Basic 1080p FR', 'Profil template 1080p simple avec une echelle maximale de 10000 points. Les Custom Formats sont deja tries par familles pour servir de grille de depart: langue, audio, resolution, source, codec, HDR, encodes light et tiers de teams. Modifiez les scores selon votre usage. Un score de -99999 sert a bannir strictement un terme ou un groupe. Exemple: mettre 1080p a +1000 pour valoriser la 1080p, ou 2160p a -99999 pour interdire la 4K.', 1, 0, 10000, 1),
+('Template Basic 2160p FR', 'Profil template 2160p simple avec une echelle maximale de 10000 points. Les Custom Formats sont deja tries par familles pour servir de grille de depart: langue, audio, resolution, source, codec, HDR, encodes light et tiers de teams. Modifiez les scores selon votre usage. Un score de -99999 sert a bannir strictement un terme ou un groupe. Exemple: mettre 1080p a +1000 pour valoriser la 1080p, ou 2160p a -99999 pour interdire la 4K.', 1, 0, 10000, 1),
+('Template Expert 1080p FR', 'Profil template 1080p detaille avec une echelle maximale de 10000 points. Les Custom Formats atomiques permettent de ponderer separement audio, resolution, source, codec, HDR, encodes light, langue et tiers de teams. Modifiez les scores selon votre usage. Un score de -99999 sert a bannir strictement un terme ou un groupe. Exemple: mettre 1080p a +1000 pour valoriser la 1080p, ou 2160p a -99999 pour interdire la 4K.', 1, 0, 10000, 1),
+('Template Expert 2160p FR', 'Profil template 2160p detaille avec une echelle maximale de 10000 points. Les Custom Formats atomiques permettent de ponderer separement audio, resolution, source, codec, HDR, encodes light, langue et tiers de teams. Modifiez les scores selon votre usage. Un score de -99999 sert a bannir strictement un terme ou un groupe. Exemple: mettre 1080p a +1000 pour valoriser la 1080p, ou 2160p a -99999 pour interdire la 4K.', 1, 0, 10000, 1);
 
 INSERT INTO quality_profile_languages (quality_profile_name, language_name, type)
 SELECT qp.name, 'Any', 'must_include'
@@ -676,4 +652,4 @@ JOIN (
 ) wanted
 WHERE qp.name LIKE 'Template Expert%'
   AND EXISTS (SELECT 1 FROM custom_formats cf WHERE cf.name = wanted.custom_format_name);
--- --- END op 9008
+-- --- END op 9108

@@ -1,6 +1,6 @@
 {
   "name": "Profilarr Database French Template",
-  "version": "2.0.1",
+  "version": "2.0.5",
   "description": "Template PCD for the French-speaking *arr ecosystem: atomic FR release-group regex, reusable grouped and expert technical custom formats, simple FR Media / Anime tiers, and generic starter profiles with minimal scoring assumptions. Sources: TRaSH Guides + Dictionarry base + leof28/profilarr-dbFR + ataaki/french-multi-arr-custom-formats + mcflykid/french-profilarr-database.",
   "arr_types": [
     "radarr",

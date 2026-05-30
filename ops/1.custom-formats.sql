@@ -1878,7 +1878,7 @@ SELECT cf.name, 'PEPiTE', 'release_group', 'all', 0, 0
 FROM custom_formats cf
 WHERE cf.name = 'FR Movie Remux Tier 02';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'QUEBEC63', 'release_group', 'all', 0, 0
+SELECT cf.name, 'QC63', 'release_group', 'all', 0, 0
 FROM custom_formats cf
 WHERE cf.name = 'FR Movie Remux Tier 02';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
@@ -2054,7 +2054,7 @@ SELECT cf.name, 'NEO', 'release_group', 'all', 0, 0
 FROM custom_formats cf
 WHERE cf.name = 'FR Movie WEB Tier 02';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'NoNe', 'release_group', 'all', 0, 0
+SELECT cf.name, 'NoNE', 'release_group', 'all', 0, 0
 FROM custom_formats cf
 WHERE cf.name = 'FR Movie WEB Tier 02';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
@@ -2762,7 +2762,7 @@ SELECT cf.name, 'HeavyWeight', 'release_group', 'all', 0, 0
 FROM custom_formats cf
 WHERE cf.name = 'FR TV WEB Tier 02';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'NoNe', 'release_group', 'all', 0, 0
+SELECT cf.name, 'NoNE', 'release_group', 'all', 0, 0
 FROM custom_formats cf
 WHERE cf.name = 'FR TV WEB Tier 02';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
@@ -5882,7 +5882,7 @@ SELECT 'FR Movie Remux Tier 02', 'PEPiTE', re.name
 FROM regular_expressions re
 WHERE re.name = 'PEPiTE';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'FR Movie Remux Tier 02', 'QUEBEC63', re.name
+SELECT 'FR Movie Remux Tier 02', 'QC63', re.name
 FROM regular_expressions re
 WHERE re.name = 'QC63';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
@@ -6018,7 +6018,7 @@ SELECT 'FR Movie WEB Tier 02', 'NEO', re.name
 FROM regular_expressions re
 WHERE re.name = 'NEO';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'FR Movie WEB Tier 02', 'NoNe', re.name
+SELECT 'FR Movie WEB Tier 02', 'NoNE', re.name
 FROM regular_expressions re
 WHERE re.name = 'NoNE';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
@@ -6694,7 +6694,7 @@ SELECT 'FR TV WEB Tier 02', 'HeavyWeight', re.name
 FROM regular_expressions re
 WHERE re.name = 'HeavyWeight';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'FR TV WEB Tier 02', 'NoNe', re.name
+SELECT 'FR TV WEB Tier 02', 'NoNE', re.name
 FROM regular_expressions re
 WHERE re.name = 'NoNE';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
