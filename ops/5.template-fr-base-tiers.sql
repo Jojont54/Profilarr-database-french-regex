@@ -2,9 +2,9 @@
 -- @entity: batch
 -- @name: template fr base tiers
 -- @exportedAt: 2026-05-30T00:00:00.000Z
--- @opIds: 9105
+-- @opIds: 9005
 
--- --- BEGIN op 9105 ( batch template fr base tiers )
+-- --- BEGIN op 9005 ( batch template fr base tiers )
 -- ============================================================================
 -- Template FR base tiers
 --
@@ -12,35 +12,6 @@
 -- Media tiers intentionally do not encode source, resolution, codec, remux, or
 -- light-encode rules: users can score those technical custom formats themselves.
 -- ============================================================================
-
-CREATE TEMP TABLE template_tier_map (
-  old_name TEXT NOT NULL,
-  new_name TEXT NOT NULL
-);
-
-INSERT INTO template_tier_map (old_name, new_name)
-VALUES
-  ('FR Global Tier 01', 'FR Media Tier 1'),
-  ('FR Movie HD Bluray Tier 01', 'FR Media Tier 1'),
-  ('FR Movie Remux Tier 01', 'FR Media Tier 1'),
-  ('FR Movie UHD Bluray Tier 01', 'FR Media Tier 1'),
-  ('FR Movie WEB Tier 01', 'FR Media Tier 1'),
-  ('FR TV HD Bluray Tier 01', 'FR Media Tier 1'),
-  ('FR TV Remux Tier 01', 'FR Media Tier 1'),
-  ('FR TV WEB Tier 01', 'FR Media Tier 1'),
-  ('FR Global Tier 02', 'FR Media Tier 2'),
-  ('FR Movie HD Bluray Tier 02', 'FR Media Tier 2'),
-  ('FR Movie Remux Tier 02', 'FR Media Tier 2'),
-  ('FR Movie UHD Bluray Tier 02', 'FR Media Tier 2'),
-  ('FR Movie WEB Tier 02', 'FR Media Tier 2'),
-  ('FR TV WEB Tier 02', 'FR Media Tier 2'),
-  ('FR HDLight Tier', 'FR Media Tier 3'),
-  ('FR TV WEB Tier 03', 'FR Media Tier 3'),
-  ('FR Anime Tier 01', 'FR Anime Tier 1'),
-  ('FR Anime Tier 02', 'FR Anime Tier 2'),
-  ('FR Anime Tier 03', 'FR Anime Tier 3'),
-  ('FR Scene Groups', 'FR Scene Unranked'),
-  ('FR LQ', 'FR Low Quality / Banned');
 
 INSERT INTO custom_formats (name, description)
 VALUES
@@ -81,6 +52,30 @@ WHERE cf.name IN ('HDLight', '4KLight')
 
 -- Keep only release-group/title conditions in the template tiers. Source,
 -- resolution, codec, remux, and HDR are intentionally left to technical CFs.
+WITH template_tier_map(old_name, new_name) AS (
+  VALUES
+    ('FR Global Tier 01', 'FR Media Tier 1'),
+    ('FR Movie HD Bluray Tier 01', 'FR Media Tier 1'),
+    ('FR Movie Remux Tier 01', 'FR Media Tier 1'),
+    ('FR Movie UHD Bluray Tier 01', 'FR Media Tier 1'),
+    ('FR Movie WEB Tier 01', 'FR Media Tier 1'),
+    ('FR TV HD Bluray Tier 01', 'FR Media Tier 1'),
+    ('FR TV Remux Tier 01', 'FR Media Tier 1'),
+    ('FR TV WEB Tier 01', 'FR Media Tier 1'),
+    ('FR Global Tier 02', 'FR Media Tier 2'),
+    ('FR Movie HD Bluray Tier 02', 'FR Media Tier 2'),
+    ('FR Movie Remux Tier 02', 'FR Media Tier 2'),
+    ('FR Movie UHD Bluray Tier 02', 'FR Media Tier 2'),
+    ('FR Movie WEB Tier 02', 'FR Media Tier 2'),
+    ('FR TV WEB Tier 02', 'FR Media Tier 2'),
+    ('FR HDLight Tier', 'FR Media Tier 3'),
+    ('FR TV WEB Tier 03', 'FR Media Tier 3'),
+    ('FR Anime Tier 01', 'FR Anime Tier 1'),
+    ('FR Anime Tier 02', 'FR Anime Tier 2'),
+    ('FR Anime Tier 03', 'FR Anime Tier 3'),
+    ('FR Scene Groups', 'FR Scene Unranked'),
+    ('FR LQ', 'FR Low Quality / Banned')
+)
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT DISTINCT m.new_name, c.name, c.type, c.arr_type, c.negate, c.required
 FROM template_tier_map m
@@ -94,6 +89,30 @@ WHERE c.negate = 0
       AND existing.name = c.name
   );
 
+WITH template_tier_map(old_name, new_name) AS (
+  VALUES
+    ('FR Global Tier 01', 'FR Media Tier 1'),
+    ('FR Movie HD Bluray Tier 01', 'FR Media Tier 1'),
+    ('FR Movie Remux Tier 01', 'FR Media Tier 1'),
+    ('FR Movie UHD Bluray Tier 01', 'FR Media Tier 1'),
+    ('FR Movie WEB Tier 01', 'FR Media Tier 1'),
+    ('FR TV HD Bluray Tier 01', 'FR Media Tier 1'),
+    ('FR TV Remux Tier 01', 'FR Media Tier 1'),
+    ('FR TV WEB Tier 01', 'FR Media Tier 1'),
+    ('FR Global Tier 02', 'FR Media Tier 2'),
+    ('FR Movie HD Bluray Tier 02', 'FR Media Tier 2'),
+    ('FR Movie Remux Tier 02', 'FR Media Tier 2'),
+    ('FR Movie UHD Bluray Tier 02', 'FR Media Tier 2'),
+    ('FR Movie WEB Tier 02', 'FR Media Tier 2'),
+    ('FR TV WEB Tier 02', 'FR Media Tier 2'),
+    ('FR HDLight Tier', 'FR Media Tier 3'),
+    ('FR TV WEB Tier 03', 'FR Media Tier 3'),
+    ('FR Anime Tier 01', 'FR Anime Tier 1'),
+    ('FR Anime Tier 02', 'FR Anime Tier 2'),
+    ('FR Anime Tier 03', 'FR Anime Tier 3'),
+    ('FR Scene Groups', 'FR Scene Unranked'),
+    ('FR LQ', 'FR Low Quality / Banned')
+)
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT DISTINCT m.new_name, p.condition_name, p.regular_expression_name
 FROM template_tier_map m
@@ -159,25 +178,23 @@ VALUES
 
 -- Remove the old detailed tiers after copying their group conditions.
 DELETE FROM quality_profile_custom_formats
-WHERE custom_format_name IN (SELECT old_name FROM template_tier_map);
+WHERE custom_format_name IN ('FR Global Tier 01', 'FR Movie HD Bluray Tier 01', 'FR Movie Remux Tier 01', 'FR Movie UHD Bluray Tier 01', 'FR Movie WEB Tier 01', 'FR TV HD Bluray Tier 01', 'FR TV Remux Tier 01', 'FR TV WEB Tier 01', 'FR Global Tier 02', 'FR Movie HD Bluray Tier 02', 'FR Movie Remux Tier 02', 'FR Movie UHD Bluray Tier 02', 'FR Movie WEB Tier 02', 'FR TV WEB Tier 02', 'FR HDLight Tier', 'FR TV WEB Tier 03', 'FR Anime Tier 01', 'FR Anime Tier 02', 'FR Anime Tier 03', 'FR Scene Groups', 'FR LQ');
 
 DELETE FROM condition_patterns
-WHERE custom_format_name IN (SELECT old_name FROM template_tier_map);
+WHERE custom_format_name IN ('FR Global Tier 01', 'FR Movie HD Bluray Tier 01', 'FR Movie Remux Tier 01', 'FR Movie UHD Bluray Tier 01', 'FR Movie WEB Tier 01', 'FR TV HD Bluray Tier 01', 'FR TV Remux Tier 01', 'FR TV WEB Tier 01', 'FR Global Tier 02', 'FR Movie HD Bluray Tier 02', 'FR Movie Remux Tier 02', 'FR Movie UHD Bluray Tier 02', 'FR Movie WEB Tier 02', 'FR TV WEB Tier 02', 'FR HDLight Tier', 'FR TV WEB Tier 03', 'FR Anime Tier 01', 'FR Anime Tier 02', 'FR Anime Tier 03', 'FR Scene Groups', 'FR LQ');
 
 DELETE FROM condition_sources
-WHERE custom_format_name IN (SELECT old_name FROM template_tier_map);
+WHERE custom_format_name IN ('FR Global Tier 01', 'FR Movie HD Bluray Tier 01', 'FR Movie Remux Tier 01', 'FR Movie UHD Bluray Tier 01', 'FR Movie WEB Tier 01', 'FR TV HD Bluray Tier 01', 'FR TV Remux Tier 01', 'FR TV WEB Tier 01', 'FR Global Tier 02', 'FR Movie HD Bluray Tier 02', 'FR Movie Remux Tier 02', 'FR Movie UHD Bluray Tier 02', 'FR Movie WEB Tier 02', 'FR TV WEB Tier 02', 'FR HDLight Tier', 'FR TV WEB Tier 03', 'FR Anime Tier 01', 'FR Anime Tier 02', 'FR Anime Tier 03', 'FR Scene Groups', 'FR LQ');
 
 DELETE FROM condition_resolutions
-WHERE custom_format_name IN (SELECT old_name FROM template_tier_map);
+WHERE custom_format_name IN ('FR Global Tier 01', 'FR Movie HD Bluray Tier 01', 'FR Movie Remux Tier 01', 'FR Movie UHD Bluray Tier 01', 'FR Movie WEB Tier 01', 'FR TV HD Bluray Tier 01', 'FR TV Remux Tier 01', 'FR TV WEB Tier 01', 'FR Global Tier 02', 'FR Movie HD Bluray Tier 02', 'FR Movie Remux Tier 02', 'FR Movie UHD Bluray Tier 02', 'FR Movie WEB Tier 02', 'FR TV WEB Tier 02', 'FR HDLight Tier', 'FR TV WEB Tier 03', 'FR Anime Tier 01', 'FR Anime Tier 02', 'FR Anime Tier 03', 'FR Scene Groups', 'FR LQ');
 
 DELETE FROM custom_format_conditions
-WHERE custom_format_name IN (SELECT old_name FROM template_tier_map);
+WHERE custom_format_name IN ('FR Global Tier 01', 'FR Movie HD Bluray Tier 01', 'FR Movie Remux Tier 01', 'FR Movie UHD Bluray Tier 01', 'FR Movie WEB Tier 01', 'FR TV HD Bluray Tier 01', 'FR TV Remux Tier 01', 'FR TV WEB Tier 01', 'FR Global Tier 02', 'FR Movie HD Bluray Tier 02', 'FR Movie Remux Tier 02', 'FR Movie UHD Bluray Tier 02', 'FR Movie WEB Tier 02', 'FR TV WEB Tier 02', 'FR HDLight Tier', 'FR TV WEB Tier 03', 'FR Anime Tier 01', 'FR Anime Tier 02', 'FR Anime Tier 03', 'FR Scene Groups', 'FR LQ');
 
 DELETE FROM custom_format_tags
-WHERE custom_format_name IN (SELECT old_name FROM template_tier_map);
+WHERE custom_format_name IN ('FR Global Tier 01', 'FR Movie HD Bluray Tier 01', 'FR Movie Remux Tier 01', 'FR Movie UHD Bluray Tier 01', 'FR Movie WEB Tier 01', 'FR TV HD Bluray Tier 01', 'FR TV Remux Tier 01', 'FR TV WEB Tier 01', 'FR Global Tier 02', 'FR Movie HD Bluray Tier 02', 'FR Movie Remux Tier 02', 'FR Movie UHD Bluray Tier 02', 'FR Movie WEB Tier 02', 'FR TV WEB Tier 02', 'FR HDLight Tier', 'FR TV WEB Tier 03', 'FR Anime Tier 01', 'FR Anime Tier 02', 'FR Anime Tier 03', 'FR Scene Groups', 'FR LQ');
 
 DELETE FROM custom_formats
-WHERE name IN (SELECT old_name FROM template_tier_map);
-
-DROP TABLE template_tier_map;
--- --- END op 9105
+WHERE name IN ('FR Global Tier 01', 'FR Movie HD Bluray Tier 01', 'FR Movie Remux Tier 01', 'FR Movie UHD Bluray Tier 01', 'FR Movie WEB Tier 01', 'FR TV HD Bluray Tier 01', 'FR TV Remux Tier 01', 'FR TV WEB Tier 01', 'FR Global Tier 02', 'FR Movie HD Bluray Tier 02', 'FR Movie Remux Tier 02', 'FR Movie UHD Bluray Tier 02', 'FR Movie WEB Tier 02', 'FR TV WEB Tier 02', 'FR HDLight Tier', 'FR TV WEB Tier 03', 'FR Anime Tier 01', 'FR Anime Tier 02', 'FR Anime Tier 03', 'FR Scene Groups', 'FR LQ');
+-- --- END op 9005

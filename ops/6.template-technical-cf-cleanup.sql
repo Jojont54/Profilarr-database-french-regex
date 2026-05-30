@@ -2,9 +2,9 @@
 -- @entity: batch
 -- @name: template technical cf cleanup
 -- @exportedAt: 2026-05-30T00:00:00.000Z
--- @opIds: 9106
+-- @opIds: 9006
 
--- --- BEGIN op 9106 ( batch template technical cf cleanup )
+-- --- BEGIN op 9006 ( batch template technical cf cleanup )
 -- ============================================================================
 -- Template technical custom format cleanup
 --
@@ -170,45 +170,29 @@ SELECT 'h264', 'h264', 'AVC'
 WHERE NOT EXISTS (SELECT 1 FROM condition_patterns WHERE custom_format_name = 'h264' AND condition_name = 'h264' AND regular_expression_name = 'AVC');
 
 -- Template cleanup: remove profile-specific composite CFs and neutralizers.
-CREATE TEMP TABLE template_technical_drop (name TEXT PRIMARY KEY);
-
-INSERT INTO template_technical_drop (name)
-VALUES
-  ('1080p Bluray (Efficient)'),
-  ('1080p WEB-DL (h264)'),
-  ('h265 (Efficient)'),
-  ('HDR (Missing)'),
-  ('UHD Bluray (Efficient)'),
-  ('x264 (2160p)'),
-  ('x265 (Bluray)'),
-  ('x265 (Efficient)'),
-  ('x265 (Missing)'),
-  ('x265 (Remux)'),
-  ('x265 (WEB)');
-
 DELETE FROM quality_profile_custom_formats
-WHERE custom_format_name IN (SELECT name FROM template_technical_drop);
+WHERE custom_format_name IN ('1080p Bluray (Efficient)', '1080p WEB-DL (h264)', 'h265 (Efficient)', 'HDR (Missing)', 'UHD Bluray (Efficient)', 'x264 (2160p)', 'x265 (Bluray)', 'x265 (Efficient)', 'x265 (Missing)', 'x265 (Remux)', 'x265 (WEB)');
 
 DELETE FROM condition_patterns
-WHERE custom_format_name IN (SELECT name FROM template_technical_drop);
+WHERE custom_format_name IN ('1080p Bluray (Efficient)', '1080p WEB-DL (h264)', 'h265 (Efficient)', 'HDR (Missing)', 'UHD Bluray (Efficient)', 'x264 (2160p)', 'x265 (Bluray)', 'x265 (Efficient)', 'x265 (Missing)', 'x265 (Remux)', 'x265 (WEB)');
 
 DELETE FROM condition_sources
-WHERE custom_format_name IN (SELECT name FROM template_technical_drop);
+WHERE custom_format_name IN ('1080p Bluray (Efficient)', '1080p WEB-DL (h264)', 'h265 (Efficient)', 'HDR (Missing)', 'UHD Bluray (Efficient)', 'x264 (2160p)', 'x265 (Bluray)', 'x265 (Efficient)', 'x265 (Missing)', 'x265 (Remux)', 'x265 (WEB)');
 
 DELETE FROM condition_resolutions
-WHERE custom_format_name IN (SELECT name FROM template_technical_drop);
+WHERE custom_format_name IN ('1080p Bluray (Efficient)', '1080p WEB-DL (h264)', 'h265 (Efficient)', 'HDR (Missing)', 'UHD Bluray (Efficient)', 'x264 (2160p)', 'x265 (Bluray)', 'x265 (Efficient)', 'x265 (Missing)', 'x265 (Remux)', 'x265 (WEB)');
 
 DELETE FROM condition_languages
-WHERE custom_format_name IN (SELECT name FROM template_technical_drop);
+WHERE custom_format_name IN ('1080p Bluray (Efficient)', '1080p WEB-DL (h264)', 'h265 (Efficient)', 'HDR (Missing)', 'UHD Bluray (Efficient)', 'x264 (2160p)', 'x265 (Bluray)', 'x265 (Efficient)', 'x265 (Missing)', 'x265 (Remux)', 'x265 (WEB)');
 
 DELETE FROM custom_format_conditions
-WHERE custom_format_name IN (SELECT name FROM template_technical_drop);
+WHERE custom_format_name IN ('1080p Bluray (Efficient)', '1080p WEB-DL (h264)', 'h265 (Efficient)', 'HDR (Missing)', 'UHD Bluray (Efficient)', 'x264 (2160p)', 'x265 (Bluray)', 'x265 (Efficient)', 'x265 (Missing)', 'x265 (Remux)', 'x265 (WEB)');
 
 DELETE FROM custom_format_tags
-WHERE custom_format_name IN (SELECT name FROM template_technical_drop);
+WHERE custom_format_name IN ('1080p Bluray (Efficient)', '1080p WEB-DL (h264)', 'h265 (Efficient)', 'HDR (Missing)', 'UHD Bluray (Efficient)', 'x264 (2160p)', 'x265 (Bluray)', 'x265 (Efficient)', 'x265 (Missing)', 'x265 (Remux)', 'x265 (WEB)');
 
 DELETE FROM custom_formats
-WHERE name IN (SELECT name FROM template_technical_drop);
+WHERE name IN ('1080p Bluray (Efficient)', '1080p WEB-DL (h264)', 'h265 (Efficient)', 'HDR (Missing)', 'UHD Bluray (Efficient)', 'x264 (2160p)', 'x265 (Bluray)', 'x265 (Efficient)', 'x265 (Missing)', 'x265 (Remux)', 'x265 (WEB)');
 
 DELETE FROM condition_patterns
 WHERE regular_expression_name = 'UHD Bluray (Efficient)';
@@ -218,6 +202,4 @@ WHERE regular_expression_name = 'UHD Bluray (Efficient)';
 
 DELETE FROM regular_expressions
 WHERE name = 'UHD Bluray (Efficient)';
-
-DROP TABLE template_technical_drop;
--- --- END op 9106
+-- --- END op 9006

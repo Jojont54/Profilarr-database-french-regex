@@ -2,9 +2,9 @@
 -- @entity: batch
 -- @name: template generic profiles
 -- @exportedAt: 2026-05-30T00:00:00.000Z
--- @opIds: 9108
+-- @opIds: 9008
 
--- --- BEGIN op 9108 ( batch template generic profiles )
+-- --- BEGIN op 9008 ( batch template generic profiles )
 -- ============================================================================
 -- PCD 2.0 French Template - Generic grouped CFs and starter profiles
 -- ============================================================================
@@ -652,4 +652,4 @@ JOIN (
 ) wanted
 WHERE qp.name LIKE 'Template Expert%'
   AND EXISTS (SELECT 1 FROM custom_formats cf WHERE cf.name = wanted.custom_format_name);
--- --- END op 9108
+-- --- END op 9008
