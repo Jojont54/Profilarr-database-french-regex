@@ -519,10 +519,30 @@ JOIN (
     UNION ALL SELECT 'Template Basic 1080p FR', '1080p Template', 'WEBDL-1080p', 1
     UNION ALL SELECT 'Template Basic 1080p FR', '1080p Template', 'WEBRip-1080p', 2
     UNION ALL SELECT 'Template Basic 1080p FR', '1080p Template', 'HDTV-1080p', 3
+    UNION ALL SELECT 'Template Basic 1080p FR', '1080p Template', 'Bluray-720p', 4
+    UNION ALL SELECT 'Template Basic 1080p FR', '1080p Template', 'WEBDL-720p', 5
+    UNION ALL SELECT 'Template Basic 1080p FR', '1080p Template', 'WEBRip-720p', 6
+    UNION ALL SELECT 'Template Basic 1080p FR', '1080p Template', 'HDTV-720p', 7
+    UNION ALL SELECT 'Template Basic 1080p FR', '1080p Template', 'Bluray-576p', 8
+    UNION ALL SELECT 'Template Basic 1080p FR', '1080p Template', 'Bluray-480p', 9
+    UNION ALL SELECT 'Template Basic 1080p FR', '1080p Template', 'WEBDL-480p', 10
+    UNION ALL SELECT 'Template Basic 1080p FR', '1080p Template', 'WEBRip-480p', 11
+    UNION ALL SELECT 'Template Basic 1080p FR', '1080p Template', 'DVD', 12
+    UNION ALL SELECT 'Template Basic 1080p FR', '1080p Template', 'SDTV', 13
     UNION ALL SELECT 'Template Expert 1080p FR', '1080p Template', 'Bluray-1080p', 0
     UNION ALL SELECT 'Template Expert 1080p FR', '1080p Template', 'WEBDL-1080p', 1
     UNION ALL SELECT 'Template Expert 1080p FR', '1080p Template', 'WEBRip-1080p', 2
     UNION ALL SELECT 'Template Expert 1080p FR', '1080p Template', 'HDTV-1080p', 3
+    UNION ALL SELECT 'Template Expert 1080p FR', '1080p Template', 'Bluray-720p', 4
+    UNION ALL SELECT 'Template Expert 1080p FR', '1080p Template', 'WEBDL-720p', 5
+    UNION ALL SELECT 'Template Expert 1080p FR', '1080p Template', 'WEBRip-720p', 6
+    UNION ALL SELECT 'Template Expert 1080p FR', '1080p Template', 'HDTV-720p', 7
+    UNION ALL SELECT 'Template Expert 1080p FR', '1080p Template', 'Bluray-576p', 8
+    UNION ALL SELECT 'Template Expert 1080p FR', '1080p Template', 'Bluray-480p', 9
+    UNION ALL SELECT 'Template Expert 1080p FR', '1080p Template', 'WEBDL-480p', 10
+    UNION ALL SELECT 'Template Expert 1080p FR', '1080p Template', 'WEBRip-480p', 11
+    UNION ALL SELECT 'Template Expert 1080p FR', '1080p Template', 'DVD', 12
+    UNION ALL SELECT 'Template Expert 1080p FR', '1080p Template', 'SDTV', 13
     UNION ALL SELECT 'Template Basic 2160p FR', '2160p Template', 'Bluray-2160p', 0
     UNION ALL SELECT 'Template Basic 2160p FR', '2160p Template', 'WEBDL-2160p', 1
     UNION ALL SELECT 'Template Basic 2160p FR', '2160p Template', 'WEBRip-2160p', 2
@@ -541,10 +561,10 @@ INSERT INTO quality_profile_qualities (quality_profile_name, quality_group_name,
 VALUES
 ('Template Basic 1080p FR', '1080p Template', 0, 1),
 ('Template Expert 1080p FR', '1080p Template', 0, 1),
-('Template Basic 2160p FR', '1080p Fallback', 0, 0),
-('Template Basic 2160p FR', '2160p Template', 1, 1),
-('Template Expert 2160p FR', '1080p Fallback', 0, 0),
-('Template Expert 2160p FR', '2160p Template', 1, 1);
+('Template Basic 2160p FR', '2160p Template', 0, 1),
+('Template Basic 2160p FR', '1080p Fallback', 1, 0),
+('Template Expert 2160p FR', '2160p Template', 0, 1),
+('Template Expert 2160p FR', '1080p Fallback', 1, 0);
 
 -- Basic profiles: mostly grouped CFs.
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
