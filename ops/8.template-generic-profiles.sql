@@ -236,28 +236,31 @@ WHERE NOT EXISTS (
 );
 
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT 'h265', 'HEVC / x265', 'release_title', 'all', 0, 0
+SELECT 'h265', name, 'release_title', 'all', 0, 0
+FROM (
+    SELECT 'HEVC' AS name
+    UNION ALL SELECT 'x265'
+) wanted
 WHERE EXISTS (SELECT 1 FROM custom_formats WHERE name = 'h265')
   AND NOT EXISTS (
     SELECT 1 FROM custom_format_conditions
     WHERE custom_format_name = 'h265'
-      AND name = 'HEVC / x265'
+      AND name = wanted.name
   );
 
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'h265', 'HEVC / x265', re.name
+SELECT 'h265', re.name, re.name
 FROM regular_expressions re
 WHERE re.name IN ('HEVC', 'x265')
   AND EXISTS (
     SELECT 1 FROM custom_format_conditions
     WHERE custom_format_name = 'h265'
-      AND name = 'HEVC / x265'
+      AND name = re.name
   )
   AND NOT EXISTS (
     SELECT 1 FROM condition_patterns
     WHERE custom_format_name = 'h265'
-      AND condition_name = 'HEVC / x265'
-      AND regular_expression_name = re.name
+      AND condition_name = re.name
   );
 
 -- Normalize technical regexes for template usage. These patterns are broad
