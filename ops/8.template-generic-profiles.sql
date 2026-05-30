@@ -46,20 +46,89 @@ WHERE re.name IN ('HDR10', 'HLG', 'PQ')
 INSERT INTO regular_expressions (name, pattern, description)
 SELECT name, pattern, description
 FROM (
-    SELECT '480p' AS name, '(?i)(?<=^|[\s.-])(?:480p|SD)(?=$|[\s.-])' AS pattern, 'Matches 480p and SD resolution markers.' AS description
-    UNION ALL SELECT '576p', '(?i)(?<=^|[\s.-])(?:576p|PAL)(?=$|[\s.-])', 'Matches 576p and PAL resolution markers.'
-    UNION ALL SELECT '720p', '(?i)(?<=^|[\s.-])(?:720p|HD)(?=$|[\s.-])', 'Matches 720p and HD resolution markers.'
-    UNION ALL SELECT '1080p', '(?i)(?<=^|[\s.-])(?:1080p|FHD|Full[ ._-]?HD)(?=$|[\s.-])', 'Matches 1080p, FHD and Full HD resolution markers.'
-    UNION ALL SELECT '2160p', '(?i)(?<=^|[\s.-])(?:2160p|UHD|4K)(?=$|[\s.-])', 'Matches 2160p, UHD and 4K resolution markers.'
+    SELECT 'DV' AS name, '(?i)(?<=^|[\s._-])DV(?![\s._-]?(?:HLG|SDR))(?=$|[\s._-])' AS pattern, 'Matches DV markers without matching DV HLG or DV SDR.' AS description
+    UNION ALL SELECT 'DoVi', '(?i)(?<=^|[\s._-])DoVi(?![\s._-]?(?:HLG|SDR))(?=$|[\s._-])', 'Matches DoVi markers without matching DoVi HLG or DoVi SDR.'
 ) wanted
 WHERE NOT EXISTS (SELECT 1 FROM regular_expressions WHERE regular_expressions.name = wanted.name);
 
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
-WHERE re.name IN ('480p', '576p', '720p', '1080p', '2160p')
+WHERE re.name IN ('DV', 'DoVi')
+  AND t.name IN ('HDR')
+  AND NOT EXISTS (
+    SELECT 1 FROM regular_expression_tags existing
+    WHERE existing.regular_expression_name = re.name
+      AND existing.tag_name = t.name
+  );
+
+INSERT INTO regular_expressions (name, pattern, description)
+SELECT name, pattern, description
+FROM (
+    SELECT '480p' AS name, '(?i)(?<=^|[\s.-])480p(?=$|[\s.-])' AS pattern, 'Matches 480p resolution markers.' AS description
+    UNION ALL SELECT '576p', '(?i)(?<=^|[\s.-])576p(?=$|[\s.-])', 'Matches 576p resolution markers.'
+    UNION ALL SELECT '720p', '(?i)(?<=^|[\s.-])720p(?=$|[\s.-])', 'Matches 720p resolution markers.'
+    UNION ALL SELECT '1080p', '(?i)(?<=^|[\s.-])1080p(?=$|[\s.-])', 'Matches 1080p resolution markers.'
+    UNION ALL SELECT '2160p', '(?i)(?<=^|[\s.-])2160p(?=$|[\s.-])', 'Matches 2160p resolution markers.'
+    UNION ALL SELECT 'SD', '(?i)(?<=^|[\s._-])SD(?![\s._-]?(?:R|TV))(?=$|[\s._-])', 'Matches standalone SD markers without matching SDR or SDTV.'
+    UNION ALL SELECT 'PAL', '(?i)(?<=^|[\s._-])PAL(?=$|[\s._-])', 'Matches PAL resolution markers.'
+    UNION ALL SELECT 'HD', '(?i)(?<=^|[\s._-])HD(?![\s._-]?(?:Light|Lite|TV|DVD))(?=$|[\s._-])', 'Matches standalone HD markers without matching HDLight, HDLite, HDTV or HD-DVD.'
+    UNION ALL SELECT 'FHD', '(?i)(?<=^|[\s._-])FHD(?=$|[\s._-])', 'Matches FHD resolution markers.'
+    UNION ALL SELECT 'Full HD', '(?i)(?<=^|[\s._-])Full[\s._-]?HD(?=$|[\s._-])', 'Matches Full HD, Full-HD and FullHD resolution markers.'
+    UNION ALL SELECT 'UHD', '(?i)(?<=^|[\s._-])UHD(?![\s._-]?(?:Light|Lite))(?=$|[\s._-])', 'Matches standalone UHD markers without matching UHDLight or UHDLite.'
+    UNION ALL SELECT '4K', '(?i)(?<=^|[\s._-])4K(?![\s._-]?(?:Light|Lite))(?=$|[\s._-])', 'Matches standalone 4K markers without matching 4KLight or 4KLite.'
+    UNION ALL SELECT 'BD', '(?i)(?<=^|[\s._-])BD(?![\s._-]?(?:Rip|Light|Lite))(?=$|[\s._-])', 'Matches standalone BD source markers without matching BDRip or BDLight.'
+    UNION ALL SELECT 'WEB', '(?i)(?<=^|[\s._-])WEB(?![\s._-]?(?:Rip|Light|Lite|DL))(?=$|[\s._-])', 'Matches standalone WEB source markers without matching WEBRip, WEBLight or WEB-DL.'
+    UNION ALL SELECT 'BDRip', '(?i)(?<=^|[\s._-])BD[\s._-]?Rip(?=$|[\s._-])', 'Matches BDRip and BD Rip source markers.'
+    UNION ALL SELECT 'BRRip', '(?i)(?<=^|[\s._-])BR[\s._-]?Rip(?=$|[\s._-])', 'Matches BRRip and BR Rip source markers.'
+    UNION ALL SELECT 'BluRay Rip', '(?i)(?<=^|[\s._-])Blu[\s._-]?Ray[\s._-]?Rip(?=$|[\s._-])', 'Matches BluRay Rip source markers.'
+    UNION ALL SELECT 'DVDRip', '(?i)(?<=^|[\s._-])DVDRip(?=$|[\s._-])', 'Matches DVDRip source markers.'
+    UNION ALL SELECT 'PDTV', '(?i)(?<=^|[\s._-])PDTV(?=$|[\s._-])', 'Matches PDTV source markers.'
+    UNION ALL SELECT 'DSR', '(?i)(?<=^|[\s._-])DSR(?=$|[\s._-])', 'Matches DSR source markers.'
+    UNION ALL SELECT 'TVRip', '(?i)(?<=^|[\s._-])TVRip(?=$|[\s._-])', 'Matches TVRip source markers.'
+    UNION ALL SELECT 'AOMedia Video 1', '(?i)(?<=^|[\s._-])AOMedia[\s._-]?Video[\s._-]?1(?=$|[\s._-])', 'Matches AOMedia Video 1 codec markers.'
+    UNION ALL SELECT 'H.264', '(?i)(?<=^|[\s._-])H\.264(?=$|[\s._-])', 'Matches H.264 codec markers.'
+    UNION ALL SELECT 'h264', '(?i)(?<=^|[\s._-])h[\s._-]?264(?=$|[\s._-])', 'Matches h264 codec markers.'
+    UNION ALL SELECT 'H.265', '(?i)(?<=^|[\s._-])H\.265(?=$|[\s._-])', 'Matches H.265 codec markers.'
+) wanted
+WHERE NOT EXISTS (SELECT 1 FROM regular_expressions WHERE regular_expressions.name = wanted.name);
+
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name IN ('480p', '576p', '720p', '1080p', '2160p', 'SD', 'PAL', 'HD', 'FHD', 'Full HD', 'UHD', '4K')
   AND t.name IN ('480p', '576p', '720p', '1080p', '2160p', 'Quality')
-  AND (re.name = t.name OR t.name = 'Quality')
+  AND (
+    re.name = t.name
+    OR t.name = 'Quality'
+    OR (re.name = 'SD' AND t.name = '480p')
+    OR (re.name = 'PAL' AND t.name = '576p')
+    OR (re.name = 'HD' AND t.name = '720p')
+    OR (re.name IN ('FHD', 'Full HD') AND t.name = '1080p')
+    OR (re.name IN ('UHD', '4K') AND t.name = '2160p')
+  )
+  AND NOT EXISTS (
+    SELECT 1 FROM regular_expression_tags existing
+    WHERE existing.regular_expression_name = re.name
+      AND existing.tag_name = t.name
+  );
+
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name IN ('Bluray', 'BD', 'WEB-DL', 'WEB', 'WEBRip', 'BDRip', 'BRRip', 'BluRay Rip', 'Rip', 'DVDRip', 'HDTV', 'PDTV', 'DSR', 'TVRip', 'UHD Bluray')
+  AND t.name = 'Source'
+  AND NOT EXISTS (
+    SELECT 1 FROM regular_expression_tags existing
+    WHERE existing.regular_expression_name = re.name
+      AND existing.tag_name = t.name
+  );
+
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name IN ('AV1', 'AOMedia Video 1', 'AVC', 'H.264', 'h264', 'x264', 'HEVC', 'H.265', 'h265', 'x265')
+  AND t.name = 'Codec'
   AND NOT EXISTS (
     SELECT 1 FROM regular_expression_tags existing
     WHERE existing.regular_expression_name = re.name
@@ -141,10 +210,17 @@ FROM (
     UNION ALL SELECT 'PQ', 'PQ'
     UNION ALL SELECT 'IMAX', 'IMAX'
     UNION ALL SELECT '480p', '480p'
+    UNION ALL SELECT '480p', 'SD'
     UNION ALL SELECT '576p', '576p'
+    UNION ALL SELECT '576p', 'PAL'
     UNION ALL SELECT '720p', '720p'
+    UNION ALL SELECT '720p', 'HD'
     UNION ALL SELECT '1080p', '1080p'
+    UNION ALL SELECT '1080p', 'FHD'
+    UNION ALL SELECT '1080p', 'Full HD'
     UNION ALL SELECT '2160p', '2160p'
+    UNION ALL SELECT '2160p', 'UHD'
+    UNION ALL SELECT '2160p', '4K'
 ) wanted
 WHERE NOT EXISTS (
     SELECT 1 FROM custom_format_conditions existing
@@ -160,10 +236,17 @@ FROM (
     UNION ALL SELECT 'PQ', 'PQ', 'PQ'
     UNION ALL SELECT 'IMAX', 'IMAX', 'IMAX'
     UNION ALL SELECT '480p', '480p', '480p'
+    UNION ALL SELECT '480p', 'SD', 'SD'
     UNION ALL SELECT '576p', '576p', '576p'
+    UNION ALL SELECT '576p', 'PAL', 'PAL'
     UNION ALL SELECT '720p', '720p', '720p'
+    UNION ALL SELECT '720p', 'HD', 'HD'
     UNION ALL SELECT '1080p', '1080p', '1080p'
+    UNION ALL SELECT '1080p', 'FHD', 'FHD'
+    UNION ALL SELECT '1080p', 'Full HD', 'Full HD'
     UNION ALL SELECT '2160p', '2160p', '2160p'
+    UNION ALL SELECT '2160p', 'UHD', 'UHD'
+    UNION ALL SELECT '2160p', '4K', '4K'
 ) wanted
 WHERE NOT EXISTS (
     SELECT 1 FROM condition_patterns existing
@@ -179,18 +262,32 @@ SELECT cf_name, condition_name, 'release_title', 'all', 0, 0
 FROM (
     SELECT 'WEB Source' AS cf_name, 'WEB-DL' AS condition_name
     UNION ALL SELECT 'WEB Source', 'WEBRip'
+    UNION ALL SELECT 'WEB Source', 'WEB'
     UNION ALL SELECT 'Disc Source', 'Bluray'
+    UNION ALL SELECT 'Disc Source', 'BD'
     UNION ALL SELECT 'Disc Source', 'UHD Bluray'
     UNION ALL SELECT 'Disc Source', 'Remux'
     UNION ALL SELECT 'Disc Source', 'Full Disc'
     UNION ALL SELECT 'Rip Source', 'BDRip / BRRip'
+    UNION ALL SELECT 'Rip Source', 'BDRip'
+    UNION ALL SELECT 'Rip Source', 'BRRip'
+    UNION ALL SELECT 'Rip Source', 'BluRay Rip'
     UNION ALL SELECT 'Rip Source', 'Rip'
+    UNION ALL SELECT 'Rip Source', 'DVDRip'
     UNION ALL SELECT 'Rip Source', 'HDTV'
+    UNION ALL SELECT 'Rip Source', 'PDTV'
+    UNION ALL SELECT 'Rip Source', 'DSR'
+    UNION ALL SELECT 'Rip Source', 'TVRip'
     UNION ALL SELECT 'Modern Codec', 'AV1'
+    UNION ALL SELECT 'Modern Codec', 'AOMedia Video 1'
     UNION ALL SELECT 'Modern Codec', 'HEVC'
     UNION ALL SELECT 'Modern Codec', 'h265'
+    UNION ALL SELECT 'Modern Codec', 'H.265'
+    UNION ALL SELECT 'Modern Codec', 'x265'
     UNION ALL SELECT 'Legacy Codec', 'AVC'
     UNION ALL SELECT 'Legacy Codec', 'x264'
+    UNION ALL SELECT 'Legacy Codec', 'h264'
+    UNION ALL SELECT 'Legacy Codec', 'H.264'
     UNION ALL SELECT 'Light Encode', 'HDLight'
     UNION ALL SELECT 'Light Encode', '4KLight'
     UNION ALL SELECT 'French Accepted', 'French MULTi'
@@ -209,18 +306,32 @@ SELECT cf_name, condition_name, regex_name
 FROM (
     SELECT 'WEB Source' AS cf_name, 'WEB-DL' AS condition_name, 'WEB-DL' AS regex_name
     UNION ALL SELECT 'WEB Source', 'WEBRip', 'WEBRip'
+    UNION ALL SELECT 'WEB Source', 'WEB', 'WEB'
     UNION ALL SELECT 'Disc Source', 'Bluray', 'Bluray'
+    UNION ALL SELECT 'Disc Source', 'BD', 'BD'
     UNION ALL SELECT 'Disc Source', 'UHD Bluray', 'UHD Bluray'
     UNION ALL SELECT 'Disc Source', 'Remux', 'Remux'
     UNION ALL SELECT 'Disc Source', 'Full Disc', 'Full Disc'
     UNION ALL SELECT 'Rip Source', 'BDRip / BRRip', 'BDRip / BRRip'
+    UNION ALL SELECT 'Rip Source', 'BDRip', 'BDRip'
+    UNION ALL SELECT 'Rip Source', 'BRRip', 'BRRip'
+    UNION ALL SELECT 'Rip Source', 'BluRay Rip', 'BluRay Rip'
     UNION ALL SELECT 'Rip Source', 'Rip', 'Rip'
+    UNION ALL SELECT 'Rip Source', 'DVDRip', 'DVDRip'
     UNION ALL SELECT 'Rip Source', 'HDTV', 'HDTV'
+    UNION ALL SELECT 'Rip Source', 'PDTV', 'PDTV'
+    UNION ALL SELECT 'Rip Source', 'DSR', 'DSR'
+    UNION ALL SELECT 'Rip Source', 'TVRip', 'TVRip'
     UNION ALL SELECT 'Modern Codec', 'AV1', 'AV1'
+    UNION ALL SELECT 'Modern Codec', 'AOMedia Video 1', 'AOMedia Video 1'
     UNION ALL SELECT 'Modern Codec', 'HEVC', 'HEVC'
     UNION ALL SELECT 'Modern Codec', 'h265', 'h265'
+    UNION ALL SELECT 'Modern Codec', 'H.265', 'H.265'
+    UNION ALL SELECT 'Modern Codec', 'x265', 'x265'
     UNION ALL SELECT 'Legacy Codec', 'AVC', 'AVC'
-    UNION ALL SELECT 'Legacy Codec', 'x264', 'AVC'
+    UNION ALL SELECT 'Legacy Codec', 'x264', 'x264'
+    UNION ALL SELECT 'Legacy Codec', 'h264', 'h264'
+    UNION ALL SELECT 'Legacy Codec', 'H.264', 'H.264'
     UNION ALL SELECT 'Light Encode', 'HDLight', 'HDLight'
     UNION ALL SELECT 'Light Encode', '4KLight', '4KLight'
     UNION ALL SELECT 'French Accepted', 'French MULTi', 'French MULTi'
@@ -239,6 +350,8 @@ INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, 
 SELECT 'h265', name, 'release_title', 'all', 0, 0
 FROM (
     SELECT 'HEVC' AS name
+    UNION ALL SELECT 'h265'
+    UNION ALL SELECT 'H.265'
     UNION ALL SELECT 'x265'
 ) wanted
 WHERE EXISTS (SELECT 1 FROM custom_formats WHERE name = 'h265')
@@ -248,10 +361,22 @@ WHERE EXISTS (SELECT 1 FROM custom_formats WHERE name = 'h265')
       AND name = wanted.name
   );
 
+DELETE FROM condition_resolutions
+WHERE custom_format_name = 'h265'
+  AND condition_name = 'Not 2160p';
+
+DELETE FROM condition_patterns
+WHERE custom_format_name = 'h265'
+  AND condition_name = 'Not 2160p';
+
+DELETE FROM custom_format_conditions
+WHERE custom_format_name = 'h265'
+  AND name = 'Not 2160p';
+
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'h265', re.name, re.name
 FROM regular_expressions re
-WHERE re.name IN ('HEVC', 'x265')
+WHERE re.name IN ('HEVC', 'h265', 'H.265', 'x265')
   AND EXISTS (
     SELECT 1 FROM custom_format_conditions
     WHERE custom_format_name = 'h265'
@@ -263,43 +388,172 @@ WHERE re.name IN ('HEVC', 'x265')
       AND condition_name = re.name
   );
 
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT cf_name, condition_name, 'release_title', 'all', 0, 1
+FROM (
+    SELECT 'Bluray' AS cf_name, 'BD' AS condition_name
+    UNION ALL SELECT 'WEB-DL', 'WEB'
+    UNION ALL SELECT 'BDRip / BRRip', 'BDRip'
+    UNION ALL SELECT 'BDRip / BRRip', 'BRRip'
+    UNION ALL SELECT 'BDRip / BRRip', 'BluRay Rip'
+    UNION ALL SELECT 'Rip', 'DVDRip'
+    UNION ALL SELECT 'HDTV', 'PDTV'
+    UNION ALL SELECT 'HDTV', 'DSR'
+    UNION ALL SELECT 'HDTV', 'TVRip'
+    UNION ALL SELECT 'AV1', 'AOMedia Video 1'
+    UNION ALL SELECT 'h264', 'AVC'
+    UNION ALL SELECT 'h264', 'x264'
+    UNION ALL SELECT 'h264', 'H.264'
+    UNION ALL SELECT 'h264', 'h264'
+) wanted
+WHERE EXISTS (SELECT 1 FROM custom_formats WHERE name = wanted.cf_name)
+  AND NOT EXISTS (
+    SELECT 1 FROM custom_format_conditions
+    WHERE custom_format_name = wanted.cf_name
+      AND name = wanted.condition_name
+  );
+
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
+SELECT cf_name, condition_name, regex_name
+FROM (
+    SELECT 'Bluray' AS cf_name, 'BD' AS condition_name, 'BD' AS regex_name
+    UNION ALL SELECT 'WEB-DL', 'WEB', 'WEB'
+    UNION ALL SELECT 'BDRip / BRRip', 'BDRip', 'BDRip'
+    UNION ALL SELECT 'BDRip / BRRip', 'BRRip', 'BRRip'
+    UNION ALL SELECT 'BDRip / BRRip', 'BluRay Rip', 'BluRay Rip'
+    UNION ALL SELECT 'Rip', 'DVDRip', 'DVDRip'
+    UNION ALL SELECT 'HDTV', 'PDTV', 'PDTV'
+    UNION ALL SELECT 'HDTV', 'DSR', 'DSR'
+    UNION ALL SELECT 'HDTV', 'TVRip', 'TVRip'
+    UNION ALL SELECT 'AV1', 'AOMedia Video 1', 'AOMedia Video 1'
+    UNION ALL SELECT 'h264', 'AVC', 'AVC'
+    UNION ALL SELECT 'h264', 'x264', 'x264'
+    UNION ALL SELECT 'h264', 'H.264', 'H.264'
+    UNION ALL SELECT 'h264', 'h264', 'h264'
+) wanted
+WHERE EXISTS (
+    SELECT 1 FROM custom_format_conditions
+    WHERE custom_format_name = wanted.cf_name
+      AND name = wanted.condition_name
+  )
+  AND NOT EXISTS (
+    SELECT 1 FROM condition_patterns
+    WHERE custom_format_name = wanted.cf_name
+      AND condition_name = wanted.condition_name
+  );
+
+UPDATE condition_patterns
+SET regular_expression_name = 'h264'
+WHERE custom_format_name = 'h264'
+  AND condition_name = 'h264';
+
+UPDATE condition_patterns
+SET regular_expression_name = 'h265'
+WHERE custom_format_name = 'h265'
+  AND condition_name = 'h265';
+
+UPDATE custom_format_conditions
+SET required = 0
+WHERE custom_format_name IN (
+  '480p',
+  '576p',
+  '720p',
+  '1080p',
+  '2160p',
+  'Bluray',
+  'WEB-DL',
+  'WEBRip',
+  'BDRip / BRRip',
+  'Rip',
+  'HDTV',
+  'AV1',
+  'h264',
+  'h265'
+)
+  AND type = 'release_title';
+
 -- Normalize technical regexes for template usage. These patterns are broad
 -- enough to catch common naming variants, but strict enough to avoid accidental
 -- matches such as HD -> HDLight, UHD -> UHDLight, 4K -> 4KLight, or WEB -> WEBLight.
 UPDATE regular_expressions
-SET pattern = '(?i)(?<=^|[\s._-])(?:480p|SD(?![\s._-]?(?:R|TV)))(?=$|[\s._-])',
-    description = 'Matches 480p and SD resolution markers without matching SDR or SDTV.'
+SET pattern = '(?i)(?<=^|[\s._-])480p(?=$|[\s._-])',
+    description = 'Matches 480p resolution markers.'
 WHERE name = '480p';
 
 UPDATE regular_expressions
-SET pattern = '(?i)(?<=^|[\s._-])(?:576p|PAL)(?=$|[\s._-])',
-    description = 'Matches 576p and PAL resolution markers.'
+SET pattern = '(?i)(?<=^|[\s._-])576p(?=$|[\s._-])',
+    description = 'Matches 576p resolution markers.'
 WHERE name = '576p';
 
 UPDATE regular_expressions
-SET pattern = '(?i)(?<=^|[\s._-])(?:720p|HD(?![\s._-]?(?:Light|Lite|TV|DVD)))(?=$|[\s._-])',
-    description = 'Matches 720p and standalone HD markers without matching HDLight, HDLite, HDTV or HD-DVD.'
+SET pattern = '(?i)(?<=^|[\s._-])SD(?![\s._-]?(?:R|TV))(?=$|[\s._-])',
+    description = 'Matches standalone SD markers without matching SDR or SDTV.'
+WHERE name = 'SD';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])PAL(?=$|[\s._-])',
+    description = 'Matches PAL resolution markers.'
+WHERE name = 'PAL';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])HD(?![\s._-]?(?:Light|Lite|TV|DVD))(?=$|[\s._-])',
+    description = 'Matches standalone HD markers without matching HDLight, HDLite, HDTV or HD-DVD.'
+WHERE name = 'HD';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])720p(?=$|[\s._-])',
+    description = 'Matches 720p resolution markers.'
 WHERE name = '720p';
 
 UPDATE regular_expressions
-SET pattern = '(?i)(?<=^|[\s._-])(?:1080p|FHD|Full[\s._-]?HD)(?=$|[\s._-])',
-    description = 'Matches 1080p, FHD, FullHD, Full HD and Full-HD resolution markers.'
+SET pattern = '(?i)(?<=^|[\s._-])1080p(?=$|[\s._-])',
+    description = 'Matches 1080p resolution markers.'
 WHERE name = '1080p';
 
 UPDATE regular_expressions
-SET pattern = '(?i)(?<=^|[\s._-])(?:2160p|UHD(?![\s._-]?(?:Light|Lite))|4K(?![\s._-]?(?:Light|Lite)))(?=$|[\s._-])',
-    description = 'Matches 2160p, UHD and 4K markers without matching UHDLight or 4KLight.'
+SET pattern = '(?i)(?<=^|[\s._-])FHD(?=$|[\s._-])',
+    description = 'Matches FHD resolution markers.'
+WHERE name = 'FHD';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])Full[\s._-]?HD(?=$|[\s._-])',
+    description = 'Matches Full HD, Full-HD and FullHD resolution markers.'
+WHERE name = 'Full HD';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])2160p(?=$|[\s._-])',
+    description = 'Matches 2160p resolution markers.'
 WHERE name = '2160p';
 
 UPDATE regular_expressions
-SET pattern = '(?i)(?<=^|[\s._-])(?:Blu[\s._-]?Ray(?![\s._-]?(?:Rip|Light|Lite))|BD(?![\s._-]?(?:Rip|Light|Lite)))(?=$|[\s._-])',
-    description = 'Matches BluRay, Blu-Ray, Blu Ray and standalone BD source markers without matching BDRip or BDLight.'
+SET pattern = '(?i)(?<=^|[\s._-])UHD(?![\s._-]?(?:Light|Lite))(?=$|[\s._-])',
+    description = 'Matches standalone UHD markers without matching UHDLight or UHDLite.'
+WHERE name = 'UHD';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])4K(?![\s._-]?(?:Light|Lite))(?=$|[\s._-])',
+    description = 'Matches standalone 4K markers without matching 4KLight or 4KLite.'
+WHERE name = '4K';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])Blu[\s._-]?Ray(?![\s._-]?(?:Rip|Light|Lite))(?=$|[\s._-])',
+    description = 'Matches BluRay, Blu-Ray and Blu Ray source markers without matching BluRay Rip or BluRay Light.'
 WHERE name = 'Bluray';
 
 UPDATE regular_expressions
-SET pattern = '(?i)(?<=^|[\s._-])(?:WEB[\s._-]?DL|WEBDL|WEB(?![\s._-]?(?:Rip|Light|Lite)))(?=$|[\s._-])',
-    description = 'Matches WEB-DL, WEBDL, WEB DL and standalone WEB source markers without matching WEBRip or WEBLight.'
+SET pattern = '(?i)(?<=^|[\s._-])BD(?![\s._-]?(?:Rip|Light|Lite))(?=$|[\s._-])',
+    description = 'Matches standalone BD source markers without matching BDRip or BDLight.'
+WHERE name = 'BD';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])(?:WEB[\s._-]?DL|WEBDL)(?=$|[\s._-])',
+    description = 'Matches WEB-DL, WEBDL and WEB DL source markers.'
 WHERE name = 'WEB-DL';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])WEB(?![\s._-]?(?:Rip|Light|Lite|DL))(?=$|[\s._-])',
+    description = 'Matches standalone WEB source markers without matching WEBRip, WEBLight or WEB-DL.'
+WHERE name = 'WEB';
 
 UPDATE regular_expressions
 SET pattern = '(?i)(?<=^|[\s._-])WEB[\s._-]?Rip(?=$|[\s._-])',
@@ -307,19 +561,54 @@ SET pattern = '(?i)(?<=^|[\s._-])WEB[\s._-]?Rip(?=$|[\s._-])',
 WHERE name = 'WEBRip';
 
 UPDATE regular_expressions
-SET pattern = '(?i)(?<=^|[\s._-])(?:(?:BD|BR)[\s._-]?Rip|Blu[\s._-]?Ray[\s._-]?Rip)(?=$|[\s._-])',
-    description = 'Matches BDRip, BRRip, BD Rip, BR Rip and BluRay Rip source markers.'
+SET pattern = '(?i)(?<=^|[\s._-])BD[\s._-]?Rip(?=$|[\s._-])',
+    description = 'Matches BDRip and BD Rip source markers.'
 WHERE name = 'BDRip / BRRip';
 
 UPDATE regular_expressions
-SET pattern = '(?i)(?<=^|[\s._-])(?:Rip|DVDRip)(?=$|[\s._-])',
-    description = 'Matches generic Rip and DVDRip markers.'
+SET pattern = '(?i)(?<=^|[\s._-])BD[\s._-]?Rip(?=$|[\s._-])',
+    description = 'Matches BDRip and BD Rip source markers.'
+WHERE name = 'BDRip';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])BR[\s._-]?Rip(?=$|[\s._-])',
+    description = 'Matches BRRip and BR Rip source markers.'
+WHERE name = 'BRRip';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])Blu[\s._-]?Ray[\s._-]?Rip(?=$|[\s._-])',
+    description = 'Matches BluRay Rip source markers.'
+WHERE name = 'BluRay Rip';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])Rip(?=$|[\s._-])',
+    description = 'Matches generic Rip markers.'
 WHERE name = 'Rip';
 
 UPDATE regular_expressions
-SET pattern = '(?i)(?<=^|[\s._-])(?:HDTV|PDTV|DSR|TVRip)(?=$|[\s._-])',
-    description = 'Matches HDTV, PDTV, DSR and TVRip broadcast source markers.'
+SET pattern = '(?i)(?<=^|[\s._-])DVDRip(?=$|[\s._-])',
+    description = 'Matches DVDRip source markers.'
+WHERE name = 'DVDRip';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])HDTV(?=$|[\s._-])',
+    description = 'Matches HDTV broadcast source markers.'
 WHERE name = 'HDTV';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])PDTV(?=$|[\s._-])',
+    description = 'Matches PDTV broadcast source markers.'
+WHERE name = 'PDTV';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])DSR(?=$|[\s._-])',
+    description = 'Matches DSR broadcast source markers.'
+WHERE name = 'DSR';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])TVRip(?=$|[\s._-])',
+    description = 'Matches TVRip broadcast source markers.'
+WHERE name = 'TVRip';
 
 UPDATE regular_expressions
 SET pattern = '(?i)(?<=^|[\s._-])(?:UHD[\s._-]?(?:Blu[\s._-]?Ray|BD)|4K[\s._-]?(?:Blu[\s._-]?Ray|BD))(?=$|[\s._-])',
@@ -327,19 +616,54 @@ SET pattern = '(?i)(?<=^|[\s._-])(?:UHD[\s._-]?(?:Blu[\s._-]?Ray|BD)|4K[\s._-]?(
 WHERE name = 'UHD Bluray';
 
 UPDATE regular_expressions
-SET pattern = '(?i)(?<=^|[\s._-])(?:AV1|AOMedia[\s._-]?Video[\s._-]?1)(?=$|[\s._-])',
-    description = 'Matches AV1 and AOMedia Video 1 codec markers.'
+SET pattern = '(?i)(?<=^|[\s._-])AV1(?=$|[\s._-])',
+    description = 'Matches AV1 codec markers.'
 WHERE name = 'AV1';
 
 UPDATE regular_expressions
-SET pattern = '(?i)(?<=^|[\s._-])(?:[xh][\s._-]?264|AVC|H\.264)(?=$|[\s._-])',
-    description = 'Matches H.264, h264, x264 and AVC codec markers.'
-WHERE name IN ('AVC', 'x264');
+SET pattern = '(?i)(?<=^|[\s._-])AOMedia[\s._-]?Video[\s._-]?1(?=$|[\s._-])',
+    description = 'Matches AOMedia Video 1 codec markers.'
+WHERE name = 'AOMedia Video 1';
 
 UPDATE regular_expressions
-SET pattern = '(?i)(?<=^|[\s._-])(?:[xh][\s._-]?265|HEVC|H\.265)(?=$|[\s._-])',
-    description = 'Matches H.265, h265, x265 and HEVC codec markers.'
-WHERE name IN ('HEVC', 'h265', 'x265');
+SET pattern = '(?i)(?<=^|[\s._-])AVC(?=$|[\s._-])',
+    description = 'Matches AVC codec markers.'
+WHERE name = 'AVC';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])x[\s._-]?264(?=$|[\s._-])',
+    description = 'Matches x264 codec markers.'
+WHERE name = 'x264';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])h[\s._-]?264(?=$|[\s._-])',
+    description = 'Matches h264 codec markers.'
+WHERE name = 'h264';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])H\.264(?=$|[\s._-])',
+    description = 'Matches H.264 codec markers.'
+WHERE name = 'H.264';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])HEVC(?=$|[\s._-])',
+    description = 'Matches HEVC codec markers.'
+WHERE name = 'HEVC';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])h[\s._-]?265(?=$|[\s._-])',
+    description = 'Matches h265 codec markers.'
+WHERE name = 'h265';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])x[\s._-]?265(?=$|[\s._-])',
+    description = 'Matches x265 codec markers.'
+WHERE name = 'x265';
+
+UPDATE regular_expressions
+SET pattern = '(?i)(?<=^|[\s._-])H\.265(?=$|[\s._-])',
+    description = 'Matches H.265 codec markers.'
+WHERE name = 'H.265';
 
 UPDATE regular_expressions
 SET pattern = '(?i)(?<=^|[\s._-])HDR(?!10|\d)(?=$|[\s._-])',
@@ -367,14 +691,99 @@ SET pattern = '(?i)(?<=^|[\s._-])(?:PQ|PQ10|Perceptual[\s._-]?Quantizer)(?=$|[\s
 WHERE name = 'PQ';
 
 UPDATE regular_expressions
-SET pattern = '(?i)(?<=^|[\s._-])(?:DV|DoVi|Dolby[\s._-]?Vision)(?![\s._-]?(?:HLG|SDR))(?=$|[\s._-])',
-    description = 'Matches DV, DoVi and Dolby Vision markers without matching DV HLG or DV SDR.'
+SET pattern = '(?i)(?<=^|[\s._-])Dolby[\s._-]?Vision(?![\s._-]?(?:HLG|SDR))(?=$|[\s._-])',
+    description = 'Matches Dolby Vision markers without matching Dolby Vision HLG or Dolby Vision SDR.'
 WHERE name = 'Dolby Vision';
 
 UPDATE regular_expressions
 SET pattern = '(?i)(?<=^|[\s._-])(?:HDR(?!\d)|HDR10(?:[\s._-]?(?:\+|P|Plus))?|HLG|PQ10?|DV|DoVi|Dolby[\s._-]?Vision)(?![\s._-]?(?:SDR))(?=$|[\s._-])',
     description = 'Matches common HDR and Dolby Vision markers as a broad HDR/DV umbrella.'
 WHERE name = 'Basic HDR Formats';
+
+DELETE FROM condition_patterns
+WHERE custom_format_name = 'HDR / DV'
+  AND condition_name = 'HDR / DV';
+
+DELETE FROM custom_format_conditions
+WHERE custom_format_name = 'HDR / DV'
+  AND name = 'HDR / DV';
+
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT 'HDR / DV', condition_name, 'release_title', 'all', 0, 0
+FROM (
+    SELECT 'HDR' AS condition_name
+    UNION ALL SELECT 'HDR10'
+    UNION ALL SELECT 'HDR10+'
+    UNION ALL SELECT 'HLG'
+    UNION ALL SELECT 'PQ'
+    UNION ALL SELECT 'DV'
+    UNION ALL SELECT 'DoVi'
+    UNION ALL SELECT 'Dolby Vision'
+) wanted
+WHERE EXISTS (SELECT 1 FROM custom_formats WHERE name = 'HDR / DV')
+  AND NOT EXISTS (
+    SELECT 1 FROM custom_format_conditions
+    WHERE custom_format_name = 'HDR / DV'
+      AND name = wanted.condition_name
+  );
+
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
+SELECT 'HDR / DV', condition_name, condition_name
+FROM (
+    SELECT 'HDR' AS condition_name
+    UNION ALL SELECT 'HDR10'
+    UNION ALL SELECT 'HDR10+'
+    UNION ALL SELECT 'HLG'
+    UNION ALL SELECT 'PQ'
+    UNION ALL SELECT 'DV'
+    UNION ALL SELECT 'DoVi'
+    UNION ALL SELECT 'Dolby Vision'
+) wanted
+WHERE EXISTS (
+    SELECT 1 FROM custom_format_conditions
+    WHERE custom_format_name = 'HDR / DV'
+      AND name = wanted.condition_name
+  )
+  AND NOT EXISTS (
+    SELECT 1 FROM condition_patterns
+    WHERE custom_format_name = 'HDR / DV'
+      AND condition_name = wanted.condition_name
+  );
+
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT 'Dolby Vision', condition_name, 'release_title', 'all', 0, 0
+FROM (
+    SELECT 'DV' AS condition_name
+    UNION ALL SELECT 'DoVi'
+) wanted
+WHERE EXISTS (SELECT 1 FROM custom_formats WHERE name = 'Dolby Vision')
+  AND NOT EXISTS (
+    SELECT 1 FROM custom_format_conditions
+    WHERE custom_format_name = 'Dolby Vision'
+      AND name = wanted.condition_name
+  );
+
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
+SELECT 'Dolby Vision', condition_name, condition_name
+FROM (
+    SELECT 'DV' AS condition_name
+    UNION ALL SELECT 'DoVi'
+) wanted
+WHERE EXISTS (
+    SELECT 1 FROM custom_format_conditions
+    WHERE custom_format_name = 'Dolby Vision'
+      AND name = wanted.condition_name
+  )
+  AND NOT EXISTS (
+    SELECT 1 FROM condition_patterns
+    WHERE custom_format_name = 'Dolby Vision'
+      AND condition_name = wanted.condition_name
+  );
+
+UPDATE custom_format_conditions
+SET required = 0
+WHERE custom_format_name = 'Dolby Vision'
+  AND type = 'release_title';
 
 UPDATE regular_expressions
 SET pattern = '(?i)(?<=^|[\s._-])(?:AAC|AAC[\s._-]?LC|HE[\s._-]?AAC)(?=$|[\s._-]|\d)',
@@ -587,8 +996,12 @@ JOIN (
     UNION ALL SELECT '720p', 'all', 2
     UNION ALL SELECT '1080p', 'all', 2
     UNION ALL SELECT '2160p', 'all', 2
-    UNION ALL SELECT 'WEB Source', 'all', 3
-    UNION ALL SELECT 'Disc Source', 'all', 3
+    UNION ALL SELECT 'Bluray', 'all', 6
+    UNION ALL SELECT 'UHD Bluray', 'all', 6
+    UNION ALL SELECT 'Remux', 'all', 6
+    UNION ALL SELECT 'Full Disc', 'all', 6
+    UNION ALL SELECT 'WEB-DL', 'all', 6
+    UNION ALL SELECT 'WEBRip', 'all', 3
     UNION ALL SELECT 'Rip Source', 'all', 2
     UNION ALL SELECT 'AV1', 'all', 4
     UNION ALL SELECT 'h264', 'all', 4
@@ -645,8 +1058,11 @@ JOIN (
     UNION ALL SELECT '720p', 'all', 2
     UNION ALL SELECT '1080p', 'all', 2
     UNION ALL SELECT '2160p', 'all', 2
-    UNION ALL SELECT 'Bluray', 'all', 3
-    UNION ALL SELECT 'WEB-DL', 'all', 3
+    UNION ALL SELECT 'Bluray', 'all', 6
+    UNION ALL SELECT 'UHD Bluray', 'all', 6
+    UNION ALL SELECT 'Remux', 'all', 6
+    UNION ALL SELECT 'Full Disc', 'all', 6
+    UNION ALL SELECT 'WEB-DL', 'all', 6
     UNION ALL SELECT 'WEBRip', 'all', 3
     UNION ALL SELECT 'BDRip / BRRip', 'all', 2
     UNION ALL SELECT 'Rip', 'all', 2

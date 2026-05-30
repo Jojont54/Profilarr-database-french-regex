@@ -20,9 +20,13 @@ L'objectif est de fournir des briques FR propres et réutilisables: regex atomiq
 
 Cette base n'impose pas une logique de scoring finale. Elle fournit plutôt une grille de départ claire, où les Custom Formats sont rangés par importance dans les profils pour que chaque utilisateur puisse ajuster les scores selon son usage.
 
-Les profils `Basic` utilisent des Custom Formats groupés pour aller vite, tout en gardant les signaux importants séparés: langue FR, résolutions, `AV1`, `h264`, `h265`, audio groupé, source groupée, HDR groupé, encodes light et tiers de teams.
+Toutes les regex sont atomiques. Elles servent de briques réutilisables pour créer vos propres Custom Formats sans embarquer de score ni de logique de profil.
 
-Les profils `Expert` exposent les Custom Formats atomiques pour scorer plus finement: `FLAC`, `TrueHD`, `WEB-DL`, `WEBRip`, `h265`, `Dolby Vision`, `HDR10+`, `HDLight`, `4KLight`, etc.
+Les profils `Basic` utilisent des Custom Formats groupés pour aller vite, sauf quand le regroupement changerait trop le poids réel des releases. Par exemple, le CF `HDR / DV` regroupe `HDR`, `HDR10`, `HDR10+`, `DV`, `DoVi` et `Dolby Vision`, mais les sources principales restent séparées: `Bluray`, `WEB-DL`, `Remux`, `Full Disc`.
+
+Les profils `Expert` séparent les Custom Formats quand le signal est différent afin de scorer plus finement: `FLAC`, `TrueHD`, `WEB-DL`, `WEBRip`, `Dolby Vision`, `HDR10+`, `HDLight`, `4KLight`, etc.
+
+Quand plusieurs notations veulent dire la même chose, elles restent dans un seul CF, même en Expert. Exemple: `2160p`, `UHD` et `4K` alimentent le CF `2160p`; `h265`, `H.265`, `HEVC` et `x265` alimentent le CF `h265`.
 
 L'idée est simple: l'utilisateur ouvre un profil, voit les blocs déjà triés dans un ordre logique, puis met les points qu'il veut sur chaque signal.
 
@@ -95,7 +99,7 @@ Technique:
 - Résolutions génériques: `480p` couvre aussi `SD`, `576p` couvre aussi `PAL`, `720p` couvre aussi `HD`, `1080p` couvre aussi `FHD` / `Full HD`, et `2160p` couvre aussi `UHD` / `4K`.
 - Codecs génériques: `AV1`, `h264`, `h265`. Le CF `h264` couvre aussi `AVC` / `x264`, et le CF `h265` couvre aussi `HEVC` / `x265`.
 - HDR et présentation: `HDR`, `HDR10+`, `HDR10`, `HLG`, `PQ`, `Dolby Vision`, `IMAX`.
-- HDR groupé: `HDR / DV`, qui couvre `HDR`, `HDR10`, `HLG`, `PQ`, `DV` et `Dolby Vision`.
+- HDR groupé: `HDR / DV`, qui couvre `HDR`, `HDR10`, `HDR10+`, `HLG`, `PQ`, `DV`, `DoVi` et `Dolby Vision`.
 - Audio générique: `Lossless Audio`, utilisable sur toutes les résolutions et incluant `FLAC`, `TrueHD`, `DTS-HD MA`, `DTS-X` et `PCM`.
 - Audio compressé: `Lossy Audio`, couvrant `AAC`, `Dolby Digital`, `Dolby Digital +`, `DTS`, `DTS-ES`, `DTS-HD HRA`, `Opus` et `MP3`.
 - Canaux audio: `2.0 Stereo`, `5.1 Surround` et `7.1 Surround`.
@@ -115,14 +119,14 @@ Profils Basic:
 - `Template Basic 1080p FR`
 - `Template Basic 2160p FR`
 
-Les profils Basic utilisent surtout les Custom Formats groupés, mais gardent les langues, résolutions, codecs et encodes light visibles séparément: `French MULTi`, `French Original`, `French VF`, `French VOSTFR`, `AV1`, `h264`, `h265`, `HDLight`, `4KLight`, audio groupé, source groupée, HDR groupé et tiers FR.
+Les profils Basic utilisent surtout les Custom Formats groupés, mais gardent les langues, sources principales, résolutions, codecs et encodes light visibles séparément: `French MULTi`, `French Original`, `French VF`, `French VOSTFR`, `Bluray`, `WEB-DL`, `Remux`, `Full Disc`, `AV1`, `h264`, `h265`, `HDLight`, `4KLight`, audio groupé, HDR groupé et tiers FR.
 
 Profils Expert:
 
 - `Template Expert 1080p FR`
 - `Template Expert 2160p FR`
 
-Les profils Expert utilisent les Custom Formats atomiques pour permettre un scoring plus fin. La logique de départ reste volontairement lisible sur `10000` points: audio autour de `1`, résolution autour de `2`, source autour de `2` à `3`, codec autour de `4`, HDR autour de `5`, encodes light autour de `6`, langue autour de `1000` à `2000`, puis tiers FR autour de `2500` à `4000`.
+Les profils Expert utilisent les Custom Formats atomiques pour permettre un scoring plus fin. La logique de départ reste volontairement lisible sur `10000` points: audio autour de `1`, résolution autour de `2`, rip / source secondaire autour de `2` à `3`, codec autour de `4`, HDR autour de `5`, source principale et encodes light autour de `6`, langue autour de `1000` à `2000`, puis tiers FR autour de `2500` à `4000`.
 
 Dans les profils fournis, `-99999` est la valeur prévue pour bannir strictement un terme, une langue ou un groupe.
 
