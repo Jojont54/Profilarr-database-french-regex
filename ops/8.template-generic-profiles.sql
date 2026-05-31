@@ -1002,13 +1002,13 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 SELECT qp.name, wanted.custom_format_name, wanted.arr_type, wanted.score
 FROM quality_profiles qp
 JOIN (
-    SELECT 'French MULTi' AS custom_format_name, 'all' AS arr_type, 2000 AS score
-    UNION ALL SELECT 'French Original', 'all', 2000
-    UNION ALL SELECT 'French Original Marker', 'all', 2000
-    UNION ALL SELECT 'French VF', 'all', 1500
-    UNION ALL SELECT 'French VOSTFR', 'all', 1000
-    UNION ALL SELECT 'French VFQ', 'all', 1500
-    UNION ALL SELECT 'French Missing', 'all', 500
+    SELECT 'French MULTi' AS custom_format_name, 'all' AS arr_type, 7 AS score
+    UNION ALL SELECT 'French Original', 'all', 7
+    UNION ALL SELECT 'French Original Marker', 'all', 7
+    UNION ALL SELECT 'French VF', 'all', 7
+    UNION ALL SELECT 'French VOSTFR', 'all', 7
+    UNION ALL SELECT 'French VFQ', 'all', 7
+    UNION ALL SELECT 'French Missing', 'all', 7
     UNION ALL SELECT 'Lossless Audio', 'all', 1
     UNION ALL SELECT 'Lossy Audio', 'all', 1
     UNION ALL SELECT '2.0 Stereo', 'all', 1
@@ -1034,14 +1034,14 @@ JOIN (
     UNION ALL SELECT 'IMAX', 'all', 4
     UNION ALL SELECT 'HDLight', 'all', 5
     UNION ALL SELECT '4KLight', 'all', 5
-    UNION ALL SELECT 'FR Media Tier 1', 'all', 4000
-    UNION ALL SELECT 'FR Media Tier 2', 'all', 3500
-    UNION ALL SELECT 'FR Media Tier 3', 'all', 3000
-    UNION ALL SELECT 'FR Anime Tier 1', 'all', 4000
-    UNION ALL SELECT 'FR Anime Tier 2', 'all', 3500
-    UNION ALL SELECT 'FR Anime Tier 3', 'all', 3000
-    UNION ALL SELECT 'FR Anime FanSub', 'all', 2500
-    UNION ALL SELECT 'FR Scene Unranked', 'all', 2500
+    UNION ALL SELECT 'FR Media Tier 1', 'all', 60
+    UNION ALL SELECT 'FR Media Tier 2', 'all', 55
+    UNION ALL SELECT 'FR Media Tier 3', 'all', 50
+    UNION ALL SELECT 'FR Anime Tier 1', 'all', 60
+    UNION ALL SELECT 'FR Anime Tier 2', 'all', 55
+    UNION ALL SELECT 'FR Anime Tier 3', 'all', 50
+    UNION ALL SELECT 'FR Anime FanSub', 'all', 45
+    UNION ALL SELECT 'FR Scene Unranked', 'all', 45
     UNION ALL SELECT 'FR Low Quality / Banned', 'all', -99999
 ) wanted
 WHERE qp.name LIKE 'Template Basic%'
@@ -1052,13 +1052,13 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 SELECT qp.name, wanted.custom_format_name, wanted.arr_type, wanted.score
 FROM quality_profiles qp
 JOIN (
-    SELECT 'French MULTi' AS custom_format_name, 'all' AS arr_type, 2000 AS score
-    UNION ALL SELECT 'French Original', 'all', 2000
-    UNION ALL SELECT 'French Original Marker', 'all', 2000
-    UNION ALL SELECT 'French VF', 'all', 1500
-    UNION ALL SELECT 'French VOSTFR', 'all', 1000
-    UNION ALL SELECT 'French VFQ', 'all', 1500
-    UNION ALL SELECT 'French Missing', 'all', 500
+    SELECT 'French MULTi' AS custom_format_name, 'all' AS arr_type, 7 AS score
+    UNION ALL SELECT 'French Original', 'all', 7
+    UNION ALL SELECT 'French Original Marker', 'all', 7
+    UNION ALL SELECT 'French VF', 'all', 7
+    UNION ALL SELECT 'French VOSTFR', 'all', 7
+    UNION ALL SELECT 'French VFQ', 'all', 7
+    UNION ALL SELECT 'French Missing', 'all', 7
     UNION ALL SELECT 'AAC', 'all', 1
     UNION ALL SELECT 'Dolby Digital', 'all', 1
     UNION ALL SELECT 'Dolby Digital +', 'all', 1
@@ -1102,14 +1102,14 @@ JOIN (
     UNION ALL SELECT 'IMAX', 'all', 4
     UNION ALL SELECT 'HDLight', 'all', 5
     UNION ALL SELECT '4KLight', 'all', 5
-    UNION ALL SELECT 'FR Media Tier 1', 'all', 4000
-    UNION ALL SELECT 'FR Media Tier 2', 'all', 3500
-    UNION ALL SELECT 'FR Media Tier 3', 'all', 3000
-    UNION ALL SELECT 'FR Anime Tier 1', 'all', 4000
-    UNION ALL SELECT 'FR Anime Tier 2', 'all', 3500
-    UNION ALL SELECT 'FR Anime Tier 3', 'all', 3000
-    UNION ALL SELECT 'FR Anime FanSub', 'all', 2500
-    UNION ALL SELECT 'FR Scene Unranked', 'all', 2500
+    UNION ALL SELECT 'FR Media Tier 1', 'all', 60
+    UNION ALL SELECT 'FR Media Tier 2', 'all', 55
+    UNION ALL SELECT 'FR Media Tier 3', 'all', 50
+    UNION ALL SELECT 'FR Anime Tier 1', 'all', 60
+    UNION ALL SELECT 'FR Anime Tier 2', 'all', 55
+    UNION ALL SELECT 'FR Anime Tier 3', 'all', 50
+    UNION ALL SELECT 'FR Anime FanSub', 'all', 45
+    UNION ALL SELECT 'FR Scene Unranked', 'all', 45
     UNION ALL SELECT 'FR Low Quality / Banned', 'all', -99999
 ) wanted
 WHERE qp.name LIKE 'Template Expert%'

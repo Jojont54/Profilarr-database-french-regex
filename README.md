@@ -30,7 +30,7 @@ Quand plusieurs notations veulent dire la même chose, elles restent dans **un s
 
 L'idée est simple: l'utilisateur ouvre un profil, voit les blocs déjà triés dans un ordre logique, puis met les points qu'il veut sur chaque signal.
 
-Les profils de départ utilisent une **échelle maximale de `10000` points**. Les paramètres de langue reflètent un choix simple `MULTi > VF > VO`, sans exclure la `VFQ` ni la VO non sous-titrée, tandis que les détails techniques ont un score par défaut servant uniquement à les trier pour que l'utilisateur puisse ensuite y mettre ses propres scores.
+Les profils de départ utilisent une **échelle maximale de `10000` points**. Les langues françaises sont toutes placées à `+7` par défaut pour rester visibles sans imposer de préférence, et les tiers de teams sont placés entre `+45` et `+60`. Les détails techniques ont un score par défaut servant uniquement à les trier pour que l'utilisateur puisse ensuite y mettre ses propres scores.
 
 ## Ce qui change
 
@@ -134,11 +134,27 @@ Les profils Expert utilisent les **Custom Formats atomiques** pour permettre un 
 
 Les profils de départ restent volontairement lisibles sur une échelle maximale de `10000` points. Les petits scores techniques ne sont pas une recommandation de valeur: ils servent uniquement à **ranger les Custom Formats dans l'interface** pour que l'utilisateur retrouve facilement ce qu'il veut modifier.
 
-Par défaut, les tags audio sont à `+1`, les résolutions à `+2`, les codecs à `+3`, le HDR et IMAX à `+4`, les sources explicites et encodes light à `+5`. Les langues suivent une priorité simple `MULTi > VF > VO`, sans exclure la `VFQ` ni la VO sans sous-titres, et les tiers de teams sont déjà scorés comme base de départ modifiable.
+Par défaut, les tags audio sont à `+1`, les résolutions à `+2`, les codecs à `+3`, le HDR et IMAX à `+4`, les sources explicites et encodes light à `+5`. Les langues françaises sont à `+7`, sans exclure la `VFQ` ni la VO sans sous-titres. Les tiers de teams sont volontairement placés sur l'échelle des bonus vidéo, entre `+45` et `+60`, pour rester utiles sans écraser vos choix de résolution ou de qualité.
 
 Dans les profils fournis, **`-99999` est la valeur prévue pour bannir strictement** un terme, une langue ou un groupe.
 
 Exemple: mettre `1080p` à `+1000` permet de valoriser la 1080p; mettre `2160p` à `-99999` permet d'interdire la 4K.
+
+### Conseil de scoring
+
+Ma recommandation est de garder une échelle simple:
+
+- `1` à `9` pour le son et les petits détails;
+- `10` à `90` pour les bonus vidéo comme `HDR`, `IMAX` ou `DV`;
+- `100` à `900` pour la qualité vidéo, la source, les codecs ou les encodes light;
+- `1000` à `9000` pour la résolution ou la cible principale du profil;
+- `-99999` pour bannir strictement.
+
+Les tiers de teams sont volontairement au milieu de l'échelle des bonus vidéo: `FR Media Tier 1` et `FR Anime Tier 1` sont à `+60`, les Tier 2 à `+55`, les Tier 3 à `+50`, puis `FR Anime FanSub` et `FR Scene Unranked` à `+45`.
+
+Si vous voulez que les tags vidéo comme `HDR`, `DV` ou `IMAX` comptent plus que les teams, commencez vos bonus vidéo autour de `90`. Si vous voulez que les teams comptent davantage, commencez plutôt autour de `10`.
+
+Vous pouvez aussi inverser la logique selon votre usage: `1` à `9`, `9` à `1`, `10` à `90`, `90` à `10`, etc. L'important est de garder une somme cohérente: **votre meilleur cumul de résolution, qualité, bonus vidéo, langue et tier doit rester sous `10000`**, sauf si vous augmentez volontairement le score maximal du profil. Sinon, Profilarr peut considérer trop tôt qu'une release ne doit plus être upgradée.
 
 ## Media management
 
