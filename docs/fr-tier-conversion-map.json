@@ -21,7 +21,7 @@
     "Generic non-tier Compact Light source CFs are added in ops/21: 4KLight Bluray/WEBRip for 2160p Compact FR and HDLight Bluray/WEBRip for 1080p Compact FR. Compact tier teams are excluded so these generic CFs do not double-score tiered groups.",
     "2160p WEBRip is added in ops/22 by copying 4KLight WEBRip (Compact) before removing the 4KLight marker; then 4KLight WEBRip (Compact) is widened from strict WEBRip source to broad WEB title matching.",
     "IMAX follows HDR10+ scoring: 2000 where HDR10+ is rewarded, 0 where HDR10+ is banned, so IMAX is never itself a ban condition.",
-    "FR Scene Tier is kept profile-specific: 127000 in 1080p Quality profiles, 15000 in 1080p Compact FR, 4000 in 2160p Compact FR and other high-ceiling 2160p/Remux profiles, while 99000 remains on Anime style profiles.",
+    "FR Scene Tier is kept profile-specific: 127000 in 1080p Quality profiles, 15000 in 1080p Compact FR, 4000 in 2160p Compact FR and other high-ceiling 2160p/Remux profiles, and 126000 immediately below the dedicated tiers in Anime profiles.",
     "UHD Bluray is adapted for French usage in ops/21: it now requires 2160p instead of 1080p, and no longer requires an explicit HDR marker.",
     "2160p Efficient FR now uses FR 2160p Efficient WEB h265 and FR 2160p Efficient Bluray h265 as source passes without release-group conditions; teams are scored separately through the reusable FR WEB/Bluray tiers.",
     "2160p WEB-DL (Efficient/Balanced) replaces Dictionarry's US high-trust exclusions with FR Efficient team exclusions: TyHD, THESYNDICATE, CHiLL, SUPPLY, FW/FORWARD and TFA.",
@@ -774,12 +774,48 @@
         "sonarr": 720000
       },
       "IMAX": 2000
+    },
+    "Anime 1080p FR": {
+      "1080p Bluray": 720000,
+      "1080p WEB-DL": 710000,
+      "1080p WEBRip": 700000,
+      "FR Anime Tier 01": 130000,
+      "FR Anime Tier 02": 129000,
+      "FR Anime Tier 03": 128000,
+      "FR Anime FanSub": 127000,
+      "FR Scene Tier": 126000,
+      "French MULTi": 0,
+      "French Original": 0,
+      "French Original Marker": 0,
+      "French VOSTFR": -30000,
+      "French VF": -70000,
+      "French VFQ": -999999,
+      "French Missing": -999999,
+      "IMAX": 0
+    },
+    "Anime 1080p VOSTFR FR": {
+      "1080p Bluray": 720000,
+      "1080p WEB-DL": 710000,
+      "1080p WEBRip": 700000,
+      "FR Anime Tier 01": 130000,
+      "FR Anime Tier 02": 129000,
+      "FR Anime Tier 03": 128000,
+      "FR Anime FanSub": 127000,
+      "FR Scene Tier": 126000,
+      "French MULTi": -999999,
+      "French Original": -999999,
+      "French Original Marker": -999999,
+      "French VOSTFR": 0,
+      "French VF": -999999,
+      "French VFQ": -999999,
+      "French Missing": -999999,
+      "IMAX": 0
     }
   },
   "decision_notes": {
     "language_policy": {
       "classic_profiles": "MULTi, French Original and French Original Marker are neutral at 0, VF is slightly penalized, VOSTFR is strongly penalized, VFQ and missing French are rejected.",
-      "anime_profiles": "Anime keeps the same French Original/MULTi base, including VOF/VOQ markers, but VOSTFR is preferred over VF because the expected anime use case is different from classic movies and series.",
+      "anime_profiles": "Anime 1080p FR uses MULTi/French Original > VOSTFR > VF on the 1,000,000-point scale. Anime 1080p VOSTFR FR shares the same technical and team scores but strictly rejects every non-VOSTFR language path.",
       "french_original": "French Original neutralizes the need for MULTi on native French or Quebec content, so a French-original release is not punished for not carrying a separate MULTi/VF tag.",
       "french_original_marker": "VOF and VOQ are treated as French Original markers. They prevent French Missing and VF/VFQ/VOSTFR penalties because they describe the original francophone version rather than an unwanted dub.",
       "intl_trackers": "For international trackers, a French release group alone is not enough to prove French audio or subtitles. French Missing (INTL) is prevented by explicit French markers, by MULTi + known French team, by MultiSub + known French team, or by VF/VOSTFR/VFQ/VOF/VOQ markers.",
@@ -790,7 +826,8 @@
       "balanced": "Balanced is intentionally narrow: FW/FORWARD and SUPPLY are the main trusted 2160p/1080p stable groups, with TFA as the lower balanced fallback where applicable.",
       "compact": "Compact is reserved for HDLight and 4KLight-style encode groups. Final 1080p/2160p Compact CF names are generic across Radarr and Sonarr, with Movie/TV removed after migration.",
       "efficient": "Efficient is limited to validated HEVC groups: TyHD, THESYNDICATE, CHiLL, SUPPLY, FW/FORWARD and TFA.",
-      "scene": "FR Scene Tier is trusted but capped depending on profile ceiling: 99000 where source scores leave room, 15000 in 1080p Compact FR, and 4000 in high-ceiling Remux/2160p profiles."
+      "scene": "FR Scene Tier is trusted but capped depending on profile ceiling: 127000 in 1080p Quality, 126000 below all dedicated Anime tiers, 15000 in 1080p Compact FR, and 4000 in high-ceiling Remux/2160p profiles.",
+      "anime": "Both Anime profiles copy the effective 1080p Quality FR technical matrix for sources, resolutions, audio, streaming services, editions and compatibility bans. HEVC/x265 and HDR/Dolby Vision remain neutral because they are valid anime encodes."
     },
     "2160p_compact_fr": {
       "goal": "Target 4KLight releases first, then accept 1080p Efficient fallback, then 1080p Compact fallback below it.",

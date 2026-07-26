@@ -46,8 +46,8 @@ Anime 1080p VOSTFR FR
 - `2160p Efficient FR`: 4K efficace.
 - `2160p Quality FR`: 4K qualité.
 - `2160p Remux FR`: priorité aux remux 2160p.
-- `Anime 1080p FR`: anime avec priorité `MULTi` / `French Original` > `VOSTFR` > `VF`.
-- `Anime 1080p VOSTFR FR`: variante stricte VOSTFR.
+- `Anime 1080p FR`: anime 1080p sur l'échelle Dictionarry de 1 000 000 points, avec un socle technique proche de `1080p Quality FR` et la priorité `MULTi` / `French Original` > `VOSTFR` > `VF`.
+- `Anime 1080p VOSTFR FR`: même scoring technique et mêmes tiers Anime, avec une sélection strictement VOSTFR.
 
 Les profils sont des bases de départ. Vous pouvez adapter les scores selon vos trackers, votre stockage et vos préférences.
 
