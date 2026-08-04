@@ -32,7 +32,7 @@
     "2160p Compact FR keeps 1080p Efficient fallback below all 4KLight paths: 1080p source Efficient is 840000 and validated 1080p HEVC team tiers are lightweight 50000 bonuses, so the combined 890000 remains below 4KLight WEBRip at 900000.",
     "Historical FR source tiers are rebuilt without Global or Movie/TV splits: WEB Top, WEB, Bluray, UHD Bluray, Light, DVD and Unknown are the reusable source buckets.",
     "1080p Balanced FR is normalized in ops/22: reusable FR WEB tiers add small team bonuses, while the obsolete FR 1080p Balanced composite CF is removed.",
-    "French Missing (INTL) no longer treats a known French team as proof of French language by itself. A team only prevents the INTL missing-French penalty when combined with MULTi or MultiSub, or when the title has an explicit French marker."
+    "French Missing (INTL) no longer treats a known French team as proof of French language by itself. A team only prevents the INTL missing-French penalty when combined with MULTi or MultiSub, or when the title has an explicit French marker. French language detected by Radarr or Sonarr also prevents the penalty, including for native French content."
   ],
   "aliases": {
     "FORWARD": "FW",
@@ -818,7 +818,7 @@
       "anime_profiles": "Anime 1080p FR uses MULTi/French Original > VOSTFR > VF on the 1,000,000-point scale. Anime 1080p VOSTFR FR shares the same technical and team scores but strictly rejects every non-VOSTFR language path.",
       "french_original": "French Original neutralizes the need for MULTi on native French or Quebec content, so a French-original release is not punished for not carrying a separate MULTi/VF tag.",
       "french_original_marker": "VOF and VOQ are treated as French Original markers. They prevent French Missing and VF/VFQ/VOSTFR penalties because they describe the original francophone version rather than an unwanted dub.",
-      "intl_trackers": "For international trackers, a French release group alone is not enough to prove French audio or subtitles. French Missing (INTL) is prevented by explicit French markers, by MULTi + known French team, by MultiSub + known French team, or by VF/VOSTFR/VFQ/VOF/VOQ markers.",
+      "intl_trackers": "For international trackers, a French release group alone is not enough to prove French audio or subtitles. French Missing (INTL) is prevented by French language detected by Radarr or Sonarr, by explicit French markers, by MULTi + known French team, by MultiSub + known French team, or by VF/VOSTFR/VFQ/VOF/VOQ markers.",
       "intl_dynamic_team_markers": "French MULTi + Team FR Marker (INTL) and French MultiSub + Team FR Marker (INTL) are regenerated from all regexes tagged French + Release Group, so newly added French teams are automatically covered."
     },
     "tier_policy": {
