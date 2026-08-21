@@ -177,10 +177,27 @@ WHERE NOT EXISTS (
 
 INSERT INTO custom_formats (name, description)
 SELECT 'French Missing (INTL)',
-       'Matches INTL releases without a trusted French MULTi/MultiSub marker, French release group, VF, VOSTFR, VFQ or French original marker.'
+       'Matches INTL releases without detected French audio or a trusted French MULTi/MultiSub marker, French release group, VF, VOSTFR, VFQ or French original marker.'
 WHERE NOT EXISTS (
     SELECT 1 FROM custom_formats
     WHERE name = 'French Missing (INTL)'
+);
+
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT 'French Missing (INTL)', 'Not French', 'language', 'all', 1, 1
+WHERE NOT EXISTS (
+    SELECT 1 FROM custom_format_conditions
+    WHERE custom_format_name = 'French Missing (INTL)'
+      AND name = 'Not French'
+);
+
+INSERT INTO condition_languages (custom_format_name, condition_name, language_name, except_language)
+SELECT 'French Missing (INTL)', 'Not French', 'French', 0
+WHERE NOT EXISTS (
+    SELECT 1 FROM condition_languages
+    WHERE custom_format_name = 'French Missing (INTL)'
+      AND condition_name = 'Not French'
+      AND language_name = 'French'
 );
 
 INSERT INTO custom_format_tags (custom_format_name, tag_name)
