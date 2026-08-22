@@ -80,7 +80,7 @@ INSERT INTO custom_formats (name, description) VALUES ('FR TV Remux Tier 01', 'M
 INSERT INTO custom_formats (name, description) VALUES ('FR TV WEB Tier 01', 'Matches French TV release groups who fall under WEB Tier 01');
 INSERT INTO custom_formats (name, description) VALUES ('FR TV WEB Tier 02', 'Matches French TV release groups who fall under WEB Tier 02');
 INSERT INTO custom_formats (name, description) VALUES ('FR TV WEB Tier 03', 'Matches French TV release groups who fall under WEB Tier 03');
-INSERT INTO custom_formats (name, description) VALUES ('French Missing', 'Rejects releases without detected French audio or an explicit French MULTi, French Original, VF, VOSTFR, or VFQ marker.');
+INSERT INTO custom_formats (name, description) VALUES ('French Missing', 'Rejects releases unless they are French-original content with only French detected, or carry an explicit French MULTi, French Original, VF, VOSTFR, or VFQ marker.');
 INSERT INTO custom_formats (name, description) VALUES ('French MULTi', 'Prioritizes French MULTi releases without also matching VFQ or VOSTFR.');
 INSERT INTO custom_formats (name, description) VALUES ('French Original Marker', 'Priorise les releases marquees VOF ou VOQ comme version originale francophone.');
 INSERT INTO custom_formats (name, description) VALUES ('French VF', 'Prioritizes French dubbed releases when they are not MULTi, VOSTFR, or VFQ.');
@@ -2882,9 +2882,13 @@ SELECT cf.name, 'Not French Original Marker', 'release_title', 'all', 1, 1
 FROM custom_formats cf
 WHERE cf.name = 'French Missing';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-VALUES ('French Missing', 'Not French', 'language', 'all', 1, 1);
+VALUES ('French Missing', 'French Except', 'language', 'all', 0, 0);
 INSERT INTO condition_languages (custom_format_name, condition_name, language_name, except_language)
-VALUES ('French Missing', 'Not French', 'French', 0);
+VALUES ('French Missing', 'French Except', 'French', 1);
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+VALUES ('French Missing', 'Original Except', 'language', 'all', 0, 0);
+INSERT INTO condition_languages (custom_format_name, condition_name, language_name, except_language)
+VALUES ('French Missing', 'Original Except', 'Original', 1);
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT cf.name, 'French MULTi', 'release_title', 'all', 0, 1
 FROM custom_formats cf

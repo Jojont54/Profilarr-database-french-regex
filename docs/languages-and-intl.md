@@ -90,7 +90,7 @@ Dans les profils FR prêts à l'emploi, ce Custom Format sert à éviter les dou
 
 ## French Missing
 
-`French Missing` se déclenche quand Radarr ou Sonarr ne détecte pas de langue française et qu'aucun marqueur français explicite n'est trouvé par les Custom Formats standards. Un contenu dont le français est la langue originale n'est donc pas considéré comme dépourvu de français, même si son titre ne contient aucun marqueur `FRENCH`, `VF` ou `VOF`.
+`French Missing` utilise deux conditions de langue alternatives: `French Except` ou `Original Except`. Il se déclenche donc lorsqu'au moins une langue détectée diffère du français ou de la langue originale, sauf lorsqu'un marqueur français reconnu neutralise le CF. Un contenu uniquement français dont le français est aussi la langue originale n'est pas considéré comme dépourvu de français, même si son titre ne contient aucun marqueur `FRENCH`, `VF` ou `VOF`.
 
 Il est pensé pour les trackers FR ou les profils qui acceptent `MULTi` comme preuve suffisante de français.
 
@@ -148,7 +148,7 @@ MultiSub.FRSUB
 
 `MULTi` seul ne suffit pas, `MultiSub` seul ne suffit pas non plus, et une team FR seule ne suffit pas non plus.
 
-`French Missing (INTL)` se déclenche quand Radarr ou Sonarr ne détecte pas de langue française et qu'il n'y a ni marqueur français explicite après `MULTi` ou `MultiSub`, ni combinaison fiable `MULTi + team FR` ou `MultiSub + team FR`, ni `VF`, ni `VOSTFR`, ni `VFQ`, ni `VOF` / `VOQ`.
+`French Missing (INTL)` utilise les mêmes conditions alternatives `French Except` ou `Original Except`. Il se déclenche lorsqu'au moins une langue détectée diffère du français ou de la langue originale et qu'il n'y a ni marqueur français explicite après `MULTi` ou `MultiSub`, ni combinaison fiable `MULTi + team FR` ou `MultiSub + team FR`, ni `VF`, ni `VOSTFR`, ni `VFQ`, ni `VOF` / `VOQ`.
 
 ## Comment utiliser les CF INTL
 
