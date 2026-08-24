@@ -1,5 +1,5 @@
 {
-  "status": "implemented-in-ops-5-to-21",
+  "status": "implemented-in-ops-5-to-26",
   "notes": [
     "Reference table for the Dictionarry V2-style FR conversion.",
     "Custom format names are Dictionarry-shaped with FR at the beginning.",
@@ -7,7 +7,9 @@
     "Quality tiers keep only the best tier per team to avoid double tier scores.",
     "LQ remains handled by the banned/LQ custom formats.",
     "FR tier custom formats scored above 600000 require the HEVC regex, which matches h265, x265 and HEVC.",
-    "Shared technical profile scores are realigned with Dictionarry V2 in ops/7 without importing US release-group tiers.",
+    "Shared technical profile scores are realigned with Dictionarry V2 without importing US release-group tiers.",
+    "The common technical layer includes the current Dictionarry CAM, Extras, 3D, Full Disc, HDR, Dolby Vision, SDR and missing-x265 conditions.",
+    "Apple TV and Apple TV+ are detected separately; HBO and Discovery+ are available as zero-score streaming-service formats, while the 2160p platform scores follow the current Dictionarry split between Radarr and Sonarr.",
     "High-score FR tiers have required source gates in ops/8 so WEB and Bluray tiers cannot stack on the same release.",
     "2160p Efficient WEB composite tiers are removed in ops/17 to align with Dictionarry V2: 2160p WEB releases score through 2160p WEB-DL (Efficient/Balanced), while trusted FR groups keep premium tiers on Bluray HEVC.",
     "FR WEB tiers with optional WEB-DL/WEBRip source conditions are hardened in ops/18: WEB source must be present, and release-group tier matching is no longer satisfied by source alone.",

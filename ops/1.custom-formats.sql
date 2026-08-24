@@ -7204,11 +7204,11 @@ WHERE re.name = 'Remux';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'x265 (Missing)', 'Not x264', re.name
 FROM regular_expressions re
-WHERE re.name = 'x264';
+WHERE re.name = 'AVC';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'x265 (Missing)', 'Not x265', re.name
 FROM regular_expressions re
-WHERE re.name = 'x265';
+WHERE re.name = 'HEVC';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'x265 (Remux)', 'x265', re.name
 FROM regular_expressions re
@@ -7492,8 +7492,17 @@ VALUES ('Season Pack', 'Season Pack', 'season_pack');
 -- Dictionarry V2 technical custom formats retained for FR profiles
 INSERT INTO custom_formats (name, description) VALUES ('Extended Edition', 'Matches extended editions separately from other special editions.');
 INSERT INTO custom_formats (name, description) VALUES ('Audio Description', 'Sign Language Variations');
+INSERT INTO custom_formats (name, description) VALUES ('CAM', 'Matches CAM, telesync, telecine, screener and workprint releases.');
+INSERT INTO custom_formats (name, description, include_in_rename) VALUES ('ATV', 'Matches ''Apple TV'' WEB-DLs.', 1);
+INSERT INTO custom_formats (name, description, include_in_rename) VALUES ('HBO', 'Matches ''HBO'' WEB-DLs.', 1);
+INSERT INTO custom_formats (name, description, include_in_rename) VALUES ('DSCP', 'Matches ''Discovery+'' WEB-DLs.', 1);
+INSERT INTO custom_formats (name, description) VALUES ('SDR', 'Ban 2160p WEB-DL releases without Dolby Vision or HDR formats. Movies Anywhere is excluded due to its high bitrate.');
+INSERT INTO custom_formats (name, description) VALUES ('Netflix Enhancement', 'Augments the Streaming Service score for 1080p releases and below in 2160p profiles.');
 INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'Extended Edition' AND t.name = 'Edition';
 INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'Audio Description' AND t.name = 'Language';
+INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'CAM' AND t.name = 'Banned';
+INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name IN ('ATV', 'HBO', 'DSCP') AND t.name IN ('Streaming Service', 'WEB-DL');
+INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name IN ('SDR', 'Netflix Enhancement') AND t.name = 'Enhancement';
 INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'Extras' AND t.name = 'Banned';
 INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'Extras' AND t.name = 'Enhancement';
 INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'Upscale' AND t.name = 'Banned';
@@ -7502,6 +7511,51 @@ INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.
 INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'B&W' AND t.name = 'Banned';
 INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'B&W' AND t.name = 'Colour Grade';
 INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'B&W' AND t.name = 'Enhancement';
+
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('CAM', 'CAM', 'release_title', 'radarr', 0, 1);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('CAM', 'CAM', 'CAM');
+
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('ATV', 'ATV Regex', 'release_title', 'all', 0, 1);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('ATV', 'ATV Regex', 'Apple TV');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('ATV', 'WEB-DL', 'source', 'all', 0, 0);
+INSERT INTO condition_sources (custom_format_name, condition_name, source) VALUES ('ATV', 'WEB-DL', 'web_dl');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('ATV', 'WEBRip', 'source', 'all', 0, 0);
+INSERT INTO condition_sources (custom_format_name, condition_name, source) VALUES ('ATV', 'WEBRip', 'webrip');
+
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('HBO', 'WEB-DL', 'source', 'all', 0, 0);
+INSERT INTO condition_sources (custom_format_name, condition_name, source) VALUES ('HBO', 'WEB-DL', 'web_dl');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('HBO', 'WEBRip', 'source', 'all', 0, 0);
+INSERT INTO condition_sources (custom_format_name, condition_name, source) VALUES ('HBO', 'WEBRip', 'webrip');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('HBO', 'HBO Regex', 'release_title', 'all', 0, 0);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('HBO', 'HBO Regex', 'HBO');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('HBO', 'HBO Rename Regex', 'release_title', 'all', 0, 0);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('HBO', 'HBO Rename Regex', 'HBO Rename');
+
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('DSCP', 'DSCP Regex', 'release_title', 'all', 0, 1);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('DSCP', 'DSCP Regex', 'Discovery+');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('DSCP', 'WEB-DL', 'source', 'all', 0, 0);
+INSERT INTO condition_sources (custom_format_name, condition_name, source) VALUES ('DSCP', 'WEB-DL', 'web_dl');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('DSCP', 'WEBRip', 'source', 'all', 0, 0);
+INSERT INTO condition_sources (custom_format_name, condition_name, source) VALUES ('DSCP', 'WEBRip', 'webrip');
+
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('SDR', '2160p', 'resolution', 'all', 0, 1);
+INSERT INTO condition_resolutions (custom_format_name, condition_name, resolution) VALUES ('SDR', '2160p', '2160p');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('SDR', 'WEB-DL', 'source', 'all', 0, 1);
+INSERT INTO condition_sources (custom_format_name, condition_name, source) VALUES ('SDR', 'WEB-DL', 'web_dl');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('SDR', 'DV HDR', 'release_title', 'all', 1, 1);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('SDR', 'DV HDR', 'Basic HDR Formats');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('SDR', 'Movies Anywhere', 'release_title', 'all', 1, 1);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('SDR', 'Movies Anywhere', 'Movies Anywhere');
+
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('Netflix Enhancement', 'NF', 'release_title', 'all', 0, 1);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('Netflix Enhancement', 'NF', 'Netflix');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('Netflix Enhancement', 'Not 2160p', 'resolution', 'all', 1, 1);
+INSERT INTO condition_resolutions (custom_format_name, condition_name, resolution) VALUES ('Netflix Enhancement', 'Not 2160p', '2160p');
+
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('Dolby Vision (Without Fallback)', 'HDR', 'release_title', 'all', 1, 1);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('Dolby Vision (Without Fallback)', 'HDR', 'HDR');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('Dolby Vision (Without Fallback)', 'HDR10+', 'release_title', 'all', 1, 1);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('Dolby Vision (Without Fallback)', 'HDR10+', 'HDR10+');
 
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('Extras', 'Movie Extras', 'release_title', 'radarr', 0, 1);
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('Extras', 'Movie Extras', 'Movie Extras');
