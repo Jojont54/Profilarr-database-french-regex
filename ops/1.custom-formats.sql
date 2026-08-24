@@ -7678,13 +7678,14 @@ INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, 
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('Dual Audio', 'Dual Audio', 'Dual Audio');
 INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = 'Dual Audio' AND t.name = 'Language';
 
--- Native French content is already in the desired language and does not need a dubbing marker.
--- MULTi is excluded here to keep a native MULTi release from receiving two language bonuses.
-INSERT INTO custom_formats (name, description) VALUES ('French Original', 'Priorise les contenus dont la langue originale est le francais, sans exiger de marqueur MULTi ou VF.');
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('French Original', 'Original', 'language', 'all', 0, 1);
-INSERT INTO condition_languages (custom_format_name, condition_name, language_name, except_language) VALUES ('French Original', 'Original', 'Original', 0);
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('French Original', 'French', 'language', 'all', 0, 1);
-INSERT INTO condition_languages (custom_format_name, condition_name, language_name, except_language) VALUES ('French Original', 'French', 'French', 0);
+-- Native French content is detected through metadata only when every detected
+-- language is both French and the original language. MULTi and explicit VOF/VOQ
+-- markers remain mutually exclusive so each release receives one language tag.
+INSERT INTO custom_formats (name, description) VALUES ('French Original', 'Identifie les contenus uniquement en francais dont le francais est aussi la langue originale, sans exiger de marqueur de titre.');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('French Original', 'French Except', 'language', 'all', 1, 1);
+INSERT INTO condition_languages (custom_format_name, condition_name, language_name, except_language) VALUES ('French Original', 'French Except', 'French', 1);
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('French Original', 'Original Except', 'language', 'all', 1, 1);
+INSERT INTO condition_languages (custom_format_name, condition_name, language_name, except_language) VALUES ('French Original', 'Original Except', 'Original', 1);
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('French Original', 'Not French MULTi', 'release_title', 'all', 1, 1);
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('French Original', 'Not French MULTi', 'French MULTi');
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('French Original', 'Not French Original Marker', 'release_title', 'all', 1, 1);

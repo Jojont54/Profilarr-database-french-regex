@@ -34,7 +34,8 @@
     "2160p Compact FR keeps 1080p Efficient fallback below all 4KLight paths: 1080p source Efficient is 840000 and validated 1080p HEVC team tiers are lightweight 50000 bonuses, so the combined 890000 remains below 4KLight WEBRip at 900000.",
     "Historical FR source tiers are rebuilt without Global or Movie/TV splits: WEB Top, WEB, Bluray, UHD Bluray, Light, DVD and Unknown are the reusable source buckets.",
     "1080p Balanced FR is normalized in ops/22: reusable FR WEB tiers add small team bonuses, while the obsolete FR 1080p Balanced composite CF is removed.",
-    "French Missing (INTL) no longer treats a known French team as proof of French language by itself. A team only prevents the INTL missing-French penalty when combined with MULTi or MultiSub, or when the title has an explicit French marker. Its optional French Except and Original Except language conditions form an OR group; only monolingual French-original metadata prevents the penalty without a trusted title marker."
+    "French Missing (INTL) no longer treats a known French team as proof of French language by itself. A team only prevents the INTL missing-French penalty when combined with MULTi or MultiSub, or when the title has an explicit French marker. Its optional French Except and Original Except language conditions form an OR group; only monolingual French-original metadata prevents the penalty without a trusted title marker.",
+    "French Original requires both French Except and Original Except with Negate and Required: only monolingual French metadata on French-original content matches. MULTi and explicit VOF/VOQ markers remain excluded and are handled by their dedicated custom formats to prevent double matching."
   ],
   "aliases": {
     "FORWARD": "FW",
