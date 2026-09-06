@@ -153,7 +153,7 @@ WHERE NOT EXISTS (
 
 INSERT INTO custom_formats (name, description)
 SELECT 'French MULTi + Marker FR (INTL)',
-       'Matches INTL MULTi releases only when MULTi is followed by an explicit French marker. Useful on international trackers where MULTi alone does not guarantee French audio.'
+       'Matches INTL MULTi releases when the title carries an explicit French marker before download or MediaInfo confirms [AUDIO][FR+--] after analysis.'
 WHERE NOT EXISTS (
     SELECT 1 FROM custom_formats
     WHERE name = 'French MULTi + Marker FR (INTL)'
@@ -177,7 +177,7 @@ WHERE NOT EXISTS (
 
 INSERT INTO custom_formats (name, description)
 SELECT 'French Missing (INTL)',
-       'Matches INTL releases unless they are French-original content with only French detected, or carry a trusted French MULTi/MultiSub marker, VF, VOSTFR, VFQ or French original marker.'
+       'Rejects INTL releases without reliable French evidence in the title before download or in the MediaInfo AUDIO/SUB markers after analysis.'
 WHERE NOT EXISTS (
     SELECT 1 FROM custom_formats
     WHERE name = 'French Missing (INTL)'
@@ -341,7 +341,7 @@ WHERE EXISTS (
   );
 
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT 'French MULTi + Marker FR (INTL)', 'French MULTi Explicit Marker (INTL)', 'release_title', 'all', 0, 1
+SELECT 'French MULTi + Marker FR (INTL)', 'French MULTi Explicit Marker (INTL)', 'release_title', 'all', 0, 0
 WHERE NOT EXISTS (
     SELECT 1 FROM custom_format_conditions
     WHERE custom_format_name = 'French MULTi + Marker FR (INTL)'
@@ -355,6 +355,22 @@ WHERE NOT EXISTS (
     WHERE custom_format_name = 'French MULTi + Marker FR (INTL)'
       AND condition_name = 'French MULTi Explicit Marker (INTL)'
       AND regular_expression_name = 'French MULTi Explicit Marker (INTL)'
+);
+
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT 'French MULTi + Marker FR (INTL)', 'Renamed French MULTi', 'release_title', 'all', 0, 0
+WHERE NOT EXISTS (
+    SELECT 1 FROM custom_format_conditions
+    WHERE custom_format_name = 'French MULTi + Marker FR (INTL)'
+      AND name = 'Renamed French MULTi'
+);
+
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
+SELECT 'French MULTi + Marker FR (INTL)', 'Renamed French MULTi', 'Renamed French MULTi'
+WHERE NOT EXISTS (
+    SELECT 1 FROM condition_patterns
+    WHERE custom_format_name = 'French MULTi + Marker FR (INTL)'
+      AND condition_name = 'Renamed French MULTi'
 );
 
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
@@ -439,6 +455,9 @@ FROM (
     UNION ALL SELECT 'Not French VOSTFR'
     UNION ALL SELECT 'Not French VFQ'
     UNION ALL SELECT 'Not French Original Marker'
+    UNION ALL SELECT 'Not Renamed French MULTi'
+    UNION ALL SELECT 'Not Renamed French VF'
+    UNION ALL SELECT 'Not Renamed French Subs'
 ) wanted
 WHERE NOT EXISTS (
     SELECT 1 FROM custom_format_conditions cfc
@@ -455,6 +474,9 @@ FROM (
     UNION ALL SELECT 'Not French VOSTFR', 'French VOSTFR'
     UNION ALL SELECT 'Not French VFQ', 'French VFQ'
     UNION ALL SELECT 'Not French Original Marker', 'French Original Marker'
+    UNION ALL SELECT 'Not Renamed French MULTi', 'Renamed French MULTi'
+    UNION ALL SELECT 'Not Renamed French VF', 'Renamed French VF'
+    UNION ALL SELECT 'Not Renamed French Subs', 'Renamed French Subs'
 ) wanted
 WHERE NOT EXISTS (
     SELECT 1 FROM condition_patterns cp
