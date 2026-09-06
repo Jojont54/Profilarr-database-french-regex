@@ -146,6 +146,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('BTN Atmos'
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('BTT', '(?<=^|[\s.-])BTT\b', 'Matches "BTT" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('BY_ORDER', '(?i)(?<=^|[\s.-])(?:BY[ ._-]?ORDER|BYOR)\b', 'Matches "BY_ORDER" and the common "byor" abbreviation when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('CARAPiLS', '(?<=^|[\s.-])CARAPiLS\b', 'Matches "CARAPiLS" when preceded by whitespace, a hyphen or dot');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('Caribou', '(?<=^|[\s.-])Caribou\b', 'Matches "Caribou" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Champion9', '(?<=^|[\s.-])Champion9\b', 'Matches "Champion9" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('CHiLL', '(?<=^|[\s.-])CHiLL\b', 'Matches "CHiLL" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Choco', '(?<=^|[\s.-])Choco\b', 'Matches "Choco" when preceded by whitespace, a hyphen or dot');
@@ -166,6 +167,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('Crave', '\
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Criterion Channel', '\b(CRiT)\b', 'The Criterion Channel is a subscription-based streaming service launched on April 8, 2019, by The Criterion Collection. Available in the United States and Canada, it features a rich library of films, including Criterion Collection releases with special features, curated playlists, temporarily licensed titles, and original content such as academic overviews and introductions. The Channel also showcases Janus-owned titles not yet available on physical media and maintains a collaborative relationship with Warner Bros. Discovery''s Max platform. Perfect for cinephiles, the service brings a curated cinematic experience to the digital space.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Crunchyroll', '\b(C(runchy)?[ .-]?R(oll)?)\b', 'Crunchyroll is a popular streaming service focused on anime, manga, and Asian entertainment. It offers a large library of animated series and films, including both classic titles and new simulcasts straight from Japan, often with subtitles soon after they air. Users can watch on demand across devices, and there’s both a free, ad-supported tier and paid premium subscriptions with ad-free viewing and early access to episodes.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('CRYPT0', '(?<=^|[\s.-])CRYPT0\b', 'Matches "CRYPT0" when preceded by whitespace, a hyphen or dot');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('CUSThOMe', '(?<=^|[\s.-])CUSThOMe\b', 'Matches "CUSThOMe" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('CZ', '(?<=^|[\s.-])CZ\d+\b', 'Matches "CZ" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('D3T3R10R1TY', '(?<=^|[\s.-])D3T3R10R1TY\b', 'Matches "D3T3R10R1TY" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('D4KiD', '(?<=^|[\s.-])D4KiD\b', 'Matches "D4KiD" when preceded by whitespace, a hyphen or dot');
@@ -347,7 +349,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('MAXAGAZ', 
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('MaxiBeNoul', '(?<=^|[\s.-])MaxiBeNoul\b', 'Matches "MaxiBeNoul" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('McNULTY', '(?<=^|[\s.-])McNULTY\b', 'Matches "McNULTY" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('MELBA', '(?<=^|[\s.-])MELBA\b', 'Matches "MELBA" when preceded by whitespace, a hyphen or dot');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('MeMyl', '(?<=^|[\s.-])MeMyl\b', 'Matches "MeMyl" when preceded by whitespace, a hyphen or dot');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('MeMyI', '(?<=^|[\s.-])MeMyI\b', 'Matches "MeMyI" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('METALLIKA', '(?<=^|[\s.-])METALLIKA\b', 'Matches "METALLIKA" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('MGD', '(?<=^|[\s.-])MGD\b', 'Matches "MGD" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('mHDgz', '(?<=^|[\s.-])mHDgz\b', 'Matches "mHDgz" when preceded by whitespace, a hyphen or dot');
@@ -1276,6 +1278,14 @@ WHERE re.name = 'CARAPiLS' AND t.name = 'Release Group';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
+WHERE re.name = 'Caribou' AND t.name = 'French';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'Caribou' AND t.name = 'Release Group';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
 WHERE re.name = 'Champion9' AND t.name = 'Banned';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
@@ -1469,6 +1479,14 @@ INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
 WHERE re.name = 'CRYPT0' AND t.name = 'Release Group';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'CUSThOMe' AND t.name = 'French';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'CUSThOMe' AND t.name = 'Release Group';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
@@ -3184,15 +3202,15 @@ WHERE re.name = 'MELBA' AND t.name = 'Release Group';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
-WHERE re.name = 'MeMyl' AND t.name = 'Banned';
+WHERE re.name = 'MeMyI' AND t.name = 'Banned';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
-WHERE re.name = 'MeMyl' AND t.name = 'French';
+WHERE re.name = 'MeMyI' AND t.name = 'French';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
-WHERE re.name = 'MeMyl' AND t.name = 'Release Group';
+WHERE re.name = 'MeMyI' AND t.name = 'Release Group';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t

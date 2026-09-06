@@ -1594,7 +1594,7 @@ SELECT cf.name, 'MACK4', 'release_group', 'all', 0, 0
 FROM custom_formats cf
 WHERE cf.name = 'FR LQ';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'MeMyl', 'release_group', 'all', 0, 0
+SELECT cf.name, 'MeMyI', 'release_group', 'all', 0, 0
 FROM custom_formats cf
 WHERE cf.name = 'FR LQ';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
@@ -2182,6 +2182,10 @@ SELECT cf.name, 'CARAPiLS', 'release_group', 'all', 0, 0
 FROM custom_formats cf
 WHERE cf.name = 'FR Scene Tier';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT cf.name, 'Caribou', 'release_group', 'all', 0, 0
+FROM custom_formats cf
+WHERE cf.name = 'FR Scene Tier';
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT cf.name, 'CiELOS', 'release_group', 'all', 0, 0
 FROM custom_formats cf
 WHERE cf.name = 'FR Scene Tier';
@@ -2203,6 +2207,10 @@ FROM custom_formats cf
 WHERE cf.name = 'FR Scene Tier';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT cf.name, 'CRYPT0', 'release_group', 'all', 0, 0
+FROM custom_formats cf
+WHERE cf.name = 'FR Scene Tier';
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT cf.name, 'CUSThOMe', 'release_group', 'all', 0, 0
 FROM custom_formats cf
 WHERE cf.name = 'FR Scene Tier';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
@@ -5646,9 +5654,9 @@ SELECT 'FR LQ', 'MACK4', re.name
 FROM regular_expressions re
 WHERE re.name = 'MACK4';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'FR LQ', 'MeMyl', re.name
+SELECT 'FR LQ', 'MeMyI', re.name
 FROM regular_expressions re
-WHERE re.name = 'MeMyl';
+WHERE re.name = 'MeMyI';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'FR LQ', 'METALLIKA', re.name
 FROM regular_expressions re
@@ -6178,6 +6186,10 @@ SELECT 'FR Scene Tier', 'CARAPiLS', re.name
 FROM regular_expressions re
 WHERE re.name = 'CARAPiLS';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
+SELECT 'FR Scene Tier', 'Caribou', re.name
+FROM regular_expressions re
+WHERE re.name = 'Caribou';
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'FR Scene Tier', 'CiELOS', re.name
 FROM regular_expressions re
 WHERE re.name = 'CiELOS';
@@ -6201,6 +6213,10 @@ INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expr
 SELECT 'FR Scene Tier', 'CRYPT0', re.name
 FROM regular_expressions re
 WHERE re.name = 'CRYPT0';
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
+SELECT 'FR Scene Tier', 'CUSThOMe', re.name
+FROM regular_expressions re
+WHERE re.name = 'CUSThOMe';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'FR Scene Tier', 'D4KiD', re.name
 FROM regular_expressions re
