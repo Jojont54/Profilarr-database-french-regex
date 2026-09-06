@@ -280,6 +280,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('HEVCBay', 
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('HiggsBoson', '(?<=^|[\s.-])HiggsBoson\b', 'Matches "HiggsBoson" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('HiRoSHiMa', '(?<=^|[\s.-])HiRoSHiMa\b', 'Matches "HiRoSHiMa" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('HMiDiMADRiDi', '(?<=^|[\s.-])HMiDiMADRiDi\b', 'Matches "HMiDiMADRiDi" when preceded by whitespace, a hyphen or dot');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('HOLiDAYS', '(?<=^|[\s.-])HOLiDAYS\b', 'Matches "HOLiDAYS" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Hotstar', '\b(HTSR)\b', 'Disney+ Hotstar, also known as JioHotstar or simply Hotstar, is an Indian subscription video-on-demand over-the-top streaming service owned by Disney Star. The brand was introduced as Hotstar for a streaming service carrying content from Disney Star''s (formerly Star India) local networks, including films, television series, live sports, and original programming, as well as featuring content licensed from third parties such as Showtime among others.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Hulu', '\b(Hulu)\b', 'Hulu, an American subscription streaming service owned by Disney, offers recent TV episodes, full seasons of shows, original content, and live TV channels. As of December 2023, Hulu content is being integrated into Disney+, making its library accessible to Disney+ subscribers.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Hush', '(?<=^|[\s.-])Hush\b', 'Matches "Hush" when preceded by whitespace, a hyphen or dot');
@@ -342,7 +343,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('MARBLECAKE
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('matheousse', '(?<=^|[\s.-])matheousse\b', 'Matches "matheousse" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Matmatha', '(?<=^|[\s.-])Matmatha\b', 'Matches "Matmatha" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Max', '\b((?<!hbo[ ._-])max)\b(?=[ ._-]web[ ._-]?(dl|rip)\b)', 'Max, formerly (and in some regions still) known as HBO Max, is an American subscription video on-demand over-the-top streaming service. The platform offers content from the libraries of Warner Bros., Discovery, HBO, CNN, Cartoon Network, Adult Swim, Animal Planet, TBS, TNT, Eurosport, and their related brands.');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('MAX (Release Group)', '(?<=^|[\s.-])MAX\b', 'Matches "MAX" when preceded by whitespace, a hyphen or dot');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('MAX (Release Group)', '(?<=^|[\s.-])MAX\b(?![ ._-]+WEB(?:[ ._-]?(?:DL|RIP))?\b)', 'Matches the release group "MAX" while excluding the Max streaming-service marker before WEB-DL or WEBRip');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Max Rename', '\[(MAX)\b|\b(MAX)\]', 'Max, formerly (and in some regions still) known as HBO Max, is an American subscription video on-demand over-the-top streaming service. The platform offers content from the libraries of Warner Bros., Discovery, HBO, CNN, Cartoon Network, Adult Swim, Animal Planet, TBS, TNT, Eurosport, and their related brands.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Maxadonf', '(?<=^|[\s.-])Maxadonf\b', 'Matches "Maxadonf" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('MAXAGAZ', '(?<=^|[\s.-])MAXAGAZ\b', 'Matches "MAXAGAZ" when preceded by whitespace, a hyphen or dot');
@@ -2611,6 +2612,14 @@ INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
 WHERE re.name = 'HMiDiMADRiDi' AND t.name = 'Release Group';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'HOLiDAYS' AND t.name = 'French';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'HOLiDAYS' AND t.name = 'Release Group';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
