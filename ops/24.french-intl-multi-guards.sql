@@ -12,8 +12,8 @@
 
 INSERT INTO regular_expressions (name, pattern, description)
 SELECT 'French MULTi Explicit Marker (INTL)',
-       '(?i)(?<=^|[\s.-])MULTI[ ._-]+(?:FR|FRA|FRENCH|FRANCAIS|FRANÇAIS|TRUE[ ._-]?FR(?:ENCH)?|VFQ2?|VF|VFI|VFF2?|VFB|VOF|VOQ|VF2|VFI2)(?=$|[\s.-])',
-       'Matches INTL MULTi releases only when MULTi is followed by an explicit French marker such as FR, FRENCH, TRUEFRENCH, VF, VFF, VFI, VFQ, VOF or VOQ.'
+       '(?i)(?<=^|[\s._-])MULTI(?:[\s._,+&/-]+(?:WITH|AUDIO(?:S)?|LANG(?:UAGE)?S?|DUAL|ORIG(?:INAL)?|PLUS|(?!(?:SUB)(?=$|[\s._,+&/-]))[A-Z]{2,3})){0,6}[\s._,+&/-]+(?:FR|FRA|FRENCH|FRANCAIS|FRANÇAIS|TRUE[\s._-]?FR(?:ENCH)?|VFQ2?|VF|VFI|VFF2?|VFB|VOF|VOQ|VF2|VFI2)(?![\s._,+&/-]+SUB(?:S|TITLE|TITLES)?\b)(?=$|[\s._,+&/-])',
+       'Matches INTL MULTi releases when an explicit French marker follows directly or after up to six intermediary language codes or words, such as MULTI.EN.ES.VFF, MULTI.VO.VFF or MULTI.WITH.TRUEFRENCH.'
 WHERE NOT EXISTS (
     SELECT 1 FROM regular_expressions
     WHERE name = 'French MULTi Explicit Marker (INTL)'
