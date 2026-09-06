@@ -32,7 +32,9 @@ Sur tracker FR, `MULTi` signifie généralement qu'une piste française est pré
 
 ## French Original
 
-`French Original` sert aux contenus dont la langue originale est française. Il évite de pénaliser un film ou une série francophone simplement parce qu'il n'y a pas de tag `MULTi`.
+`French Original` sert aux contenus uniquement en français dont le français est également la langue originale. Il utilise les métadonnées Radarr/Sonarr et ne demande aucun marqueur dans le titre.
+
+La détection est volontairement stricte: une release contenant une autre langue ne matche pas `French Original`. Une release francophone multilingue doit être identifiée par `French MULTi`, tandis que les marqueurs explicites restent gérés séparément pour éviter les doubles matchs.
 
 `French Original Marker` détecte les marqueurs de titre:
 

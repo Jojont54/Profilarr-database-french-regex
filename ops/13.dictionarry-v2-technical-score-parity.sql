@@ -1217,3 +1217,86 @@ VALUES
   ('720p Quality FR', 'iT', 'all', 1000),
   ('720p Quality FR', 'x265', 'all', -999999);
 -- --- END op 9013
+
+-- Final Dictionarry V2 platform and technical alignment, without US group tiers.
+UPDATE quality_profile_custom_formats
+SET arr_type = 'radarr'
+WHERE custom_format_name = 'ATVP'
+  AND arr_type = 'all'
+  AND quality_profile_name IN (
+    '720p Quality FR',
+    '1080p Balanced FR', '1080p Compact FR', '1080p Efficient FR',
+    '1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR',
+    '2160p Balanced FR', '2160p Efficient FR', '2160p Quality FR', '2160p Remux FR'
+  );
+
+WITH profiles(name) AS (
+  VALUES
+    ('720p Quality FR'),
+    ('1080p Balanced FR'), ('1080p Compact FR'), ('1080p Efficient FR'),
+    ('1080p Quality FR'), ('1080p Quality HDR FR'), ('1080p Remux FR'),
+    ('2160p Balanced FR'), ('2160p Efficient FR'), ('2160p Quality FR'), ('2160p Remux FR')
+), scores(custom_format_name, arr_type, score) AS (
+  VALUES
+    ('ATVP', 'sonarr', 3000),
+    ('ATV', 'radarr', 2000), ('ATV', 'sonarr', 2000),
+    ('HBO', 'radarr', 0), ('HBO', 'sonarr', 0),
+    ('DSCP', 'radarr', 0), ('DSCP', 'sonarr', 0),
+    ('CAM', 'radarr', -999999)
+)
+INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
+SELECT profiles.name, scores.custom_format_name, scores.arr_type, scores.score
+FROM profiles CROSS JOIN scores;
+
+DELETE FROM quality_profile_custom_formats
+WHERE custom_format_name = 'Disney+ Enhancement'
+  AND arr_type = 'sonarr'
+  AND quality_profile_name IN ('2160p Balanced FR', '2160p Efficient FR', '2160p Quality FR', '2160p Remux FR');
+
+UPDATE quality_profile_custom_formats
+SET score = 2000
+WHERE custom_format_name = 'DSNP'
+  AND arr_type = 'sonarr'
+  AND quality_profile_name IN ('2160p Balanced FR', '2160p Efficient FR', '2160p Quality FR', '2160p Remux FR');
+
+UPDATE quality_profile_custom_formats
+SET arr_type = 'radarr'
+WHERE custom_format_name = 'NF'
+  AND arr_type = 'all'
+  AND quality_profile_name IN ('2160p Balanced FR', '2160p Efficient FR', '2160p Quality FR', '2160p Remux FR');
+
+WITH profiles(name) AS (
+  VALUES ('2160p Balanced FR'), ('2160p Efficient FR'), ('2160p Quality FR'), ('2160p Remux FR')
+)
+INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
+SELECT name, 'NF', 'sonarr', 3000 FROM profiles;
+
+UPDATE quality_profile_custom_formats
+SET score = 6000
+WHERE custom_format_name = 'MA'
+  AND arr_type = 'radarr'
+  AND quality_profile_name IN ('2160p Balanced FR', '2160p Efficient FR', '2160p Quality FR', '2160p Remux FR');
+
+UPDATE quality_profile_custom_formats
+SET score = -3000
+WHERE custom_format_name = 'Movies Anywhere Enhancement'
+  AND arr_type = 'radarr'
+  AND quality_profile_name IN ('2160p Balanced FR', '2160p Efficient FR', '2160p Quality FR', '2160p Remux FR');
+
+UPDATE quality_profile_custom_formats
+SET score = 7000
+WHERE custom_format_name = 'BCORE'
+  AND arr_type = 'radarr'
+  AND quality_profile_name IN ('2160p Quality FR', '2160p Remux FR');
+
+WITH profiles(name) AS (
+  VALUES ('2160p Balanced FR'), ('2160p Efficient FR'), ('2160p Quality FR'), ('2160p Remux FR')
+)
+INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
+SELECT name, 'Netflix Enhancement', 'sonarr', -2000 FROM profiles;
+
+WITH profiles(name) AS (
+  VALUES ('2160p Balanced FR'), ('2160p Efficient FR'), ('2160p Remux FR')
+)
+INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
+SELECT name, 'SDR', 'radarr', 0 FROM profiles;

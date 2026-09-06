@@ -64,7 +64,7 @@ INSERT INTO tags (name) VALUES ('UHD Bluray');
 INSERT INTO tags (name) VALUES ('WEB-DL');
 INSERT INTO tags (name) VALUES ('x264');
 INSERT INTO tags (name) VALUES ('x265');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('3D', '(?<=\b[12]\d{3}\b).*\b((Bluray|BD)?3D|SBS|H[- .]?OU|H[- .]?SBS|Half[ .-]?OU|Half[ .-]?SBS)\b', 'Matches terms related to 3D video formats:
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('3D', '(?<=\b[12]\d{3}\b).*\b((Blu[-]?ray|BD)?3D|((H(alf)?|F(ull)?).?)?(O(ver)?.?U(nder)?|S(ide)?[\W_]?B(y)?.?S(ide)?))\b', 'Matches terms related to 3D video formats:
 - `bluray3d` or `bd3d` (optional `bluray` or `bd` followed by `3d`).
 - `sbs` (side-by-side).
 - `half ou` or `half sbs` with space (` `), dot (`.`), or hyphen (`-`) as separators.');
@@ -90,7 +90,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('Anime Hear
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('ANMWR', '(?<=^|[\s.-])ANMWR\b', 'Matches "ANMWR" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('ANONA', '(?<=^|[\s.-])ANONA\b', 'Matches "ANONA" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Aoi Project', '(?<=^|[\s.-])Aoi[ .-]?Project\b', 'Matches "Aoi Project" when preceded by whitespace, a hyphen or dot');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('Apple TV+', '\b(ATVP|ATV|APTV|Apple TV\+)\s*\b', 'Apple TV+ is an American subscription OTT streaming service owned and operated by Apple Inc. Launched on November 1, 2019, it offers a selection of original production film and television series called Apple Originals.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('Apple TV+', '\b(ATVP|APTV|Apple TV\+)\s*\b', 'Apple TV+ is an American subscription OTT streaming service owned and operated by Apple Inc. Launched on November 1, 2019, it offers a selection of original production film and television series called Apple Originals.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Arcedo', '(?<=^|[\s.-])(Team[ .-])?Arcedo\b', 'Matches "Arcedo" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('ARK01', '(?<=^|[\s.-])ARK01\b', 'Matches "ARK01" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('ARKRiL', '(?<=^|[\s.-])ARKRiL\b', 'Matches "ARKRiL" when preceded by whitespace, a hyphen or dot');
@@ -99,7 +99,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('AT', '(?<=
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('ATE', '(?<=^|[\s.-])ATE\b', 'Matches "ATE" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Atmos', '\bATMOS|DDPA(\b|\d)', '');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Atmos (Missing)', '\bATMOS(\b|\d)', '');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('AV1', '\b(AV1)\b', 'AV1, or AOMedia Video 1, is a video coding format that compresses video files and streams while maintaining high quality.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('AV1', '\bAV1\b', 'AV1, or AOMedia Video 1, is a video coding format that compresses video files and streams while maintaining high quality.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('AVC', '[xh][ ._-]?264|\bAVC(\b|\d)', 'An open source encoder that produces AVC videos. ');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('AViTECH', '(?<=^|[\s.-])AViTECH\b', 'Matches "AViTECH" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('AVON', '(?<=^|[\s.-])AVON\b', 'Matches "AVON" when preceded by whitespace, a hyphen or dot');
@@ -111,7 +111,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('B@tman', '
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Balibalo', '(?<=^|[\s.-])Balibalo\b', 'Matches "Balibalo" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Bandix', '(?<=^|[\s.-])Bandix\b', 'Matches "Bandix" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('BANKAi', '(?<=^|[\s.-])BANKAi\b', 'Matches "BANKAi" when preceded by whitespace, a hyphen or dot');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('Basic HDR Formats', '(?:(?<=^(?!.*\b(HLG|PQ|SDR)(\b|\d)).*?)HDR)|\b(dv(?![ .](HLG|SDR))|dovi|dolby[ .]?vision)\b', 'Matches Dolby Vision OR HDR10. Needed to better match UHD Blurays');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('Basic HDR Formats', '\bHDR(\b|\d)|\b(DV|Dovi|Dolby[ .]?Vision|HLG|PQ(10)?)\b', 'Matches the common HDR, Dolby Vision, HLG and PQ markers used by UHD releases.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('BAWLS', '(?<=^|[\s.-])BAWLS\b', 'Matches "BAWLS" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('BBC iPlayer', '\b(iP)\b', 'BBC iPlayer is a video on demand service from the BBC. The service is available over-the-top on a wide range of devices, including mobile phones and tablets, personal computers and smart televisions. iPlayer services delivered to UK-based viewers are free from commercial advertising. ');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('BDHD', '(?<=^|[\s.-])BDHD\b', 'Matches "BDHD" when preceded by whitespace, a hyphen or dot');
@@ -146,6 +146,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('BTN Atmos'
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('BTT', '(?<=^|[\s.-])BTT\b', 'Matches "BTT" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('BY_ORDER', '(?i)(?<=^|[\s.-])(?:BY[ ._-]?ORDER|BYOR)\b', 'Matches "BY_ORDER" and the common "byor" abbreviation when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('CARAPiLS', '(?<=^|[\s.-])CARAPiLS\b', 'Matches "CARAPiLS" when preceded by whitespace, a hyphen or dot');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('Caribou', '(?<=^|[\s.-])Caribou\b', 'Matches "Caribou" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Champion9', '(?<=^|[\s.-])Champion9\b', 'Matches "Champion9" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('CHiLL', '(?<=^|[\s.-])CHiLL\b', 'Matches "CHiLL" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Choco', '(?<=^|[\s.-])Choco\b', 'Matches "Choco" when preceded by whitespace, a hyphen or dot');
@@ -166,6 +167,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('Crave', '\
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Criterion Channel', '\b(CRiT)\b', 'The Criterion Channel is a subscription-based streaming service launched on April 8, 2019, by The Criterion Collection. Available in the United States and Canada, it features a rich library of films, including Criterion Collection releases with special features, curated playlists, temporarily licensed titles, and original content such as academic overviews and introductions. The Channel also showcases Janus-owned titles not yet available on physical media and maintains a collaborative relationship with Warner Bros. Discovery''s Max platform. Perfect for cinephiles, the service brings a curated cinematic experience to the digital space.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Crunchyroll', '\b(C(runchy)?[ .-]?R(oll)?)\b', 'Crunchyroll is a popular streaming service focused on anime, manga, and Asian entertainment. It offers a large library of animated series and films, including both classic titles and new simulcasts straight from Japan, often with subtitles soon after they air. Users can watch on demand across devices, and there’s both a free, ad-supported tier and paid premium subscriptions with ad-free viewing and early access to episodes.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('CRYPT0', '(?<=^|[\s.-])CRYPT0\b', 'Matches "CRYPT0" when preceded by whitespace, a hyphen or dot');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('CUSThOMe', '(?<=^|[\s.-])CUSThOMe\b', 'Matches "CUSThOMe" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('CZ', '(?<=^|[\s.-])CZ\d+\b', 'Matches "CZ" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('D3T3R10R1TY', '(?<=^|[\s.-])D3T3R10R1TY\b', 'Matches "D3T3R10R1TY" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('D4KiD', '(?<=^|[\s.-])D4KiD\b', 'Matches "D4KiD" when preceded by whitespace, a hyphen or dot');
@@ -178,8 +180,8 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('DiEBEX', '
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Disney+', '\b(dsnp|dsny(p)?|disney\+)\s*\b', 'Disney+ is an American subscription video on-demand over-the-top streaming media service that primarily distributes films and television shows produced by Walt Disney Studios and Disney Television Studios, with dedicated content hubs for Disney''s flagship brands; Disney, Pixar, Marvel, Star Wars, National Geographic, ESPN, Hulu and Star.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Dolby Digital', '\bDD[^a-z+]|(?<!e-?)\b(ac-?3)\b', '');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Dolby Digital +', '\bDD[P+]|\b(e[-_. ]?ac3)\b', '');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('Dolby Vision', '\b(dv(?![ .](HLG|SDR))|dovi|dolby[ .]?vision)\b', 'Dolby Vision is a high dynamic range (HDR) video format that uses dynamic metadata to deliver enhanced brightness, contrast, and color on a scene-by-scene or frame-by-frame basis, providing superior picture quality. This pattern excludes matches where Dolby Vision is associated with SDR (Standard Dynamic Range) or HLG (Hybrid Log-Gamma), ensuring it focuses on Dolby Vision-specific terms.');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('Dolby Vision (Without Fallback)', '(?<=^(?!.*(HDR|HULU|REMUX|BLURAY)).*?)\b(DV|Dovi|Dolby[- .]?V(ision)?)\b', 'Matches Dolby Vision when it doesn''t come with regular HDR Fallback (A Bluray Remux or a Hulu WEB-DL)');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('Dolby Vision', '\b(DV|Dovi|Dolby[ .]?Vision)\b', 'Dolby Vision is a high dynamic range (HDR) video format that uses dynamic metadata to deliver enhanced brightness, contrast, and color on a scene-by-scene or frame-by-frame basis.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('Dolby Vision (Without Fallback)', '(?<=^(?!.*(HDR|HULU|REMUX|BLU[-]?RAY)).*?)\b(DV|Dovi|Dolby[ .]?Vision)\b', 'Matches Dolby Vision when it does not come with a regular HDR fallback, a Blu-ray Remux or a Hulu WEB-DL.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('DOLL4R', '(?<=^|[\s.-])DOLL4R\b', 'Matches "DOLL4R" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Dread Team', '(?<=^|[\s.-])Dread[\.-]?Team\b', 'Matches "Dread Team" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('DREAM', '(?<=^|[\s.-])DREAM\b', 'Matches "DREAM" when preceded by whitespace, a hyphen or dot');
@@ -235,7 +237,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('FtLi', '(?
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FTMVHD', '(?<=^|[\s.-])FTMVHD\b', 'Matches "FTMVHD" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Fuceo', '(?<=^|[\s.-])Fuceo\b', 'Matches "Fuceo" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FUJiSAN', '(?<=^|[\s.-])FUJiSAN\b', 'Matches "FUJiSAN" when preceded by whitespace, a hyphen or dot');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('Full Disc', '^(?!.*\b((?<!HD[._ -]|HD)DVD|BDRip|MKV|XviD|WMV|d3g|BDREMUX|REMUX|^(?=.*1080p)(?=.*HEVC)|[xh][-_. ]?26[45]|German.*DL|((?<=\d{4}).*German.*(DL)?)(?=.*\b(AVC|HEVC|VC[-_. ]?1|MVC|MPEG[-_. ]?2)\b))\b)(((?=.*\b(Blu[-_. ]?ray|BD|HD[-_. ]?DVD)\b)(?=.*\b(AVC|HEVC|VC[-_. ]?1|MVC|MPEG[-_. ]?2|BDMV|ISO)\b))|^((?=.*\b(^((?=.*\b((.*_)?COMPLETE.*|Dis[ck])\b)(?=.*(Blu[-_. ]?ray|HD[-_. ]?DVD)))|3D[-_. ]?BD|BR[-_. ]?DISK|Full[-_. ]?Blu[-_. ]?ray|^((?=.*((BD|UHD)[-_. ]?(25|50|66|100|ISO)))))))).*|(?i)(DVD9|DVD5|NTSC|PAL|VOB IFO|VC-1|AVC|MPEG-2|\bCOMPLETE[-.\s]?(?:UHD[-.\s])?BLU[-.\s]?RAY\b|\bCOMPLETE BLURAY\b|\bBR-Disk\b)', 'A Full Disc release refers to a complete copy of a physical media disc, such as a DVD or Blu-ray, preserving all original content including menus, bonus features, and multiple audio or subtitle tracks. Unlike compressed or re-encoded formats, Full Disc files maintain the full structure and quality of the original disc, often stored as ISO files or folders like BDMV for Blu-rays. These releases are ideal for users seeking an authentic, unaltered experience identical to using the physical disc.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('Full Disc', '^(?!.*\b((?<!HD[._ -]|HD)DVD|BDRip|MKV|XviD|WMV|d3g|BDREMUX|REMUX|^(?=.*1080p)(?=.*HEVC)|[xh][-_. ]?26[45]|German.*DL|((?<=\d{4}).*German.*(DL)?)(?=.*\b(AVC|HEVC|VC[-_. ]?1|MVC|MPEG[-_. ]?2)\b))\b)(((?=.*\b(Blu[-_. ]?ray|BD|HD[-_. ]?DVD)\b)(?=.*\b(AVC|HEVC|VC[-_. ]?1|MVC|MPEG[-_. ]?2|BDMV|ISO)\b))|^((?=.*\b(^((?=.*\b((.*_)?COMPLETE.*|Dis[ck])\b)(?=.*(Blu[-_. ]?ray|HD[-_. ]?DVD)))|3D[-_. ]?BD|BR[-_. ]?DISK|Full[-_. ]?Blu[-_. ]?ray|^((?=.*((BD|UHD)[-_. ]?(25|50|66|100|ISO)))))))).*|(?i)(DVD9|DVD5|NTSC|PAL|VOB IFO|VC-1|AVC|MPEG-2|\bCOMPLETE[-.\s]?(?:UHD[-.\s])?BLU[-.\s]?RAY\b|\bCOMPLETE BLU[-]?RAY\b|\bBR-Disk\b)', 'A Full Disc release refers to a complete copy of a physical media disc, such as a DVD or Blu-ray, preserving all original content including menus, bonus features, and multiple audio or subtitle tracks. Unlike compressed or re-encoded formats, Full Disc files maintain the full structure and quality of the original disc, often stored as ISO files or folders like BDMV for Blu-rays. These releases are ideal for users seeking an authentic, unaltered experience identical to using the physical disc.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FUN', '(?<=^|[\s.-])FUN\b', 'Matches "FUN" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FUNKKY', '(?<=^|[\s.-])FUNKKY\b', 'Matches "FUNKKY" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FUTiL', '(?<=^|[\s.-])FUTiL\b', 'Matches "FUTiL" when preceded by whitespace, a hyphen or dot');
@@ -244,7 +246,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('FWDHD', '(
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FZTeam', '(?<=^|[\s.-])FZTeam\b', 'Matches "FZTeam" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('GAIA', '(?<=^|[\s.-])GA(\xCF|I)A\b', 'Matches "GAIA" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Galactic', '(?<=^|[\s.-])Galactic\b', 'Matches "Galactic" when preceded by whitespace, a hyphen or dot');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('German DL', '\b(GERMAN[ ._-][DM]L)\b', '');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('German DL', '(?=.*\bGERMAN\b)(?=.*\b(?<!WEB-)[DM]L\b).*', 'Matches German dual-language markers while excluding WEB-DL itself.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('GHOSTSPiRiT', '(?<=^|[\s.-])GHOSTSPiRiT\b', 'Matches "GHOSTSPiRiT" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('GHOULS', '(?<=^|[\s.-])GHOULS\b', 'Matches "GHOULS" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('GHT', '(?<=^|[\s.-])GHT\b', 'Matches "GHT" when preceded by whitespace, a hyphen or dot');
@@ -347,7 +349,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('MAXAGAZ', 
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('MaxiBeNoul', '(?<=^|[\s.-])MaxiBeNoul\b', 'Matches "MaxiBeNoul" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('McNULTY', '(?<=^|[\s.-])McNULTY\b', 'Matches "McNULTY" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('MELBA', '(?<=^|[\s.-])MELBA\b', 'Matches "MELBA" when preceded by whitespace, a hyphen or dot');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('MeMyl', '(?<=^|[\s.-])MeMyl\b', 'Matches "MeMyl" when preceded by whitespace, a hyphen or dot');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('MeMyI', '(?<=^|[\s.-])MeMyI\b', 'Matches "MeMyI" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('METALLIKA', '(?<=^|[\s.-])METALLIKA\b', 'Matches "METALLIKA" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('MGD', '(?<=^|[\s.-])MGD\b', 'Matches "MGD" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('mHDgz', '(?<=^|[\s.-])mHDgz\b', 'Matches "mHDgz" when preceded by whitespace, a hyphen or dot');
@@ -482,7 +484,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('SANTACRUZ'
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('SASHiMi', '(?<=^|[\s.-])SASHiMi\b', 'Matches "SASHiMi" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Scaph', '(?<=^|[\s.-])Scaph\b', 'Matches "Scaph" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('SCREEN', '(?<=^|[\s.-])SCREEN\b', 'Matches "SCREEN" when preceded by whitespace, a hyphen or dot');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('SDR', '\b(SDR)\b', 'Explicitly matches labelled Standard Dynamic Range, i.e. "SDR" ');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('SDR', '\bSDR\b', 'Explicitly matches labelled Standard Dynamic Range, i.e. "SDR" ');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('SEiGHT', '(?<=^|[\s.-])SEiGHT\b', 'Matches "SEiGHT" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Seimeisen', '(?<=^|[\s.-])Seimeisen\b', 'Matches "Seimeisen" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('SESKAPiLE', '(?<=^|[\s.-])SESKAPiLE\b', 'Matches "SESKAPiLE" when preceded by whitespace, a hyphen or dot');
@@ -559,7 +561,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('TSuNaMi', 
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Tsundere Raws', '(?<=^|[\s.-])Tsundere[ .-]?Raws\b', 'Matches "Tsundere Raws" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('TTN', '(?<=^|[\s.-])TTN\b', 'Matches "TTN" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('TUTUTE', '(?<=^|[\s.-])TUTUTE\b', 'Matches "TUTUTE" when preceded by whitespace, a hyphen or dot');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('TV Extras', '(?<=\bS\d+\b).*\b(Extras|Bonus|Extended[ ._-]Clip)\b', 'Extras, Special Features, Featurettes, etc');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('TV Extras', '(?<=\bS\d+\b).*\b(Extra(s)?|Bonus|Deleted[ ._-]Scene(s)?|Extended[ ._-]Clip)\b', 'Extras, Special Features, Featurettes, etc');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('TVPSLO', '(?<=^|[\s.-])TVPSLO\b', 'Matches "TVPSLO" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('TyHD', '(?<=^|[\s.-])TyHD\b', 'Matches "TyHD" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('TyrellCorp', '(?<=^|[\s.-])TyrellCorp\b', 'Matches "TyrellCorp" when preceded by whitespace, a hyphen or dot');
@@ -583,7 +585,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('VERCLAM', 
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('VFC', '(?<=^|[\s.-])VFC\b', 'Matches "VFC" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('ViKi47', '(?<=^|[\s.-])ViKi47\b', 'Matches "ViKi47" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('VoMiT', '(?<=^|[\s.-])VoMiT\b', 'Matches "VoMiT" when preceded by whitespace, a hyphen or dot');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('VP9', '\b(VP9)\b', 'VP9 is an open and royalty-free video coding format developed by Google');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('VP9', '\bVP9\b', 'VP9 is an open and royalty-free video coding format developed by Google');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('VVC', '[xh][ ._-]?266|\bVVC(\b|\d)', 'VVC, or Versatile Video Coding (H.266), is a video coding format that compresses video files and streams to significantly smaller sizes than H.265 while maintaining high quality.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('WaCkS', '(?<=^|[\s.-])WaCkS\b', 'Matches "WaCkS" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Wakanim', '(?<=^|[\s.-])Wakanim\b', 'Matches "Wakanim" when preceded by whitespace, a hyphen or dot');
@@ -1276,6 +1278,14 @@ WHERE re.name = 'CARAPiLS' AND t.name = 'Release Group';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
+WHERE re.name = 'Caribou' AND t.name = 'French';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'Caribou' AND t.name = 'Release Group';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
 WHERE re.name = 'Champion9' AND t.name = 'Banned';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
@@ -1469,6 +1479,14 @@ INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
 WHERE re.name = 'CRYPT0' AND t.name = 'Release Group';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'CUSThOMe' AND t.name = 'French';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'CUSThOMe' AND t.name = 'Release Group';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
@@ -3184,15 +3202,15 @@ WHERE re.name = 'MELBA' AND t.name = 'Release Group';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
-WHERE re.name = 'MeMyl' AND t.name = 'Banned';
+WHERE re.name = 'MeMyI' AND t.name = 'Banned';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
-WHERE re.name = 'MeMyl' AND t.name = 'French';
+WHERE re.name = 'MeMyI' AND t.name = 'French';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
-WHERE re.name = 'MeMyl' AND t.name = 'Release Group';
+WHERE re.name = 'MeMyI' AND t.name = 'Release Group';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
@@ -5753,7 +5771,12 @@ FROM regular_expressions re, tags t
 WHERE re.name = 'USURY' AND t.name = 'Release Group';
 
 -- Dictionarry V2 technical regex retained for FR profiles
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('Movie Extras', '(?i)(?<=\b[12]\d{3}\b).*(\b|\.)\b(Extras?|Bonus|Extended[ ._-]Clip|Special Feature[s]?)\b', 'Extras, Special Features, Featurettes, etc');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('Movie Extras', '(?<=\b[12]\d{3}\b).*(\b|\.)\b(Extra(s)?|Bonus|Deleted[ ._-]Scene(s)?|Extended[ ._-]Clip|Special[ ._-]Feature(s)?)\b', 'Extras, Special Features, Featurettes, etc');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('CAM', '(?<=\b[12]\d{3}\b).*(\b((AC3)?(LD|MD)|CAM[ ._-]?(Rip)?|DCP(RIP)?|DVD[ ._-]?(SCR(EENER)?)|HD[ ._-]?(CAM|SCR|TC|TS)|(LINE|MIC)[ ._-]?DUBBED|SCREENER|(TC|TS)(Rip)?|TELE(CINE|SYNC)|WORKPRINT)\b)', 'Matches CAM, telesync, telecine, screener and workprint releases.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('Apple TV', '\b(ATV)\b', 'Matches Apple TV purchases and channel releases separately from Apple TV+.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('HBO', '\b(HBO)(?![ ._-]MAX)\b(?=[ ._-]WEB[ ._-]?(DL|RIP)\b)', 'Matches HBO WEB releases without matching HBO Max.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('HBO Rename', '\[(HBO)\b|\b(HBO)\]', 'Matches the HBO marker retained between brackets during renaming.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('Discovery+', '\b(DSCP)\b', 'Matches Discovery+ WEB releases.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Extended Edition', '(?<=\b[12]\d{3}\b).*\b(Extended)(\b|\d)', 'Matches extended non theatrical editions.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Black & White', '(?<=\b[12]\d{3}\b).*\b((B(lack)?[ ._-]?(out|(and|[n&])?[ ._-]?(W(hite)?|Chrome))))\b(?!$)', '');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Monochrome', '(?<=\b[12]\d{3}\b).*\b(Monochrome)\b(?!$)', '');
@@ -5768,6 +5791,8 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('Black Amer
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('British Sign Language', '\b(BSL)\b', '');
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name) SELECT re.name, t.name FROM regular_expressions re, tags t WHERE re.name = 'Movie Extras' AND t.name = 'Enhancement';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name) SELECT re.name, t.name FROM regular_expressions re, tags t WHERE re.name = 'Movie Extras' AND t.name = 'Banned';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name) SELECT re.name, t.name FROM regular_expressions re, tags t WHERE re.name = 'CAM' AND t.name IN ('Banned', 'Enhancement');
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name) SELECT re.name, t.name FROM regular_expressions re, tags t WHERE re.name IN ('Apple TV', 'HBO', 'HBO Rename', 'Discovery+') AND t.name IN ('Streaming Service', 'WEB-DL');
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name) SELECT re.name, t.name FROM regular_expressions re, tags t WHERE re.name = 'Extended Edition' AND t.name = 'Edition';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name) SELECT re.name, t.name FROM regular_expressions re, tags t WHERE re.name IN ('Black & White', 'Monochrome', 'Noir', 'Shush Cut', 'Color', 'Grayscale', 'Darkness & Light') AND t.name = 'Enhancement';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name) SELECT re.name, t.name FROM regular_expressions re, tags t WHERE re.name IN ('Black & White', 'Monochrome', 'Noir', 'Shush Cut', 'Color', 'Grayscale', 'Darkness & Light') AND t.name = 'Colour Grade';

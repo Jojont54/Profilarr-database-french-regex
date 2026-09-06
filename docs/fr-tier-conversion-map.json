@@ -1,5 +1,5 @@
 {
-  "status": "implemented-in-ops-5-to-21",
+  "status": "implemented-in-ops-5-to-26",
   "notes": [
     "Reference table for the Dictionarry V2-style FR conversion.",
     "Custom format names are Dictionarry-shaped with FR at the beginning.",
@@ -7,7 +7,9 @@
     "Quality tiers keep only the best tier per team to avoid double tier scores.",
     "LQ remains handled by the banned/LQ custom formats.",
     "FR tier custom formats scored above 600000 require the HEVC regex, which matches h265, x265 and HEVC.",
-    "Shared technical profile scores are realigned with Dictionarry V2 in ops/7 without importing US release-group tiers.",
+    "Shared technical profile scores are realigned with Dictionarry V2 without importing US release-group tiers.",
+    "The common technical layer includes the current Dictionarry CAM, Extras, 3D, Full Disc, HDR, Dolby Vision, SDR and missing-x265 conditions.",
+    "Apple TV and Apple TV+ are detected separately; HBO and Discovery+ are available as zero-score streaming-service formats, while the 2160p platform scores follow the current Dictionarry split between Radarr and Sonarr.",
     "High-score FR tiers have required source gates in ops/8 so WEB and Bluray tiers cannot stack on the same release.",
     "2160p Efficient WEB composite tiers are removed in ops/17 to align with Dictionarry V2: 2160p WEB releases score through 2160p WEB-DL (Efficient/Balanced), while trusted FR groups keep premium tiers on Bluray HEVC.",
     "FR WEB tiers with optional WEB-DL/WEBRip source conditions are hardened in ops/18: WEB source must be present, and release-group tier matching is no longer satisfied by source alone.",
@@ -32,7 +34,8 @@
     "2160p Compact FR keeps 1080p Efficient fallback below all 4KLight paths: 1080p source Efficient is 840000 and validated 1080p HEVC team tiers are lightweight 50000 bonuses, so the combined 890000 remains below 4KLight WEBRip at 900000.",
     "Historical FR source tiers are rebuilt without Global or Movie/TV splits: WEB Top, WEB, Bluray, UHD Bluray, Light, DVD and Unknown are the reusable source buckets.",
     "1080p Balanced FR is normalized in ops/22: reusable FR WEB tiers add small team bonuses, while the obsolete FR 1080p Balanced composite CF is removed.",
-    "French Missing (INTL) no longer treats a known French team as proof of French language by itself. A team only prevents the INTL missing-French penalty when combined with MULTi or MultiSub, or when the title has an explicit French marker. Its optional French Except and Original Except language conditions form an OR group; only monolingual French-original metadata prevents the penalty without a trusted title marker."
+    "French Missing (INTL) no longer treats a known French team as proof of French language by itself. A team only prevents the INTL missing-French penalty when combined with MULTi or MultiSub, or when the title has an explicit French marker. Its optional French Except and Original Except language conditions form an OR group; only monolingual French-original metadata prevents the penalty without a trusted title marker.",
+    "French Original requires both French Except and Original Except with Negate and Required: only monolingual French metadata on French-original content matches. MULTi and explicit VOF/VOQ markers remain excluded and are handled by their dedicated custom formats to prevent double matching."
   ],
   "aliases": {
     "FORWARD": "FW",
