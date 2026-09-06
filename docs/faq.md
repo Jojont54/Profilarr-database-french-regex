@@ -27,6 +27,19 @@ La langue est gérée par Custom Formats pour éviter les conflits entre:
 
 Cela laisse Radarr/Sonarr voir les releases, puis Profilarr les classe par score.
 
+## À quoi servent les marqueurs `[AUDIO]` et `[SUB]` dans le renommage?
+
+Ils conservent une synthèse des langues réellement détectées dans le fichier:
+
+```text
+[AUDIO][FR]       français uniquement
+[AUDIO][FR+--]    français avec une autre langue
+[SUB][FR]         sous-titres français
+[SUB][FR+--]      sous-titres français et autres langues
+```
+
+Les Custom Formats continuent d'utiliser le titre de la release avant téléchargement, puis ces marqueurs MediaInfo leur permettent de rester cohérents après import et renommage.
+
 ## Pourquoi ne pas tout mettre dans le README?
 
 Le README sert de porte d'entrée. La documentation détaillée vit dans `docs/` pour rester versionnée, lisible et facile à modifier.

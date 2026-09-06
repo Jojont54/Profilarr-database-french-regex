@@ -30,6 +30,7 @@ Pour une nouvelle installation, utilisez `stable`.
 - Regex atomiques pour les teams FR.
 - Custom Formats FR de langue: `French MULTi`, `French Original`, `French VF`, `French VOSTFR`, `French VFQ`, `French Missing`.
 - Custom Formats `INTL` pour les trackers internationaux.
+- Marqueurs MediaInfo `[AUDIO]` et `[SUB]` conservés au renommage pour que les Custom Formats de langue restent détectables après l'import.
 - Tiers FR inspirés et recoupés avec plusieurs sources francophones.
 - Profils FR basés sur la logique Dictionarry V2.
 - Base technique commune maintenue avec les évolutions utiles de Dictionarry: sources, codecs, HDR/Dolby Vision/SDR, Extras, CAM et plateformes de streaming.
