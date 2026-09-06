@@ -26,7 +26,12 @@ MULTI.VFI
 MULTI.VFQ
 MULTI.VOF
 MULTI.VOQ
+MULTI.WITH.TRUEFRENCH
+MULTI.VO.VFF
+MULTI.EN.ES.VFF
 ```
+
+Un marqueur français peut être précédé de plusieurs indications intermédiaires. Les mots de liaison comme `WITH`, les indications comme `VO`, `AUDIO` ou `DUAL`, ainsi que les codes courts de langue tels que `EN`, `ENG`, `ES` ou `ESP` sont acceptés. Les séparateurs `.`, `_`, `-`, `+`, `&`, `/` et `,` peuvent être combinés.
 
 Sur tracker FR, `MULTi` signifie généralement qu'une piste française est présente. Sur tracker international, ce n'est pas toujours vrai: utilisez alors les Custom Formats `INTL`.
 
@@ -133,7 +138,12 @@ MULTi.VFI
 MULTi.VFQ
 MULTi.VOF
 MULTi.VOQ
+MULTi.WITH.TRUEFRENCH
+MULTi.VO.VFF
+MULTi.EN.ES.VFF
 ```
+
+Le marqueur français peut suivre directement `MULTi` ou apparaître après un maximum de six indications intermédiaires. Cela couvre notamment les listes de langues comme `MULTi.EN.ES.VFF`. Un marqueur `SUB` intercalé n'est volontairement pas accepté comme preuve d'une piste audio française.
 
 `French MultiSub + Team FR (INTL)` fonctionne de la même manière, mais avec un tag `MultiSub` à la place de `MULTi`.
 

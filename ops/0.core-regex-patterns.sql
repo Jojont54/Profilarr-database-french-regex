@@ -225,7 +225,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('FoX', '(?<
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FRATERNiTY', '(?<=^|[\s.-])FRATERNiTY\b', 'Matches "FRATERNiTY" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FREAMON', '(?<=^|[\s.-])FREAMON\b', 'Matches "FREAMON" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FReeZeR', '(?<=^|[\s.-])FReeZeR\b', 'Matches "FReeZeR" when preceded by whitespace, a hyphen or dot');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('French MULTi', '(?i)(?<=^|[\s.-])(?:MULTI(?:[ ._-]?(?:FR|FRA|FRENCH|FRANCAIS|FRANÇAIS|TRUE[ ._-]?FR(?:ENCH)?|VF|VFI|VFF|VFQ|VFB|VOF|VOQ|VF2|VFQ2|VFF2|VFI2|\d+))?|FR\s*\+\s*[A-Z]{2}|[A-Z]{2}\s*\+\s*FR)(?![ ._-]?SUBS?)(?=$|[\s.-])', 'Matches French scene-style MULTi releases, including MULTi.FR/FRENCH/TRUEFRENCH variants, and FR+XX language-pair tags.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('French MULTi', '(?i)(?<=^|[\s._-])(?:MULTI(?:(?:[\s._,+&/-]?(?:FR|FRA|FRENCH|FRANCAIS|FRANÇAIS|TRUE[\s._-]?FR(?:ENCH)?|VFQ2?|VF|VFI|VFF2?|VFB|VOF|VOQ|VF2|VFI2|\d+))|(?:[\s._,+&/-]+(?:WITH|AUDIO(?:S)?|LANG(?:UAGE)?S?|DUAL|ORIG(?:INAL)?|PLUS|(?!(?:SUB)(?=$|[\s._,+&/-]))[A-Z]{2,3})){1,6}[\s._,+&/-]+(?:FR|FRA|FRENCH|FRANCAIS|FRANÇAIS|TRUE[\s._-]?FR(?:ENCH)?|VFQ2?|VF|VFI|VFF2?|VFB|VOF|VOQ|VF2|VFI2|\d+))?|FR\s*\+\s*[A-Z]{2}|[A-Z]{2}\s*\+\s*FR)(?![\s._,+&/-]?SUBS?)(?=$|[\s._,+&/-])', 'Matches French scene-style MULTi releases, including compact variants and explicit French markers after intermediary language codes or words such as MULTI.EN.ES.VFF, MULTI.VO.VFF and MULTI.WITH.TRUEFRENCH, plus FR+XX language-pair tags.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('French VF', '(?i)(?<=^|[\s.-])(?:VF(?!Q)|VFI|VFF2?|VF2|TRUE[ ._-]?FR(?:ENCH)?|FRENCH(?![ ._-]?(?:SUBS?|CANADIAN))|FRANCAIS|FRANÇAIS|FRA)(?=$|[\s.-])', 'Matches French dubbed releases while keeping subtitles, MULTi, and Quebec French variants separate.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('French Original Marker', '(?i)(?<=^|[\s.-])(?:VOF|VOQ)(?=$|[\s.-])', 'Matches French original-version markers VOF and VOQ.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('French VFQ', '(?i)(?<=^|[\s.-])(?:VFQ2?|VQ|(?:MULTI|FRENCH)[ ._-]+CA|FRENCH[ ._-]?CANADIAN|CANADIAN[ ._-]?FRENCH|QUEBECOIS)(?=$|[\s.-])', 'Matches Quebec or Canadian French markers that should be rejected by French profiles, including MULTi.CA and FRENCH.CA.');
@@ -280,6 +280,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('HEVCBay', 
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('HiggsBoson', '(?<=^|[\s.-])HiggsBoson\b', 'Matches "HiggsBoson" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('HiRoSHiMa', '(?<=^|[\s.-])HiRoSHiMa\b', 'Matches "HiRoSHiMa" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('HMiDiMADRiDi', '(?<=^|[\s.-])HMiDiMADRiDi\b', 'Matches "HMiDiMADRiDi" when preceded by whitespace, a hyphen or dot');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('HOLiDAYS', '(?<=^|[\s.-])HOLiDAYS\b', 'Matches "HOLiDAYS" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Hotstar', '\b(HTSR)\b', 'Disney+ Hotstar, also known as JioHotstar or simply Hotstar, is an Indian subscription video-on-demand over-the-top streaming service owned by Disney Star. The brand was introduced as Hotstar for a streaming service carrying content from Disney Star''s (formerly Star India) local networks, including films, television series, live sports, and original programming, as well as featuring content licensed from third parties such as Showtime among others.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Hulu', '\b(Hulu)\b', 'Hulu, an American subscription streaming service owned by Disney, offers recent TV episodes, full seasons of shows, original content, and live TV channels. As of December 2023, Hulu content is being integrated into Disney+, making its library accessible to Disney+ subscribers.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Hush', '(?<=^|[\s.-])Hush\b', 'Matches "Hush" when preceded by whitespace, a hyphen or dot');
@@ -342,7 +343,7 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('MARBLECAKE
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('matheousse', '(?<=^|[\s.-])matheousse\b', 'Matches "matheousse" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Matmatha', '(?<=^|[\s.-])Matmatha\b', 'Matches "Matmatha" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Max', '\b((?<!hbo[ ._-])max)\b(?=[ ._-]web[ ._-]?(dl|rip)\b)', 'Max, formerly (and in some regions still) known as HBO Max, is an American subscription video on-demand over-the-top streaming service. The platform offers content from the libraries of Warner Bros., Discovery, HBO, CNN, Cartoon Network, Adult Swim, Animal Planet, TBS, TNT, Eurosport, and their related brands.');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('MAX (Release Group)', '(?<=^|[\s.-])MAX\b', 'Matches "MAX" when preceded by whitespace, a hyphen or dot');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('MAX (Release Group)', '(?<=^|[\s.-])MAX\b(?![ ._-]+WEB(?:[ ._-]?(?:DL|RIP))?\b)', 'Matches the release group "MAX" while excluding the Max streaming-service marker before WEB-DL or WEBRip');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Max Rename', '\[(MAX)\b|\b(MAX)\]', 'Max, formerly (and in some regions still) known as HBO Max, is an American subscription video on-demand over-the-top streaming service. The platform offers content from the libraries of Warner Bros., Discovery, HBO, CNN, Cartoon Network, Adult Swim, Animal Planet, TBS, TNT, Eurosport, and their related brands.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('Maxadonf', '(?<=^|[\s.-])Maxadonf\b', 'Matches "Maxadonf" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('MAXAGAZ', '(?<=^|[\s.-])MAXAGAZ\b', 'Matches "MAXAGAZ" when preceded by whitespace, a hyphen or dot');
@@ -2611,6 +2612,14 @@ INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
 WHERE re.name = 'HMiDiMADRiDi' AND t.name = 'Release Group';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'HOLiDAYS' AND t.name = 'French';
+INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
+SELECT re.name, t.name
+FROM regular_expressions re, tags t
+WHERE re.name = 'HOLiDAYS' AND t.name = 'Release Group';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
