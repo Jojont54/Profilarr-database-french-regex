@@ -225,14 +225,11 @@ INSERT INTO regular_expressions (name, pattern, description) VALUES ('FoX', '(?<
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FRATERNiTY', '(?<=^|[\s.-])FRATERNiTY\b', 'Matches "FRATERNiTY" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FREAMON', '(?<=^|[\s.-])FREAMON\b', 'Matches "FREAMON" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FReeZeR', '(?<=^|[\s.-])FReeZeR\b', 'Matches "FReeZeR" when preceded by whitespace, a hyphen or dot');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('French MULTi', '(?i)(?<=^|[\s._-])(?:MULTI(?:(?:[\s._,+&/-]?(?:FR|FRA|FRENCH|FRANCAIS|FRANÇAIS|TRUE[\s._-]?FR(?:ENCH)?|VFQ2?|VF|VFI|VFF2?|VFB|VOF|VOQ|VF2|VFI2|\d+))|(?:[\s._,+&/-]+(?:WITH|AUDIO(?:S)?|LANG(?:UAGE)?S?|DUAL|ORIG(?:INAL)?|PLUS|(?!(?:SUB)(?=$|[\s._,+&/-]))[A-Z]{2,3})){1,6}[\s._,+&/-]+(?:FR|FRA|FRENCH|FRANCAIS|FRANÇAIS|TRUE[\s._-]?FR(?:ENCH)?|VFQ2?|VF|VFI|VFF2?|VFB|VOF|VOQ|VF2|VFI2|\d+))?|FR\s*\+\s*[A-Z]{2}|[A-Z]{2}\s*\+\s*FR)(?![\s._,+&/-]?SUBS?)(?=$|[\s._,+&/-])', 'Matches French scene-style MULTi releases, including compact variants and explicit French markers after intermediary language codes or words such as MULTI.EN.ES.VFF, MULTI.VO.VFF and MULTI.WITH.TRUEFRENCH, plus FR+XX language-pair tags.');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('French VF', '(?i)(?<=^|[\s.-])(?:VF(?!Q)|VFI|VFF2?|VF2|TRUE[ ._-]?FR(?:ENCH)?|FRENCH(?![ ._-]?(?:SUBS?|CANADIAN))|FRANCAIS|FRANÇAIS|FRA)(?=$|[\s.-])', 'Matches French dubbed releases while keeping subtitles, MULTi, and Quebec French variants separate.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('French MULTi', '(?i)(?:(?<=^|[\s._-])(?:MULTI(?:(?:[\s._,+&/-]?(?:FR|FRA|FRENCH|FRANCAIS|FRANÇAIS|TRUE[\s._-]?FR(?:ENCH)?|VFQ2?|VF|VFI|VFF2?|VFB|VOF|VOQ|VF2|VFI2|\d+))|(?:[\s._,+&/-]+(?:WITH|AUDIO(?:S)?|LANG(?:UAGE)?S?|DUAL|ORIG(?:INAL)?|PLUS|(?!(?:SUB)(?=$|[\s._,+&/-]))[A-Z]{2,3})){1,6}[\s._,+&/-]+(?:FR|FRA|FRENCH|FRANCAIS|FRANÇAIS|TRUE[\s._-]?FR(?:ENCH)?|VFQ2?|VF|VFI|VFF2?|VFB|VOF|VOQ|VF2|VFI2|\d+))?|FR\s*\+\s*[A-Z]{2}|[A-Z]{2}\s*\+\s*FR)(?![\s._,+&/-]?SUBS?)(?=$|[\s._,+&/-])|\[AUDIO\]\[FR\+-{1,2}\])', 'Matches French scene-style MULTi releases and the normalized MediaInfo marker [AUDIO][FR+--], including compact variants, intermediary language codes and FR+XX language-pair tags.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('French VF', '(?i)(?:(?<=^|[\s.-])(?:VF(?!Q)|VFI|VFF2?|VF2|TRUE[ ._-]?FR(?:ENCH)?|FRENCH(?![ ._-]?(?:SUBS?|CANADIAN))|FRANCAIS|FRANÇAIS|FRA)(?=$|[\s.-])|\[AUDIO\]\[FR\])', 'Matches French dubbed markers and the normalized MediaInfo marker [AUDIO][FR], while keeping subtitles, MULTi, and Quebec French variants separate.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('French Original Marker', '(?i)(?<=^|[\s.-])(?:VOF|VOQ)(?=$|[\s.-])', 'Matches French original-version markers VOF and VOQ.');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('French VFQ', '(?i)(?<=^|[\s.-])(?:VFQ2?|VQ|(?:MULTI|FRENCH)[ ._-]+CA|FRENCH[ ._-]?CANADIAN|CANADIAN[ ._-]?FRENCH|QUEBECOIS)(?=$|[\s.-])', 'Matches Quebec or Canadian French markers that should be rejected by French profiles, including MULTi.CA and FRENCH.CA.');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('French VOSTFR', '(?i)(?<=^|[\s.-])(?:VOST(?:[ ._-]?FR)?|SUB[ ._-]?(?:FR|FRENCH)|FRENCH[ ._-]?SUBS?|FR[ ._-]?SUBS?)(?=$|[\s.-])', 'Matches original-audio releases with French subtitles.');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('Renamed French MULTi', '(?i)\[AUDIO\]\[FR\+-{1,2}\]', 'Matches the normalized MediaInfo marker [AUDIO][FR+--], meaning French audio plus at least one other detected language.');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('Renamed French VF', '(?i)\[AUDIO\]\[FR\]', 'Matches the normalized MediaInfo marker [AUDIO][FR], meaning French is the only detected audio language.');
-INSERT INTO regular_expressions (name, pattern, description) VALUES ('Renamed French Subs', '(?i)\[SUB\]\[FR(?:\+-{1,2})?\]', 'Matches normalized MediaInfo subtitle markers [SUB][FR] and [SUB][FR+--], meaning French subtitles are present.');
+INSERT INTO regular_expressions (name, pattern, description) VALUES ('French VOSTFR', '(?i)(?:(?<=^|[\s.-])(?:VOST(?:[ ._-]?FR)?|SUB[ ._-]?(?:FR|FRENCH)|FRENCH[ ._-]?SUBS?|FR[ ._-]?SUBS?)(?=$|[\s.-])|\[SUB\]\[FR(?:\+-{1,2})?\])', 'Matches original-audio releases with French subtitles and normalized MediaInfo markers [SUB][FR] or [SUB][FR+--].');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FRENCHDEADPOOL2', '(?<=^|[\s.-])FRENCHDEADPOOL2\b', 'Matches "FRENCHDEADPOOL2" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FrIeNdS', '(?<=^|[\s.-])FrIeNdS\b', 'Matches "FrIeNdS" when preceded by whitespace, a hyphen or dot');
 INSERT INTO regular_expressions (name, pattern, description) VALUES ('FRiES', '(?<=^|[\s.-])FRiES\b', 'Matches "FRiES" when preceded by whitespace, a hyphen or dot');
@@ -2091,30 +2088,6 @@ INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
 WHERE re.name = 'French VOSTFR' AND t.name = 'Language';
-INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
-SELECT re.name, t.name
-FROM regular_expressions re, tags t
-WHERE re.name = 'Renamed French MULTi' AND t.name = 'French';
-INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
-SELECT re.name, t.name
-FROM regular_expressions re, tags t
-WHERE re.name = 'Renamed French MULTi' AND t.name = 'Language';
-INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
-SELECT re.name, t.name
-FROM regular_expressions re, tags t
-WHERE re.name = 'Renamed French VF' AND t.name = 'French';
-INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
-SELECT re.name, t.name
-FROM regular_expressions re, tags t
-WHERE re.name = 'Renamed French VF' AND t.name = 'Language';
-INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
-SELECT re.name, t.name
-FROM regular_expressions re, tags t
-WHERE re.name = 'Renamed French Subs' AND t.name = 'French';
-INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
-SELECT re.name, t.name
-FROM regular_expressions re, tags t
-WHERE re.name = 'Renamed French Subs' AND t.name = 'Language';
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
 SELECT re.name, t.name
 FROM regular_expressions re, tags t
