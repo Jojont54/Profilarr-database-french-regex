@@ -12,8 +12,8 @@
 
 INSERT INTO regular_expressions (name, pattern, description)
 SELECT 'French MULTi Explicit Marker (INTL)',
-       '(?i)(?:(?<=^|[\s._-])MULTI(?:[\s._,+&/-]+(?:WITH|AUDIO(?:S)?|LANG(?:UAGE)?S?|DUAL|ORIG(?:INAL)?|PLUS|(?!(?:SUB)(?=$|[\s._,+&/-]))[A-Z]{2,3})){0,6}[\s._,+&/-]+(?:FR|FRA|FRENCH|FRANCAIS|FRANÇAIS|TRUE[\s._-]?FR(?:ENCH)?|VFQ2?|VF|VFI|VFF2?|VFB|VOF|VOQ|VF2|VFI2)(?![\s._,+&/-]+SUB(?:S|TITLE|TITLES)?\b)(?=$|[\s._,+&/-])|\[AUDIO\]\[FR\+-{1,2}\])',
-       'Matches INTL MULTi releases when an explicit French marker is present before download or when MediaInfo preserves [AUDIO][FR+--] after analysis.'
+       '(?i)(?:(?<=^|[\s._-])MULTI(?:[\s._,+&/-]+(?:WITH|AUDIO(?:S)?|LANG(?:UAGE)?S?|DUAL|ORIG(?:INAL)?|PLUS|(?!(?:SUB)(?=$|[\s._,+&/-]))[A-Z]{2,3})){0,6}[\s._,+&/-]+(?:FR|FRA|FRENCH|FRANCAIS|FRANÇAIS|TRUE[\s._-]?FR(?:ENCH)?|VFQ2?|VF|VFI|VFF2?|VFB|VOF|VOQ|VF2|VFI2)(?![\s._,+&/-]+SUB(?:S|TITLE|TITLES)?\b)(?=$|[\s._,+&/-])|(?<!\()\[(?=[^\]]*\bFR\b)(?=[^\]]*\+)[A-Z]{2,3}(?:\+[A-Z]{2,3})+\](?!\)))',
+       'Matches INTL MULTi releases when an explicit French marker is present before download or when renamed MediaInfo audio contains French and another language outside a subtitle block, such as [FR+EN] or [EN+FR].'
 WHERE NOT EXISTS (
     SELECT 1 FROM regular_expressions
     WHERE name = 'French MULTi Explicit Marker (INTL)'
@@ -153,7 +153,7 @@ WHERE NOT EXISTS (
 
 INSERT INTO custom_formats (name, description)
 SELECT 'French MULTi + Marker FR (INTL)',
-       'Matches INTL MULTi releases when the title carries an explicit French marker before download or MediaInfo confirms [AUDIO][FR+--] after analysis.'
+       'Matches INTL MULTi releases when the title carries an explicit French marker before download or renamed MediaInfo audio contains French and another language after analysis.'
 WHERE NOT EXISTS (
     SELECT 1 FROM custom_formats
     WHERE name = 'French MULTi + Marker FR (INTL)'

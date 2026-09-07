@@ -87,7 +87,7 @@ La DB conserve la logique Media Management de Dictionarry V2:
 - Delay Profiles FR supplémentaires: `Ratio Boost`, `Balanced`, `Quality`;
 - protection `Full Disc` contre certaines correspondances incorrectes.
 
-Les formats de renommage Radarr et Sonarr ajoutent aussi `[AUDIO]{MediaInfo AudioLanguagesAll:FR+}[SUB]{MediaInfo SubtitleLanguagesAll:FR+}`. Ces marqueurs permettent aux Custom Formats de langue de retrouver après import une piste audio française unique, un audio français multilingue ou des sous-titres français, même lorsque le marqueur original de la release a disparu du nom.
+Les formats de renommage Radarr et Sonarr ajoutent aussi `{MediaInfo AudioLanguagesAll}{(MediaInfo SubtitleLanguagesAll)}`. Le premier bloc `[...]` contient les langues audio et le bloc optionnel `([...])` les langues de sous-titres. En l'absence de sous-titres détectés, les parenthèses ne sont pas ajoutées. Les Custom Formats peuvent ainsi retrouver après import une piste audio française unique, un audio français multilingue ou des sous-titres français, même lorsque le marqueur original de la release a disparu du nom.
 
 ## Delay Profiles
 
