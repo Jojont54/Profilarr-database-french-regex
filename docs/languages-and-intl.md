@@ -76,6 +76,34 @@ Les teams sont récupérées automatiquement depuis les regex portant les tags `
 
 Pour `MULTi` comme pour `MultiSub`, les chemins `Team FR` et `Marker FR` sont mutuellement exclusifs afin d'éviter le double score. Une release `MULTi.VFF-TeamFR` utilise uniquement `French MULTi + Marker FR (INTL)`, tandis qu'une release `MultiSub.FR-TeamFR` utilise uniquement `French MultiSub + Marker FR (INTL)`.
 
+## Utiliser des trackers FR et internationaux ensemble
+
+Deux méthodes sont possibles lorsque la même instance Radarr ou Sonarr reçoit des résultats provenant de trackers français et internationaux.
+
+### Option 1: conserver les CF standards
+
+Conservez `French MULTi` et `French Missing` dans vos profils. Ajoutez ensuite dans les Release Profiles une restriction propre à chaque tracker international afin de refuser les `MULTi` qui ne fournissent aucune preuve explicite de français. Cette méthode est simple si vous utilisez peu de trackers internationaux, mais chaque restriction doit être associée au bon tracker et maintenue avec ses regex.
+
+Ajoutez la regex suivante dans **Must Contain**, puis limitez le Release Profile aux trackers internationaux concernés:
+
+```regex
+/(?:\b(?:VF(?:F|I|Q|B|C)?2?|VQ|VO(?:F|FR|Q)|TRUE[ ._-]?FR(?:ENCH)?|FRENCH|FRAN(?:C|Ç)AIS|FRE|FRA|VOST(?:[ ._-]*FR(?:E|A)?|F)?|SUB[ ._-]?(?:FR|FRA|FRE|FRENCH)|(?:FR|FRENCH)[ ._-]?SUBS?|ST[ ._-]?FR|FRENCH[ ._-]?CANADIAN|CANADIAN[ ._-]?FRENCH|QU(?:E|É)B(?:E|É)COIS|MULTI[ ._-]+CA[N]?|\d{3,4}p[ ._-]+CA[N]?|MULTI(?:[ ._+&\/-]+[A-Z]{2,3}){0,6}[ ._+&\/-]+FR|FR(?:[ ._+&\/-]+[A-Z]{2,3})+|(?:[A-Z]{2,3}[ ._+&\/-]+)+FR)\b|\[FR\])/i
+```
+
+Elle reconnaît notamment `VF`, `VFF`, `VFI`, `VFB`, `VFQ`, leurs variantes numérotées, `TRUEFRENCH`, `VOF`, `VOQ`, `VOSTFR`, `SUBFRENCH`, `FRSUBS`, `MULTI.FR`, `MULTI.CAN`, `FR+EN`, `EN+FR` et `[FR]`. Elle n'accepte volontairement pas un simple `MULTI`, puisqu'il ne prouve pas la présence du français sur un tracker international.
+
+Les marqueurs québécois sont inclus parce qu'ils prouvent bien la présence d'une piste française. Ils restent ensuite soumis au score de `French VFQ`: si ce CF est banni, une release `MULTI.VFQ` ou `MULTI.CAN` sera toujours rejetée.
+
+### Option 2: utiliser les CF INTL
+
+Utilisez les CF INTL pour tous les résultats et retirez `French MULTi` ainsi que `French Missing` des profils concernés. Pour chaque tracker français, activez dans Prowlarr l'option **Replace MULTi by another language in release name**, puis sélectionnez `MULTi.FRENCH`. Laissez cette option désactivée sur les trackers internationaux.
+
+![Réglage Prowlarr pour convertir MULTi en MULTi.FRENCH sur un tracker français](image/Prowlarr%20Multi.png)
+
+Prowlarr transmet alors `MULTi.FRENCH` à Radarr ou Sonarr pour les trackers français. Cette forme constitue un marqueur français explicite et peut être validée par `French MULTi + Marker FR (INTL)`. Un `MULTi` provenant d'un tracker international reste inchangé et doit toujours être accompagné d'une team FR connue ou d'un marqueur français explicite.
+
+La seconde méthode offre une logique unique dans les profils et évite de maintenir une restriction différente pour chaque tracker international. Elle est donc recommandée lorsque les deux types de trackers sont utilisés régulièrement.
+
 ## Utiliser les CF INTL
 
 Pour adapter un profil aux trackers internationaux:
