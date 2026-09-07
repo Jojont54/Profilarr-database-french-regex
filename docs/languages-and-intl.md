@@ -137,7 +137,10 @@ Le suffixe `:FR+` conserve seulement l'information nécessaire à la logique fra
 Ces marqueurs sont intégrés directement aux regex existantes:
 
 - `French MULTi` reconnaît aussi `[AUDIO][FR+--]`;
+- `French MULTi + Marker FR (INTL)` reconnaît aussi `[AUDIO][FR+--]`;
 - `French VF` reconnaît aussi `[AUDIO][FR]`;
 - `French VOSTFR` reconnaît aussi `[SUB][FR]` et `[SUB][FR+--]`.
+
+Après analyse, `French MULTi + Team FR (INTL)` exclut ce marqueur MediaInfo. Le fichier conserve ainsi uniquement `French MULTi + Marker FR (INTL)`, sans double score entre les chemins `Team FR` et `Marker FR`.
 
 Toutes les conditions `Release Title` de ces CF restent ainsi `Required`. Avant téléchargement, les regex analysent le titre de l'indexeur. Après analyse du fichier, les marqueurs MediaInfo maintiennent la bonne classification et empêchent `French Missing` ou `French Missing (INTL)` de réapparaître.
