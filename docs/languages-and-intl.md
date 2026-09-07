@@ -80,8 +80,8 @@ Pour `MULTi` comme pour `MultiSub`, les chemins `Team FR` et `Marker FR` sont mu
 
 Pour adapter un profil aux trackers internationaux:
 
-1. Retirez ou mettez à `0` le score de `French MULTi`.
-2. Retirez ou mettez à `0` le score de `French Missing`.
+1. Retirez `French MULTi`.
+2. Retirez `French Missing`.
 3. Ajoutez les cinq CF INTL au profil.
 4. Conservez les scores de `French Original`, `French Original Marker`, `French VF`, `French VOSTFR` et `French VFQ`.
 
@@ -90,19 +90,19 @@ Pour adapter un profil aux trackers internationaux:
 Cet exemple conserve la priorité `MULTi / Original > VF > VOSTFR`, tout en bannissant les releases sans français et les VFQ:
 
 ```text
-French MULTi                              0          désactivé pour ce profil INTL
-French Missing                            0          désactivé pour ce profil INTL
+French MULTi                              -          retiré de ce profil INTL
+French Missing                            -          retiré de ce profil INTL
 
-French MULTi + Team FR (INTL)       +200 000
-French MULTi + Marker FR (INTL)     +200 000
-French Original                     +200 000
-French Original Marker              +200 000
+French MULTi + Team FR (INTL)             0
+French MULTi + Marker FR (INTL)           0
+French Original                           0
+French Original Marker                    0
 
-French VF                            +150 000
+French VF                            -50 000
 
-French VOSTFR                        +100 000
-French MultiSub + Team FR (INTL)     +100 000
-French MultiSub + Marker FR (INTL)   +100 000
+French VOSTFR                       -200 000
+French MultiSub + Team FR (INTL)    -200 000
+French MultiSub + Marker FR (INTL)  -200 000
 
 French VFQ                           -999 999
 French Missing (INTL)                -999 999
