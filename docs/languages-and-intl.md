@@ -1,20 +1,37 @@
 # Langues FR et trackers internationaux
 
+Cette page présente les Custom Formats de langue et leur utilisation selon le type de tracker.
+
+`INTL` signifie **International**. Les CF portant ce suffixe sont destinés aux trackers internationaux, où le tag `MULTi` ne garantit pas la présence du français.
+
 ## Custom Formats de langue
 
-- `French MULTi`
-- `French Original`
-- `French Original Marker`
-- `French VF`
-- `French VOSTFR`
-- `French VFQ`
-- `French Missing`
+### Communs à tous les trackers
 
-## French MULTi
+- `French Original`: contenu uniquement en français dont le français est la langue originale;
+- `French Original Marker`: marqueur `VOF` ou `VOQ` dans le titre;
+- `French VF`: doublage français `VF`, `VFF`, `VFI`, `TRUEFRENCH` ou équivalent;
+- `French VOSTFR`: audio original avec sous-titres français;
+- `French VFQ`: doublage québécois ou canadien.
 
-`French MULTi` détecte les releases `MULTi` et les notations de langues combinées comme `FR+EN` ou `EN+FR`.
+### Trackers français
 
-Il couvre aussi les variantes courantes:
+- `French MULTi`: plusieurs pistes audio, dont le français;
+- `French Missing`: aucune preuve suffisante de français selon la logique d'un tracker FR.
+
+### Trackers internationaux
+
+- `French MULTi + Team FR (INTL)`;
+- `French MULTi + Marker FR (INTL)`;
+- `French MultiSub + Team FR (INTL)`;
+- `French MultiSub + Marker FR (INTL)`;
+- `French Missing (INTL)`.
+
+Pour un profil INTL, seuls `French MULTi` et `French Missing` sont remplacés. Tous les CF de la section commune restent utilisés et scorés normalement.
+
+## Détection des langues
+
+`French MULTi` reconnaît notamment:
 
 ```text
 MULTI
@@ -29,202 +46,102 @@ MULTI.VOQ
 MULTI.WITH.TRUEFRENCH
 MULTI.VO.VFF
 MULTI.EN.ES.VFF
+FR+EN
+EN+FR
 ```
 
-Un marqueur français peut être précédé de plusieurs indications intermédiaires. Les mots de liaison comme `WITH`, les indications comme `VO`, `AUDIO` ou `DUAL`, ainsi que les codes courts de langue tels que `EN`, `ENG`, `ES` ou `ESP` sont acceptés. Les séparateurs `.`, `_`, `-`, `+`, `&`, `/` et `,` peuvent être combinés.
+Les mots ou codes de langue intermédiaires sont acceptés, ainsi que les séparateurs `.`, `_`, `-`, `+`, `&`, `/` et `,`. Quand une release matche `French MULTi`, les conditions d'exclusion empêchent le cumul avec `French VF` ou `French VOSTFR`.
 
-Sur tracker FR, `MULTi` signifie généralement qu'une piste française est présente. Sur tracker international, ce n'est pas toujours vrai: utilisez alors les Custom Formats `INTL`.
+`French Original` utilise les métadonnées Radarr/Sonarr. Sa détection est volontairement stricte: le français doit être la seule langue détectée et aussi la langue originale. Les marqueurs `VOF` et `VOQ` sont gérés par `French Original Marker` afin de couvrir les titres qui les conservent explicitement.
 
-## French Original
+`French VF` reconnaît les marqueurs `VF`, `VFF`, `VFI`, `TRUEFRENCH`, `FRENCH`, `FRANCAIS` et `FRANÇAIS`.
 
-`French Original` sert aux contenus uniquement en français dont le français est également la langue originale. Il utilise les métadonnées Radarr/Sonarr et ne demande aucun marqueur dans le titre.
+`French VOSTFR` reconnaît notamment `VOST`, `VOSTFR`, `SUBFR`, `SUBFRENCH` et `FRENCH SUBS`. Après téléchargement, une présence confirmée de sous-titres français est normalisée sous ce même CF, qu'elle provienne initialement de `VOSTFR` ou de `MultiSub`.
 
-La détection est volontairement stricte: une release contenant une autre langue ne matche pas `French Original`. Une release francophone multilingue doit être identifiée par `French MULTi`, tandis que les marqueurs explicites restent gérés séparément pour éviter les doubles matchs.
+`French VFQ` reconnaît notamment `VFQ`, `VFQ2`, `VQ`, `MULTI.CA`, `FRENCH.CA`, `FRENCH CANADIAN`, `CANADIAN FRENCH` et `QUEBECOIS`. Il peut recevoir un score fortement négatif si ce doublage n'est pas souhaité.
 
-`French Original Marker` détecte les marqueurs de titre:
+## Pourquoi les CF INTL
+
+Sur un tracker FR, `MULTi` indique généralement qu'une piste française est présente. Sur un tracker international, il peut désigner n'importe quelle combinaison de langues, par exemple `VO + DE + ES`. De même, `MultiSub` annonce plusieurs sous-titres sans garantir le français.
+
+Les CF INTL demandent donc une preuve supplémentaire:
+
+- `French MULTi + Team FR (INTL)`: `MULTi` et une team FR connue;
+- `French MULTi + Marker FR (INTL)`: `MULTi` et un marqueur français explicite;
+- `French MultiSub + Team FR (INTL)`: `MultiSub` et une team FR connue;
+- `French MultiSub + Marker FR (INTL)`: `MultiSub` et un marqueur français explicite;
+- `French Missing (INTL)`: aucune preuve fiable de piste audio ou de sous-titres français.
+
+Les teams sont récupérées automatiquement depuis les regex portant les tags `French` et `Release Group`. Une team FR seule ne valide pas la langue: `Batwheels.S01E23.1080p.MAX.WEB-DL.H.264-VARYG` reste `French Missing (INTL)` puisqu'il ne contient ni `MULTi`, ni `MultiSub`, ni marqueur français.
+
+Pour `MULTi` comme pour `MultiSub`, les chemins `Team FR` et `Marker FR` sont mutuellement exclusifs afin d'éviter le double score. Une release `MULTi.VFF-TeamFR` utilise uniquement `French MULTi + Marker FR (INTL)`, tandis qu'une release `MultiSub.FR-TeamFR` utilise uniquement `French MultiSub + Marker FR (INTL)`.
+
+## Utiliser les CF INTL
+
+Pour adapter un profil aux trackers internationaux:
+
+1. Retirez `French MULTi`.
+2. Retirez `French Missing`.
+3. Ajoutez les cinq CF INTL au profil.
+4. Conservez les scores de `French Original`, `French Original Marker`, `French VF`, `French VOSTFR` et `French VFQ`.
+
+### Exemple complet
+
+Cet exemple conserve la priorité `MULTi / Original > VF > VOSTFR`, tout en bannissant les releases sans français et les VFQ:
 
 ```text
-VOF
-VOQ
+French MULTi                              -          retiré de ce profil INTL
+French Missing                            -          retiré de ce profil INTL
+
+French MULTi + Team FR (INTL)             0
+French MULTi + Marker FR (INTL)           0
+French Original                           0
+French Original Marker                    0
+
+French VF                            -50 000
+
+French VOSTFR                        -200 000
+French MultiSub + Team FR (INTL)     -200 000
+French MultiSub + Marker FR (INTL)   -200 000
+
+French VFQ                           -999 999
+French Missing (INTL)                -999 999
 ```
 
-`VOQ` peut être techniquement québécois, mais si le contenu est original francophone, il ne doit pas être traité comme une mauvaise VFQ.
+Les deux CF `MultiSub` ne se cumulent pas: la présence d'un marqueur français explicite neutralise le chemin `Team FR`. Chaque preuve fiable peut donc recevoir directement le même score que `French VOSTFR`.
 
-## French VF
+Ces valeurs sont illustratives. Vous pouvez conserver l'échelle de votre profil tant que l'ordre relatif reste cohérent et que la somme maximale ne dépasse pas son score maximal.
 
-`French VF` détecte les marqueurs de doublage français:
+Si `French VFQ` est banni, une release `MULTi.VFQ` sera rejetée même si elle matche `French MULTi + Marker FR (INTL)`.
 
-```text
-VF
-VFF
-VFI
-TRUEFRENCH
-FRENCH
-FRANCAIS
-FRANÇAIS
-```
+## Persistance après import
 
-Quand une release matche déjà `French MULTi`, `French VF` est neutralisé par condition `Not French MULTi` pour éviter le double score.
-
-## French VOSTFR
-
-`French VOSTFR` détecte les releases en audio original avec sous-titres français:
-
-```text
-VOST
-VOSTFR
-SUBFR
-SUBFRENCH
-FRENCH SUBS
-```
-
-Après téléchargement, les sous-titres français détectés dans le fichier sont conservés dans son nom. À ce stade, `MultiSub` et `VOSTFR` sont volontairement normalisés sous `French VOSTFR`: une fois la présence du français confirmée, le nombre total de langues de sous-titres n'a plus d'influence sur la priorité de langue.
-
-## French VFQ
-
-`French VFQ` détecte les variantes québécoises ou canadiennes:
-
-```text
-VFQ
-VFQ2
-VQ
-MULTi.CA
-FRENCH.CA
-FRENCH CANADIAN
-CANADIAN FRENCH
-QUEBECOIS
-```
-
-Dans les profils FR prêts à l'emploi, ce Custom Format sert à éviter les doublages VFQ non souhaités.
-
-## French Missing
-
-`French Missing` utilise deux conditions de langue alternatives: `French Except` ou `Original Except`. Il se déclenche donc lorsqu'au moins une langue détectée diffère du français ou de la langue originale, sauf lorsqu'un marqueur français reconnu neutralise le CF. Un contenu uniquement français dont le français est aussi la langue originale n'est pas considéré comme dépourvu de français, même si son titre ne contient aucun marqueur `FRENCH`, `VF` ou `VOF`.
-
-Il est pensé pour les trackers FR ou les profils qui acceptent `MULTi` comme preuve suffisante de français.
-
-## Pourquoi des Custom Formats INTL
-
-Sur un tracker international, `MULTi` peut seulement vouloir dire plusieurs langues:
-
-```text
-VO + DE + ES
-VO + IT + DE
-VO + plusieurs sous-titres
-```
-
-Dans ce cas, faire confiance à `MULTi` seul peut accepter des releases sans français.
-
-La même prudence s'applique à `MultiSub`: le tag indique plusieurs sous-titres, mais pas forcément des sous-titres français.
-
-## Custom Formats INTL
-
-- `French MULTi + Team FR (INTL)`
-- `French MULTi + Marker FR (INTL)`
-- `French MultiSub + Team FR (INTL)`
-- `French MultiSub + Marker FR (INTL)`
-- `French Missing (INTL)`
-
-`French MULTi + Team FR (INTL)` matche si le titre contient `MULTi` et que la release vient d'une team FR connue. Les teams sont récupérées automatiquement depuis les regex taggées `French` + `Release Group`.
-
-Une team FR seule ne suffit pas à valider la langue sur un tracker international. Une release comme `Batwheels.S01E23.1080p.MAX.WEB-DL.DDP5.1.H.264-VARYG` reste donc considérée comme `French Missing (INTL)` parce qu'elle n'a ni `MULTi`, ni `MultiSub`, ni marqueur français explicite.
-
-`French MULTi + Marker FR (INTL)` matche uniquement si `MULTi` est accompagné d'un marqueur français explicite:
-
-```text
-MULTi.FR
-MULTi.FRENCH
-MULTi.TRUEFRENCH
-MULTi.VFF
-MULTi.VFI
-MULTi.VFQ
-MULTi.VOF
-MULTi.VOQ
-MULTi.WITH.TRUEFRENCH
-MULTi.VO.VFF
-MULTi.EN.ES.VFF
-```
-
-Le marqueur français peut suivre directement `MULTi` ou apparaître après un maximum de six indications intermédiaires. Cela couvre notamment les listes de langues comme `MULTi.EN.ES.VFF`. Un marqueur `SUB` intercalé n'est volontairement pas accepté comme preuve d'une piste audio française.
-
-`French MultiSub + Team FR (INTL)` fonctionne de la même manière, mais avec un tag `MultiSub` à la place de `MULTi`.
-
-`French MultiSub + Marker FR (INTL)` matche uniquement si `MultiSub` est accompagné d'un marqueur français explicite:
-
-```text
-MultiSub.FR
-MultiSub.FRENCH
-MultiSub.VOSTFR
-MultiSub.SUBFR
-MultiSub.SUBFRENCH
-MultiSub.FRSUB
-```
-
-`MULTi` seul ne suffit pas, `MultiSub` seul ne suffit pas non plus, et une team FR seule ne suffit pas non plus.
-
-`French Missing (INTL)` utilise les mêmes conditions alternatives `French Except` ou `Original Except`. Il se déclenche lorsqu'au moins une langue détectée diffère du français ou de la langue originale et qu'il n'y a ni marqueur français explicite après `MULTi` ou `MultiSub`, ni combinaison fiable `MULTi + team FR` ou `MultiSub + team FR`, ni `VF`, ni `VOSTFR`, ni `VFQ`, ni `VOF` / `VOQ`.
-
-## Comment utiliser les CF INTL
-
-Ces Custom Formats sont optionnels. Pour un profil dédié aux trackers internationaux:
-
-1. Retirez ou neutralisez le score de `French MULTi`.
-2. Retirez ou neutralisez le score de `French Missing`.
-3. Scorez à la place:
-
-```text
-French MULTi + Team FR (INTL)
-French MULTi + Marker FR (INTL)
-French MultiSub + Team FR (INTL)
-French MultiSub + Marker FR (INTL)
-French Missing (INTL)
-```
-
-Exemple de logique:
-
-```text
-French MULTi + Team FR (INTL)     + même score que MULTi
-French MULTi + Marker FR (INTL)   + même score que MULTi
-French MultiSub + Team FR (INTL)  + score de fallback VOSTFR/anime selon votre usage
-French MultiSub + Marker FR (INTL)+ même score qu'un VOSTFR explicite
-French Missing (INTL)             - gros malus ou ban
-French VFQ                        - ban si vous ne voulez pas de VFQ
-```
-
-Si `VFQ` est banni dans le profil, une release `MULTi.VFQ` sera rejetée même si elle matche `French MULTi + Marker FR (INTL)`.
-
-## Persistance après import avec MediaInfo
-
-Les presets de renommage Radarr et Sonarr ajoutent cette information avant le release group:
+Les presets de renommage Radarr et Sonarr ajoutent les informations MediaInfo suivantes avant le release group:
 
 ```text
 [AUDIO]{MediaInfo AudioLanguagesAll:FR+}[SUB]{MediaInfo SubtitleLanguagesAll:FR+}
 ```
 
-Le suffixe `:FR+` conserve uniquement l'information utile à la logique française et remplace les autres langues par `--`:
+Le suffixe `:FR+` conserve seulement l'information nécessaire à la logique française:
 
 ```text
 [AUDIO][FR]       audio français uniquement
 [AUDIO][FR+--]    audio français avec au moins une autre langue
-[AUDIO][--]       audio présent sans français détecté
-[AUDIO]           aucune information audio exploitable
+[AUDIO][--]       audio sans français détecté
 
 [SUB][FR]         sous-titres français uniquement
 [SUB][FR+--]      sous-titres français avec au moins une autre langue
-[SUB][--]         sous-titres présents sans français détecté
-[SUB]             aucun sous-titre exploitable détecté
+[SUB][--]         sous-titres sans français détecté
 ```
 
-Les alternatives MediaInfo sont intégrées directement aux regex de langue existantes:
+Ces marqueurs sont intégrés directement aux regex existantes:
 
-- `French MULTi` détecte aussi `[AUDIO][FR+--]`;
-- `French VF` détecte aussi `[AUDIO][FR]`;
-- `French VOSTFR` détecte aussi `[SUB][FR]` et `[SUB][FR+--]`.
+- `French MULTi` reconnaît aussi `[AUDIO][FR+--]`;
+- `French MULTi + Marker FR (INTL)` reconnaît aussi `[AUDIO][FR+--]`;
+- `French VF` reconnaît aussi `[AUDIO][FR]`;
+- `French VOSTFR` reconnaît aussi `[SUB][FR]` et `[SUB][FR+--]`.
 
-Chaque Custom Format conserve ainsi une seule condition positive `Required`. Les conditions négatives restent elles aussi `Required`, conformément au fonctionnement des groupes de conditions Radarr/Sonarr.
+Après analyse, `French MULTi + Team FR (INTL)` exclut ce marqueur MediaInfo. Le fichier conserve ainsi uniquement `French MULTi + Marker FR (INTL)`, sans double score entre les chemins `Team FR` et `Marker FR`.
+Il n'est pas nécessaire de reconnaitre `French MultiSub + Marker FR (INTL)`, puisque `French VOSTFR` est reconnu et scoré avec la même échelle, l'un des deux suffit à la conservation du score même si le Custom Format est différent.
 
-Avant téléchargement, les regex historiques continuent d'analyser le titre fourni par l'indexeur. Après analyse du fichier, les marqueurs MediaInfo deviennent des alternatives aux marqueurs du titre. Ils neutralisent également `French Missing` et `French Missing (INTL)` lorsque du français est effectivement détecté.
-
-Les exclusions croisées conservent une seule priorité principale: un audio `[FR+--]` reste `MULTi`, un audio `[FR]` reste `VF` ou `French Original`, et les sous-titres français ne produisent `VOSTFR` que lorsqu'aucun audio français prioritaire n'est détecté. `French VFQ` reste inchangé, car ce doublage est normalement rejeté avant import dans les profils fournis.
-
-Pour les CF INTL, `French MULTi + Team FR (INTL)` reste une preuve utilisée avant téléchargement. La condition négative du marqueur explicite reconnaît également `[AUDIO][FR+--]`: après analyse, le CF Team est donc neutralisé et le fichier est normalisé sous `French MULTi + Marker FR (INTL)`. Cette séparation empêche une release MULTI provenant d'une team FR de cumuler les deux scores après renommage. Les chemins `MultiSub` sont normalisés de la même façon sous `French VOSTFR` lorsque MediaInfo confirme des sous-titres français.
+Toutes les conditions `Release Title` de ces CF restent ainsi `Required`. Avant téléchargement, les regex analysent le titre de l'indexeur. Après analyse du fichier, les marqueurs MediaInfo maintiennent la bonne classification et empêchent `French Missing` ou `French Missing (INTL)` de réapparaître.
