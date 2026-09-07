@@ -147,26 +147,26 @@ Si `French VFQ` est banni, une release `MULTi.VFQ` sera rejetée même si elle m
 Les presets de renommage Radarr et Sonarr ajoutent les informations MediaInfo suivantes avant le release group:
 
 ```text
-{MediaInfo AudioLanguagesAll}({MediaInfo SubtitleLanguagesAll})
+{MediaInfo AudioLanguagesAll}{(MediaInfo SubtitleLanguagesAll)}
 ```
 
 `AudioLanguagesAll` conserve toutes les langues audio détectées, y compris l'anglais seul. Les parenthèses donnent un rôle clair au second bloc sans ajouter les préfixes `[AUDIO]` et `[SUB]`:
 
 ```text
-[FR]()               audio français uniquement, aucun sous-titre détecté
+[FR]                 audio français uniquement, aucun sous-titre détecté
 [FR+EN]([FR])        audio français et anglais, sous-titres français
 [EN+FR]([EN+FR])     ordre différent, français présent dans les deux blocs
 [JA]([FR+EN])        audio japonais, sous-titres français et anglais
 [EN+JA]([EN])        aucune preuve de français
 ```
 
-Le bloc `[...]` immédiatement suivi de `(` représente toujours l'audio. Le bloc `([...])` représente toujours les sous-titres. La détection ne dépend pas de l'ordre des codes de langue.
+La convention est simple: `[...]` sans parenthèses représente l'audio, tandis que `([...])` entre parenthèses représente les sous-titres. Les regex audio vérifient donc que `[` n'est pas précédé de `(` et que `]` n'est pas suivi de `)`. La détection ne dépend pas de ce qui vient après un bloc audio valide, ni de l'ordre des codes de langue.
 
 Ces formes persistées sont intégrées directement aux regex existantes:
 
-- `French MULTi` reconnaît un bloc audio contenant `FR` et au moins une autre langue, comme `[FR+EN](` ou `[EN+FR](`;
+- `French MULTi` reconnaît un bloc audio contenant `FR` et au moins une autre langue, comme `[FR+EN]` ou `[EN+FR]`, lorsqu'il n'est ni précédé de `(`, ni suivi de `)`;
 - `French MULTi + Marker FR (INTL)` reconnaît la même preuve MediaInfo multilingue;
-- `French VF` reconnaît le bloc audio français seul `[FR](`;
+- `French VF` reconnaît le bloc audio français seul `[FR]` lorsqu'il n'est ni précédé de `(`, ni suivi de `)`;
 - `French VOSTFR` reconnaît `FR` parmi les sous-titres, comme `([FR])`, `([FR+EN])` ou `([EN+FR])`.
 
 Après analyse, `French MULTi + Team FR (INTL)` exclut cette preuve MediaInfo. Le fichier conserve ainsi uniquement `French MULTi + Marker FR (INTL)`, sans double score entre les chemins `Team FR` et `Marker FR`.

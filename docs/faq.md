@@ -32,7 +32,7 @@ Cela laisse Radarr/Sonarr voir les releases, puis Profilarr les classe par score
 Le premier bloc conserve les langues audio réellement détectées dans le fichier. Le second, placé entre parenthèses, conserve les langues de sous-titres:
 
 ```text
-[FR]()               audio français uniquement
+[FR]                 audio français uniquement
 [FR+EN]([FR])        audio français et anglais, sous-titres français
 [JA]([FR+EN])        audio japonais, sous-titres français et anglais
 ```

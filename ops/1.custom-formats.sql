@@ -81,9 +81,9 @@ INSERT INTO custom_formats (name, description) VALUES ('FR TV WEB Tier 01', 'Mat
 INSERT INTO custom_formats (name, description) VALUES ('FR TV WEB Tier 02', 'Matches French TV release groups who fall under WEB Tier 02');
 INSERT INTO custom_formats (name, description) VALUES ('FR TV WEB Tier 03', 'Matches French TV release groups who fall under WEB Tier 03');
 INSERT INTO custom_formats (name, description) VALUES ('French Missing', 'Rejette les releases sans preuve de francais dans le titre, les metadonnees de langue ou les blocs MediaInfo audio/sous-titres conserves au renommage.');
-INSERT INTO custom_formats (name, description) VALUES ('French MULTi', 'Priorise les releases MULTi francaises detectees dans le titre avant telechargement ou confirmees apres analyse par un bloc audio MediaInfo tel que [FR+EN]().');
+INSERT INTO custom_formats (name, description) VALUES ('French MULTi', 'Priorise les releases MULTi francaises detectees dans le titre avant telechargement ou confirmees apres analyse par un bloc audio MediaInfo tel que [FR+EN].');
 INSERT INTO custom_formats (name, description) VALUES ('French Original Marker', 'Priorise les releases marquees VOF ou VOQ comme version originale francophone.');
-INSERT INTO custom_formats (name, description) VALUES ('French VF', 'Priorise les releases avec audio francais unique detectees dans le titre ou confirmees apres analyse par le bloc audio MediaInfo [FR](), hors contenu original francophone.');
+INSERT INTO custom_formats (name, description) VALUES ('French VF', 'Priorise les releases avec audio francais unique detectees dans le titre ou confirmees apres analyse par le bloc audio MediaInfo [FR] hors bloc de sous-titres, hors contenu original francophone.');
 INSERT INTO custom_formats (name, description) VALUES ('French VFQ', 'Rejects Quebec French releases from French profiles.');
 INSERT INTO custom_formats (name, description) VALUES ('French VOSTFR', 'Detecte les marqueurs VOSTFR avant telechargement puis le francais dans le bloc MediaInfo de sous-titres, par exemple ([FR]) ou ([EN+FR]), sans cumuler avec MULTi ou VF.');
 INSERT INTO custom_formats (name, description) VALUES ('Full Disc', 'Matches the ''Full Disc'' regex pattern and negates any remuxes / encodes. ');
