@@ -215,14 +215,16 @@ Le suffixe `:FR+` conserve uniquement l'information utile à la logique françai
 [SUB]             aucun sous-titre exploitable détecté
 ```
 
-Trois regex atomiques exploitent ces marqueurs:
+Les alternatives MediaInfo sont intégrées directement aux regex de langue existantes:
 
-- `Renamed French MULTi` détecte `[AUDIO][FR+--]`;
-- `Renamed French VF` détecte `[AUDIO][FR]`;
-- `Renamed French Subs` détecte `[SUB][FR]` et `[SUB][FR+--]`.
+- `French MULTi` détecte aussi `[AUDIO][FR+--]`;
+- `French VF` détecte aussi `[AUDIO][FR]`;
+- `French VOSTFR` détecte aussi `[SUB][FR]` et `[SUB][FR+--]`.
+
+Chaque Custom Format conserve ainsi une seule condition positive `Required`. Les conditions négatives restent elles aussi `Required`, conformément au fonctionnement des groupes de conditions Radarr/Sonarr.
 
 Avant téléchargement, les regex historiques continuent d'analyser le titre fourni par l'indexeur. Après analyse du fichier, les marqueurs MediaInfo deviennent des alternatives aux marqueurs du titre. Ils neutralisent également `French Missing` et `French Missing (INTL)` lorsque du français est effectivement détecté.
 
 Les exclusions croisées conservent une seule priorité principale: un audio `[FR+--]` reste `MULTi`, un audio `[FR]` reste `VF` ou `French Original`, et les sous-titres français ne produisent `VOSTFR` que lorsqu'aucun audio français prioritaire n'est détecté. `French VFQ` reste inchangé, car ce doublage est normalement rejeté avant import dans les profils fournis.
 
-Pour les CF INTL, `French MULTi + Team FR (INTL)` reste une preuve utilisée avant téléchargement. Après analyse, tout audio `[FR+--]` est normalisé sous `French MULTi + Marker FR (INTL)`. Cette séparation empêche une release MULTi provenant d'une team FR de cumuler les scores `Team FR` et `Marker FR` après renommage. Les chemins `MultiSub` sont normalisés de la même façon sous `French VOSTFR` lorsque MediaInfo confirme des sous-titres français.
+Pour les CF INTL, `French MULTi + Team FR (INTL)` reste une preuve utilisée avant téléchargement. La condition négative du marqueur explicite reconnaît également `[AUDIO][FR+--]`: après analyse, le CF Team est donc neutralisé et le fichier est normalisé sous `French MULTi + Marker FR (INTL)`. Cette séparation empêche une release MULTI provenant d'une team FR de cumuler les deux scores après renommage. Les chemins `MultiSub` sont normalisés de la même façon sous `French VOSTFR` lorsque MediaInfo confirme des sous-titres français.

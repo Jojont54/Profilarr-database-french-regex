@@ -2894,18 +2894,6 @@ SELECT cf.name, 'Not French Original Marker', 'release_title', 'all', 1, 1
 FROM custom_formats cf
 WHERE cf.name = 'French Missing';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'Not Renamed French MULTi', 'release_title', 'all', 1, 1
-FROM custom_formats cf
-WHERE cf.name = 'French Missing';
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'Not Renamed French VF', 'release_title', 'all', 1, 1
-FROM custom_formats cf
-WHERE cf.name = 'French Missing';
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'Not Renamed French Subs', 'release_title', 'all', 1, 1
-FROM custom_formats cf
-WHERE cf.name = 'French Missing';
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 VALUES ('French Missing', 'French Except', 'language', 'all', 0, 0);
 INSERT INTO condition_languages (custom_format_name, condition_name, language_name, except_language)
 VALUES ('French Missing', 'French Except', 'French', 1);
@@ -2914,11 +2902,7 @@ VALUES ('French Missing', 'Original Except', 'language', 'all', 0, 0);
 INSERT INTO condition_languages (custom_format_name, condition_name, language_name, except_language)
 VALUES ('French Missing', 'Original Except', 'Original', 1);
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'French MULTi', 'release_title', 'all', 0, 0
-FROM custom_formats cf
-WHERE cf.name = 'French MULTi';
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'Renamed French MULTi', 'release_title', 'all', 0, 0
+SELECT cf.name, 'French MULTi', 'release_title', 'all', 0, 1
 FROM custom_formats cf
 WHERE cf.name = 'French MULTi';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
@@ -2926,23 +2910,11 @@ SELECT cf.name, 'Not French VFQ', 'release_title', 'all', 1, 1
 FROM custom_formats cf
 WHERE cf.name = 'French MULTi';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'Not French VOSTFR', 'release_title', 'all', 1, 1
-FROM custom_formats cf
-WHERE cf.name = 'French MULTi';
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'French VF', 'release_title', 'all', 0, 0
-FROM custom_formats cf
-WHERE cf.name = 'French VF';
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'Renamed French VF', 'release_title', 'all', 0, 0
+SELECT cf.name, 'French VF', 'release_title', 'all', 0, 1
 FROM custom_formats cf
 WHERE cf.name = 'French VF';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT cf.name, 'Not French MULTi', 'release_title', 'all', 1, 1
-FROM custom_formats cf
-WHERE cf.name = 'French VF';
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'Not French VOSTFR', 'release_title', 'all', 1, 1
 FROM custom_formats cf
 WHERE cf.name = 'French VF';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
@@ -2962,11 +2934,7 @@ SELECT cf.name, 'Not French Original Marker', 'release_title', 'all', 1, 1
 FROM custom_formats cf
 WHERE cf.name = 'French VFQ';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'French VOSTFR', 'release_title', 'all', 0, 0
-FROM custom_formats cf
-WHERE cf.name = 'French VOSTFR';
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'Renamed French Subs', 'release_title', 'all', 0, 0
+SELECT cf.name, 'French VOSTFR', 'release_title', 'all', 0, 1
 FROM custom_formats cf
 WHERE cf.name = 'French VOSTFR';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
@@ -2983,14 +2951,6 @@ FROM custom_formats cf
 WHERE cf.name = 'French VOSTFR';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT cf.name, 'Not French Original Marker', 'release_title', 'all', 1, 1
-FROM custom_formats cf
-WHERE cf.name = 'French VOSTFR';
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'Not Renamed French MULTi', 'release_title', 'all', 1, 1
-FROM custom_formats cf
-WHERE cf.name = 'French VOSTFR';
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT cf.name, 'Not Renamed French VF', 'release_title', 'all', 1, 1
 FROM custom_formats cf
 WHERE cf.name = 'French VOSTFR';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
@@ -6890,49 +6850,21 @@ SELECT 'French Missing', 'Not French Original Marker', re.name
 FROM regular_expressions re
 WHERE re.name = 'French Original Marker';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'French Missing', 'Not Renamed French MULTi', re.name
-FROM regular_expressions re
-WHERE re.name = 'Renamed French MULTi';
-INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'French Missing', 'Not Renamed French VF', re.name
-FROM regular_expressions re
-WHERE re.name = 'Renamed French VF';
-INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'French Missing', 'Not Renamed French Subs', re.name
-FROM regular_expressions re
-WHERE re.name = 'Renamed French Subs';
-INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'French MULTi', 'French MULTi', re.name
 FROM regular_expressions re
 WHERE re.name = 'French MULTi';
-INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'French MULTi', 'Renamed French MULTi', re.name
-FROM regular_expressions re
-WHERE re.name = 'Renamed French MULTi';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'French MULTi', 'Not French VFQ', re.name
 FROM regular_expressions re
 WHERE re.name = 'French VFQ';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'French MULTi', 'Not French VOSTFR', re.name
-FROM regular_expressions re
-WHERE re.name = 'French VOSTFR';
-INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'French VF', 'French VF', re.name
 FROM regular_expressions re
 WHERE re.name = 'French VF';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'French VF', 'Renamed French VF', re.name
-FROM regular_expressions re
-WHERE re.name = 'Renamed French VF';
-INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'French VF', 'Not French MULTi', re.name
 FROM regular_expressions re
 WHERE re.name = 'French MULTi';
-INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'French VF', 'Not French VOSTFR', re.name
-FROM regular_expressions re
-WHERE re.name = 'French VOSTFR';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'French VF', 'Not French VFQ', re.name
 FROM regular_expressions re
@@ -6954,10 +6886,6 @@ SELECT 'French VOSTFR', 'French VOSTFR', re.name
 FROM regular_expressions re
 WHERE re.name = 'French VOSTFR';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'French VOSTFR', 'Renamed French Subs', re.name
-FROM regular_expressions re
-WHERE re.name = 'Renamed French Subs';
-INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'French VOSTFR', 'Not French MULTi', re.name
 FROM regular_expressions re
 WHERE re.name = 'French MULTi';
@@ -6973,14 +6901,6 @@ INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expr
 SELECT 'French VOSTFR', 'Not French Original Marker', re.name
 FROM regular_expressions re
 WHERE re.name = 'French Original Marker';
-INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'French VOSTFR', 'Not Renamed French MULTi', re.name
-FROM regular_expressions re
-WHERE re.name = 'Renamed French MULTi';
-INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'French VOSTFR', 'Not Renamed French VF', re.name
-FROM regular_expressions re
-WHERE re.name = 'Renamed French VF';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'French Original Marker', 'French Original Marker', re.name
 FROM regular_expressions re
