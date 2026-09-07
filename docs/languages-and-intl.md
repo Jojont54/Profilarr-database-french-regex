@@ -119,29 +119,29 @@ Si `French VFQ` est banni, une release `MULTi.VFQ` sera rejetée même si elle m
 Les presets de renommage Radarr et Sonarr ajoutent les informations MediaInfo suivantes avant le release group:
 
 ```text
-[AUDIO]{MediaInfo AudioLanguagesAll:FR+}[SUB]{MediaInfo SubtitleLanguagesAll:FR+}
+{MediaInfo AudioLanguagesAll}({MediaInfo SubtitleLanguagesAll})
 ```
 
-Le suffixe `:FR+` conserve seulement l'information nécessaire à la logique française:
+`AudioLanguagesAll` conserve toutes les langues audio détectées, y compris l'anglais seul. Les parenthèses donnent un rôle clair au second bloc sans ajouter les préfixes `[AUDIO]` et `[SUB]`:
 
 ```text
-[AUDIO][FR]       audio français uniquement
-[AUDIO][FR+--]    audio français avec au moins une autre langue
-[AUDIO][--]       audio sans français détecté
-
-[SUB][FR]         sous-titres français uniquement
-[SUB][FR+--]      sous-titres français avec au moins une autre langue
-[SUB][--]         sous-titres sans français détecté
+[FR]()               audio français uniquement, aucun sous-titre détecté
+[FR+EN]([FR])        audio français et anglais, sous-titres français
+[EN+FR]([EN+FR])     ordre différent, français présent dans les deux blocs
+[JA]([FR+EN])        audio japonais, sous-titres français et anglais
+[EN+JA]([EN])        aucune preuve de français
 ```
 
-Ces marqueurs sont intégrés directement aux regex existantes:
+Le bloc `[...]` immédiatement suivi de `(` représente toujours l'audio. Le bloc `([...])` représente toujours les sous-titres. La détection ne dépend pas de l'ordre des codes de langue.
 
-- `French MULTi` reconnaît aussi `[AUDIO][FR+--]`;
-- `French MULTi + Marker FR (INTL)` reconnaît aussi `[AUDIO][FR+--]`;
-- `French VF` reconnaît aussi `[AUDIO][FR]`;
-- `French VOSTFR` reconnaît aussi `[SUB][FR]` et `[SUB][FR+--]`.
+Ces formes persistées sont intégrées directement aux regex existantes:
 
-Après analyse, `French MULTi + Team FR (INTL)` exclut ce marqueur MediaInfo. Le fichier conserve ainsi uniquement `French MULTi + Marker FR (INTL)`, sans double score entre les chemins `Team FR` et `Marker FR`.
+- `French MULTi` reconnaît un bloc audio contenant `FR` et au moins une autre langue, comme `[FR+EN](` ou `[EN+FR](`;
+- `French MULTi + Marker FR (INTL)` reconnaît la même preuve MediaInfo multilingue;
+- `French VF` reconnaît le bloc audio français seul `[FR](`;
+- `French VOSTFR` reconnaît `FR` parmi les sous-titres, comme `([FR])`, `([FR+EN])` ou `([EN+FR])`.
+
+Après analyse, `French MULTi + Team FR (INTL)` exclut cette preuve MediaInfo. Le fichier conserve ainsi uniquement `French MULTi + Marker FR (INTL)`, sans double score entre les chemins `Team FR` et `Marker FR`.
 Il n'est pas nécessaire de reconnaitre `French MultiSub + Marker FR (INTL)`, puisque `French VOSTFR` est reconnu et scoré avec la même échelle, l'un des deux suffit à la conservation du score même si le Custom Format est différent.
 
-Toutes les conditions `Release Title` de ces CF restent ainsi `Required`. Avant téléchargement, les regex analysent le titre de l'indexeur. Après analyse du fichier, les marqueurs MediaInfo maintiennent la bonne classification et empêchent `French Missing` ou `French Missing (INTL)` de réapparaître.
+Toutes les conditions `Release Title` de ces CF restent ainsi `Required`. Avant téléchargement, les regex analysent le titre de l'indexeur. Après analyse du fichier, les blocs MediaInfo maintiennent la bonne classification et empêchent `French Missing` ou `French Missing (INTL)` de réapparaître.
