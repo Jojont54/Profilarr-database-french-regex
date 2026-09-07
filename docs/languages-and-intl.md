@@ -142,5 +142,6 @@ Ces marqueurs sont intégrés directement aux regex existantes:
 - `French VOSTFR` reconnaît aussi `[SUB][FR]` et `[SUB][FR+--]`.
 
 Après analyse, `French MULTi + Team FR (INTL)` exclut ce marqueur MediaInfo. Le fichier conserve ainsi uniquement `French MULTi + Marker FR (INTL)`, sans double score entre les chemins `Team FR` et `Marker FR`.
+Il n'est pas nécessaire de reconnaitre `French MultiSub + Marker FR (INTL)`, puisque `French VOSTFR` est reconnu et scoré avec la même échelle, l'un des deux suffit à la conservation du score même si le Custom Format est différent.
 
 Toutes les conditions `Release Title` de ces CF restent ainsi `Required`. Avant téléchargement, les regex analysent le titre de l'indexeur. Après analyse du fichier, les marqueurs MediaInfo maintiennent la bonne classification et empêchent `French Missing` ou `French Missing (INTL)` de réapparaître.
