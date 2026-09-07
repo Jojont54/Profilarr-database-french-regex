@@ -100,9 +100,9 @@ French Original Marker                    0
 
 French VF                            -50 000
 
-French VOSTFR                       -200 000
-French MultiSub + Team FR (INTL)    -200 000
-French MultiSub + Marker FR (INTL)  -200 000
+French VOSTFR                        -200 000
+French MultiSub + Team FR (INTL)     -200 000
+French MultiSub + Marker FR (INTL)   -200 000
 
 French VFQ                           -999 999
 French Missing (INTL)                -999 999
