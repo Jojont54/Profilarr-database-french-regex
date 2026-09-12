@@ -2134,6 +2134,10 @@ SELECT cf.name, 'ANMWR', 'release_group', 'all', 0, 0
 FROM custom_formats cf
 WHERE cf.name = 'FR Scene Tier';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
+SELECT cf.name, 'AvALoN', 'release_group', 'all', 0, 0
+FROM custom_formats cf
+WHERE cf.name = 'FR Scene Tier';
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT cf.name, 'AVON', 'release_group', 'all', 0, 0
 FROM custom_formats cf
 WHERE cf.name = 'FR Scene Tier';
@@ -6133,6 +6137,10 @@ INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expr
 SELECT 'FR Scene Tier', 'ANMWR', re.name
 FROM regular_expressions re
 WHERE re.name = 'ANMWR';
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
+SELECT 'FR Scene Tier', 'AvALoN', re.name
+FROM regular_expressions re
+WHERE re.name = 'AvALoN';
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT 'FR Scene Tier', 'AVON', re.name
 FROM regular_expressions re
