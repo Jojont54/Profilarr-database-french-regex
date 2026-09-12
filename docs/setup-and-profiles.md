@@ -69,14 +69,19 @@ MULTi / French Original > VOSTFR > VF
 
 ## Logique de tiers
 
-Les tiers FR servent à classer les teams selon le type de profil:
+Les teams sont classées une seule fois, indépendamment de la source, de la résolution et du profil:
 
-- tiers qualité;
-- tiers compact / light;
-- tiers efficient;
-- tiers remux;
-- tiers anime;
-- scene tier;
-- low quality / banned.
+```text
+FR Team Tier 1 = 10000
+FR Team Tier 2 =  8000
+FR Team Tier 3 =  6000
+FR Team Tier 4 =  4000
+```
 
-Les tiers à très gros score sont utilisés uniquement quand ils remplacent un score technique important. Les tiers plus généraux ajoutent un bonus plus modéré.
+Cette échelle est identique dans les quatorze profils. Les anciens tiers WEB, Bluray, UHD Bluray, Remux, Compact, Efficient, Movie, TV, Scene et Anime ne sont plus utilisés comme CF distincts. Une team présente dans plusieurs anciennes listes est classée selon la moyenne de ses tiers, arrondie vers le meilleur tier. Par exemple, Tier 1 + Tier 2 donne Tier 1, tandis que Tier 1 + Tier 3 donne Tier 2.
+
+Les teams uniquement connues comme Scene, LQ ou sans classement précis arrivent en Tier 4. `FR LQ` reste associé à un score de bannissement séparé: son bonus de Tier 4 ne neutralise donc jamais le ban.
+
+Les profils Anime conservent deux catégories exclusives à `6000`: `FR Anime SubFr` et `FR Anime FanSub`. Leurs teams sont retirées des quatre tiers génériques afin d'éviter un double score.
+
+Les tiers ne contiennent aucune condition de source, résolution, codec ou type d'encode. Ces préférences restent gérées par les Custom Formats techniques du profil.

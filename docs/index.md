@@ -19,6 +19,8 @@ La base garde la logique Dictionarry:
 
 Les regex de teams FR sont atomiques: une regex détecte une team ou un marqueur précis. Les scores ne sont pas dans les regex, mais dans les profils.
 
+Les teams sont réparties dans quatre tiers génériques indépendants de la source. Une team ne change donc pas de CF selon qu'elle publie un WEB-DL, un Bluray ou un Remux. Les CF techniques détectent ces caractéristiques séparément.
+
 La couche technique commune suit les évolutions utiles de Dictionarry sans importer ses teams ni ses tiers US. Elle couvre notamment les sources, codecs, formats HDR, Extras, releases CAM et plateformes de streaming; les profils FR restent responsables de la langue et des tiers de teams.
 
 ## Branches

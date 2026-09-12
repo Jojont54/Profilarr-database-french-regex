@@ -31,6 +31,21 @@ Pour une échelle à `10000`, une base simple peut être:
 
 Les tiers de teams peuvent rester sur une échelle intermédiaire si vous voulez qu'ils comptent moins que la résolution mais plus qu'un petit détail technique.
 
+## Scores des teams
+
+La base applique désormais une échelle unique à tous les profils:
+
+```text
+FR Team Tier 1 = 10000
+FR Team Tier 2 =  8000
+FR Team Tier 3 =  6000
+FR Team Tier 4 =  4000
+```
+
+Dans les deux profils Anime, `FR Anime SubFr` et `FR Anime FanSub` valent également `6000`. Ces catégories sont exclusives des quatre tiers génériques et ne peuvent donc pas se cumuler avec eux.
+
+Le score de team est un bonus distinct du score technique. Une release peut ainsi cumuler son tier avec sa source, sa résolution, son codec, son audio et ses formats HDR, sans que la team impose elle-même l'une de ces caractéristiques.
+
 ## Bans
 
 Utilisez un score très négatif pour interdire:

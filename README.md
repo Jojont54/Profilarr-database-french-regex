@@ -31,7 +31,8 @@ Pour une nouvelle installation, utilisez `stable`.
 - Custom Formats FR de langue: `French MULTi`, `French Original`, `French VF`, `French VOSTFR`, `French VFQ`, `French Missing`.
 - Custom Formats `INTL` pour les trackers internationaux.
 - Langues MediaInfo conservées sous la forme `[audio]([sous-titres])` au renommage pour que les Custom Formats de langue restent détectables après l'import.
-- Tiers FR inspirés et recoupés avec plusieurs sources francophones.
+- Quatre tiers de teams FR communs à toutes les sources et tous les profils, construits à partir des anciens classements WEB, Bluray, Remux, Anime, Scene et LQ.
+- Deux catégories Anime spécialisées: `FR Anime SubFr` et `FR Anime FanSub`.
 - Profils FR basés sur la logique Dictionarry V2.
 - Base technique commune maintenue avec les évolutions utiles de Dictionarry: sources, codecs, HDR/Dolby Vision/SDR, Extras, CAM et plateformes de streaming.
 - Media Management aligné sur Dictionarry et Delay Profiles FR prêts à l'emploi.
@@ -59,6 +60,8 @@ Anime 1080p VOSTFR FR
 Les profils classiques priorisent `MULTi` / `French Original` > `VF` > `VOSTFR`.
 
 Les profils anime priorisent `MULTi` / `French Original` > `VOSTFR` > `VF`.
+
+Les teams utilisent la même échelle dans tous les profils: `Tier 1 = 10000`, `Tier 2 = 8000`, `Tier 3 = 6000` et `Tier 4 = 4000`. Les sources, résolutions, codecs et autres détails techniques sont scorés séparément.
 
 ## Documentation
 
