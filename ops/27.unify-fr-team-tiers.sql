@@ -6,12 +6,6 @@
 -- Build one source of truth for release-group quality. Historical source-specific
 -- tiers are used as evidence, then removed from the final database.
 
--- HYPERION publishes games rather than video releases. Earlier operations keep
--- the row only for migration safety; at this final stage all dependencies can
--- be removed through the schema cascades.
-DELETE FROM regular_expressions
-WHERE name = 'HYPERION';
-
 DROP TABLE IF EXISTS temp.fr_special_team_regexes;
 CREATE TEMP TABLE fr_special_team_regexes (
   regex_name TEXT PRIMARY KEY,
@@ -179,6 +173,47 @@ WHERE NOT EXISTS (
     SELECT 1 FROM fr_special_team_regexes special
     WHERE special.regex_name = french_groups.regex_name
   );
+
+-- Manually reviewed groups whose output quality warrants Tier 3 even though
+-- their historical evidence only placed them in Scene or unranked lists.
+UPDATE fr_unified_team_ranks
+SET tier = 3
+WHERE regex_name IN (
+  'addicted2u',
+  'AgoraQc',
+  'AKS',
+  'AMB3R',
+  'Anime-DL',
+  'AnimesForAll',
+  'ANTHEM',
+  'AvALoN',
+  'Blap',
+  'BTT',
+  'BY_ORDER',
+  'CaptQC',
+  'CUSThOMe',
+  'DELiRiUS',
+  'EICHBAUM MUSIC',
+  'FWDHD',
+  'GL0P',
+  'H4KIG',
+  'HazzAnim',
+  'HiggsBoson',
+  'HYPERION',
+  'KTH',
+  'LPP',
+  'LOST',
+  'LUCKY',
+  'MiniPousses',
+  'MiTOU',
+  'NODA',
+  'NYX',
+  'RAPTOR',
+  'REBiRTH',
+  'SHADOW',
+  'SESKAPiLE',
+  'ZiGZaG'
+);
 
 WITH tier(name, description) AS (
   VALUES
