@@ -114,6 +114,7 @@ Un `MULTi` provenant d'un indexeur international reste inchangé et doit toujour
 ```text
 MULTI
 MULTI.FR
+MULTI.FRE
 MULTI.FRENCH
 MULTI.TRUEFRENCH
 MULTI.VFF
@@ -132,7 +133,7 @@ Les mots ou codes de langue intermédiaires sont acceptés, ainsi que les sépar
 
 `French Original` utilise les métadonnées Radarr/Sonarr. Sa détection est volontairement stricte: le français doit être la seule langue détectée et aussi la langue originale. Les marqueurs `VOF` et `VOQ` sont gérés par `French Original Marker` afin de couvrir les titres qui les conservent explicitement.
 
-`French VF` reconnaît les marqueurs `VF`, `VFF`, `VFI`, `TRUEFRENCH`, `FRENCH`, `FRANCAIS` et `FRANÇAIS`.
+`French VF` reconnaît les marqueurs `VF`, `VFF`, `VFI`, `TRUEFRENCH`, `FRENCH`, `FRANCAIS`, `FRANÇAIS`, `FR`, `FRE` et `FRA`. Les trois codes courts doivent être entourés par le début ou la fin du titre, un point, un tiret ou un espace.
 
 `French VOSTFR` reconnaît notamment `VOST`, `VOSTFR`, `SUBFR`, `SUBFRENCH` et `FRENCH SUBS`. Après téléchargement, une présence confirmée de sous-titres français est normalisée sous ce même CF, qu'elle provienne initialement de `VOSTFR` ou de `MultiSub`.
 
