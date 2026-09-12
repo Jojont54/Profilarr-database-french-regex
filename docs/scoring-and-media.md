@@ -44,6 +44,8 @@ FR Team Tier 4 =  4000
 
 Dans les deux profils Anime, `FR Anime SubFr` et `FR Anime FanSub` valent également `6000`. Ces catégories sont exclusives des quatre tiers génériques et ne peuvent donc pas se cumuler avec eux.
 
+Les teams de `FR LQ` sont exclues des quatre tiers positifs, y compris du Tier 4. Elles conservent uniquement leur score de bannissement.
+
 Le score de team est un bonus distinct du score technique. Une release peut ainsi cumuler son tier avec sa source, sa résolution, son codec, son audio et ses formats HDR, sans que la team impose elle-même l'une de ces caractéristiques.
 
 ## Bans

@@ -80,7 +80,7 @@ FR Team Tier 4 =  4000
 
 Cette échelle est identique dans les quatorze profils. Les anciens tiers WEB, Bluray, UHD Bluray, Remux, Compact, Efficient, Movie, TV, Scene et Anime ne sont plus utilisés comme CF distincts. Une team présente dans plusieurs anciennes listes est classée selon la moyenne de ses tiers, arrondie vers le meilleur tier. Par exemple, Tier 1 + Tier 2 donne Tier 1, tandis que Tier 1 + Tier 3 donne Tier 2.
 
-Les teams uniquement connues comme Scene, LQ ou sans classement précis arrivent en Tier 4. `FR LQ` reste associé à un score de bannissement séparé: son bonus de Tier 4 ne neutralise donc jamais le ban.
+Les teams uniquement connues comme Scene ou sans classement précis arrivent en Tier 4. Les teams présentes dans `FR LQ` sont totalement exclues des quatre tiers positifs et restent uniquement associées à leur score de bannissement.
 
 Les profils Anime conservent deux catégories exclusives à `6000`: `FR Anime SubFr` et `FR Anime FanSub`. Leurs teams sont retirées des quatre tiers génériques afin d'éviter un double score.
 

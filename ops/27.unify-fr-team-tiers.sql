@@ -114,8 +114,7 @@ WITH evidence_map(custom_format_name, category, tier) AS (
     ('FR Global Tier 02', 'global', 2),
     ('FR DVD Tier 1', 'dvd', 1),
     ('FR Unknown Tier 1', 'unknown', 4),
-    ('FR Scene Tier', 'scene', 4),
-    ('FR LQ', 'low_quality', 4)
+    ('FR Scene Tier', 'scene', 4)
 ), raw_evidence AS (
   SELECT cp.regular_expression_name AS regex_name,
          evidence_map.category,
@@ -135,6 +134,16 @@ WITH evidence_map(custom_format_name, category, tier) AS (
 INSERT OR REPLACE INTO fr_team_evidence (regex_name, category, tier)
 SELECT regex_name, category, tier
 FROM category_best;
+
+DROP TABLE IF EXISTS temp.fr_lq_team_regexes;
+CREATE TEMP TABLE fr_lq_team_regexes AS
+SELECT DISTINCT cp.regular_expression_name AS regex_name
+FROM condition_patterns cp
+JOIN custom_format_conditions cfc
+  ON cfc.custom_format_name = cp.custom_format_name
+ AND cfc.name = cp.condition_name
+WHERE cp.custom_format_name = 'FR LQ'
+  AND cfc.type = 'release_group';
 
 DROP TABLE IF EXISTS temp.fr_unified_team_ranks;
 CREATE TEMP TABLE fr_unified_team_ranks AS
@@ -163,6 +172,10 @@ SELECT french_groups.regex_name,
 FROM french_groups
 LEFT JOIN averaged ON averaged.regex_name = french_groups.regex_name
 WHERE NOT EXISTS (
+    SELECT 1 FROM fr_lq_team_regexes lq
+    WHERE lq.regex_name = french_groups.regex_name
+  )
+  AND NOT EXISTS (
     SELECT 1 FROM fr_special_team_regexes special
     WHERE special.regex_name = french_groups.regex_name
   );
@@ -412,5 +425,6 @@ DROP TABLE IF EXISTS temp.fr_non_tier_team_conditions;
 DROP TABLE IF EXISTS temp.fr_old_team_tier_cfs;
 DROP TABLE IF EXISTS temp.fr_multi_intl_special_conditions;
 DROP TABLE IF EXISTS temp.fr_unified_team_ranks;
+DROP TABLE IF EXISTS temp.fr_lq_team_regexes;
 DROP TABLE IF EXISTS temp.fr_team_evidence;
 DROP TABLE IF EXISTS temp.fr_special_team_regexes;

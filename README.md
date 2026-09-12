@@ -31,7 +31,8 @@ Pour une nouvelle installation, utilisez `stable`.
 - Custom Formats FR de langue: `French MULTi`, `French Original`, `French VF`, `French VOSTFR`, `French VFQ`, `French Missing`.
 - Custom Formats `INTL` pour les trackers internationaux.
 - Langues MediaInfo conservées sous la forme `[audio]([sous-titres])` au renommage pour que les Custom Formats de langue restent détectables après l'import.
-- Quatre tiers de teams FR communs à toutes les sources et tous les profils, construits à partir des anciens classements WEB, Bluray, Remux, Anime, Scene et LQ.
+- Quatre tiers de teams FR communs à toutes les sources et tous les profils, construits à partir des anciens classements WEB, Bluray, Remux, Anime et Scene.
+- Les teams Low Quality restent exclusivement dans `FR LQ` et ne sont incluses dans aucun tier positif.
 - Deux catégories Anime spécialisées: `FR Anime SubFr` et `FR Anime FanSub`.
 - Profils FR basés sur la logique Dictionarry V2.
 - Base technique commune maintenue avec les évolutions utiles de Dictionarry: sources, codecs, HDR/Dolby Vision/SDR, Extras, CAM et plateformes de streaming.
