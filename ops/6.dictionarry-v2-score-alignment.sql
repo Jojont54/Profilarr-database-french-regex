@@ -11,53 +11,53 @@
 -- the final Dictionarry V2 score model.
 -- ============================================================================
 
--- Dictionarry renamed the h264 Efficient source CF to make the intent explicit.
+-- Keep the h264 source CF under an explicit codec-oriented name.
 UPDATE custom_formats
-SET name = '1080p WEB-DL (Efficient)'
+SET name = '1080p WEB-DL AVC'
 WHERE name = '1080p WEB-DL (h264)';
 
 UPDATE custom_format_conditions
-SET custom_format_name = '1080p WEB-DL (Efficient)'
+SET custom_format_name = '1080p WEB-DL AVC'
 WHERE custom_format_name = '1080p WEB-DL (h264)';
 
 UPDATE condition_sources
-SET custom_format_name = '1080p WEB-DL (Efficient)'
+SET custom_format_name = '1080p WEB-DL AVC'
 WHERE custom_format_name = '1080p WEB-DL (h264)';
 
 UPDATE condition_resolutions
-SET custom_format_name = '1080p WEB-DL (Efficient)'
+SET custom_format_name = '1080p WEB-DL AVC'
 WHERE custom_format_name = '1080p WEB-DL (h264)';
 
 UPDATE condition_patterns
-SET custom_format_name = '1080p WEB-DL (Efficient)'
+SET custom_format_name = '1080p WEB-DL AVC'
 WHERE custom_format_name = '1080p WEB-DL (h264)';
 
 UPDATE custom_format_tags
-SET custom_format_name = '1080p WEB-DL (Efficient)'
+SET custom_format_name = '1080p WEB-DL AVC'
 WHERE custom_format_name = '1080p WEB-DL (h264)';
 
 UPDATE quality_profile_custom_formats
-SET custom_format_name = '1080p WEB-DL (Efficient)'
+SET custom_format_name = '1080p WEB-DL AVC'
 WHERE custom_format_name = '1080p WEB-DL (h264)';
 
--- Dictionarry V2 uses a separate 2160p Efficient WEB-DL source CF.
+-- Keep the 2160p h264 source CF under an explicit codec-oriented name.
 INSERT INTO custom_formats (name, description)
-VALUES ('2160p WEB-DL (Efficient)', 'Matches 2160p WEB-DLs for Efficient profiles.');
+VALUES ('2160p WEB-DL AVC', 'Matches 2160p AVC WEB-DLs.');
 
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-VALUES ('2160p WEB-DL (Efficient)', '2160p', 'resolution', 'all', 0, 1);
+VALUES ('2160p WEB-DL AVC', '2160p', 'resolution', 'all', 0, 1);
 
 INSERT INTO condition_resolutions (custom_format_name, condition_name, resolution)
-VALUES ('2160p WEB-DL (Efficient)', '2160p', '2160p');
+VALUES ('2160p WEB-DL AVC', '2160p', '2160p');
 
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-VALUES ('2160p WEB-DL (Efficient)', 'WEB-DL', 'source', 'all', 0, 1);
+VALUES ('2160p WEB-DL AVC', 'WEB-DL', 'source', 'all', 0, 1);
 
 INSERT INTO condition_sources (custom_format_name, condition_name, source)
-VALUES ('2160p WEB-DL (Efficient)', 'WEB-DL', 'web_dl');
+VALUES ('2160p WEB-DL AVC', 'WEB-DL', 'web_dl');
 
 INSERT INTO custom_format_tags (custom_format_name, tag_name)
-VALUES ('2160p WEB-DL (Efficient)', 'Source');
+VALUES ('2160p WEB-DL AVC', 'Source');
 
 -- 2160p Balanced: the high-trust Bluray tier is a small validated HEVC group
 -- list. Generic and high-trust WEB-DL scoring are handled by separate source
@@ -73,14 +73,14 @@ VALUES ('2160p Balanced FR', 'FR 2160p Balanced Bluray Tier 1', 'all', 921000);
 
 DELETE FROM quality_profile_custom_formats
 WHERE quality_profile_name IN ('1080p Efficient FR', '2160p Efficient FR')
-  AND custom_format_name = '1080p WEB-DL (Efficient)';
+  AND custom_format_name = '1080p WEB-DL AVC';
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 VALUES
-  ('1080p Efficient FR', '1080p WEB-DL (Efficient)', 'radarr', 880000),
-  ('1080p Efficient FR', '1080p WEB-DL (Efficient)', 'sonarr', 860000),
-  ('2160p Efficient FR', '1080p WEB-DL (Efficient)', 'radarr', 880000),
-  ('2160p Efficient FR', '1080p WEB-DL (Efficient)', 'sonarr', 860000);
+  ('1080p Efficient FR', '1080p WEB-DL AVC', 'radarr', 880000),
+  ('1080p Efficient FR', '1080p WEB-DL AVC', 'sonarr', 860000),
+  ('2160p Efficient FR', '1080p WEB-DL AVC', 'radarr', 880000),
+  ('2160p Efficient FR', '1080p WEB-DL AVC', 'sonarr', 860000);
 
 DELETE FROM quality_profile_custom_formats
 WHERE quality_profile_name = '2160p Efficient FR'
@@ -88,8 +88,8 @@ WHERE quality_profile_name = '2160p Efficient FR'
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 VALUES
-  ('2160p Efficient FR', '2160p WEB-DL (Efficient)', 'radarr', 980000),
-  ('2160p Efficient FR', '2160p WEB-DL (Efficient)', 'sonarr', 960000);
+  ('2160p Efficient FR', '2160p WEB-DL AVC', 'radarr', 980000),
+  ('2160p Efficient FR', '2160p WEB-DL AVC', 'sonarr', 960000);
 
 -- UHD Bluray x265 uses a negative counterweight in Dictionarry V2 so blessed
 -- groups do not also inherit the full technical UHD Bluray score.

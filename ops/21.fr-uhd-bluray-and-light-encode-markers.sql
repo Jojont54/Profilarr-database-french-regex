@@ -95,7 +95,7 @@ VALUES
 -- team tiers. Replace Dictionarry's US high-trust exclusions with our FR
 -- Efficient teams: TyHD, THESYNDICATE, CHiLL, SUPPLY, FW/FORWARD and TFA.
 DELETE FROM condition_patterns
-WHERE custom_format_name = '2160p WEB-DL (Efficient)'
+WHERE custom_format_name = '2160p WEB-DL AVC'
   AND condition_name IN (
     'Not QxR',
     'Not QxR Title',
@@ -105,7 +105,7 @@ WHERE custom_format_name = '2160p WEB-DL (Efficient)'
   );
 
 DELETE FROM custom_format_conditions
-WHERE custom_format_name = '2160p WEB-DL (Efficient)'
+WHERE custom_format_name = '2160p WEB-DL AVC'
   AND name IN (
     'Not QxR',
     'Not QxR Title',
@@ -125,7 +125,7 @@ WITH efficient_team(condition_name, regular_expression_name) AS (
   ('Not TFA', 'TFA')
 )
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT '2160p WEB-DL (Efficient)', condition_name, 'release_group', 'all', 1, 1
+SELECT '2160p WEB-DL AVC', condition_name, 'release_group', 'all', 1, 1
 FROM efficient_team;
 
 WITH efficient_team(condition_name, regular_expression_name) AS (
@@ -139,7 +139,7 @@ WITH efficient_team(condition_name, regular_expression_name) AS (
   ('Not TFA', 'TFA')
 )
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT '2160p WEB-DL (Efficient)', condition_name, regular_expression_name
+SELECT '2160p WEB-DL AVC', condition_name, regular_expression_name
 FROM efficient_team;
 
 -- UHD Bluray is not a generic Efficient/Balanced target. Those profiles target
@@ -379,18 +379,18 @@ VALUES
 -- tiers. Tiered Compact teams are excluded so they do not double-score.
 INSERT INTO custom_formats (name, description)
 VALUES
-  ('4KLight Bluray (Compact)', 'Matches non-tier 2160p 4KLight Bluray releases for 2160p Compact FR.'),
-  ('4KLight WEBRip (Compact)', 'Matches non-tier 2160p 4KLight WEBRip releases for 2160p Compact FR.'),
-  ('HDLight Bluray (Compact)', 'Matches non-tier 1080p HDLight Bluray releases for 1080p Compact FR.'),
-  ('HDLight WEBRip (Compact)', 'Matches non-tier 1080p HDLight WEB releases for 1080p Compact FR.'),
+  ('2160p 4KLight Bluray (Compact)', 'Matches non-tier 2160p 4KLight Bluray releases for 2160p Compact FR.'),
+  ('2160p 4KLight WEBRip (Compact)', 'Matches non-tier 2160p 4KLight WEBRip releases for 2160p Compact FR.'),
+  ('1080p HDLight Bluray (Compact)', 'Matches non-tier 1080p HDLight Bluray releases for 1080p Compact FR.'),
+  ('1080p HDLight WEBRip (Compact)', 'Matches non-tier 1080p HDLight WEB releases for 1080p Compact FR.'),
   ('1080p WEBRip (Compact)', 'Matches non-tier 1080p WEBRip releases for Compact FR fallback.');
 
 WITH compact_light_cf(custom_format_name) AS (
   VALUES
-  ('4KLight Bluray (Compact)'),
-  ('4KLight WEBRip (Compact)'),
-  ('HDLight Bluray (Compact)'),
-  ('HDLight WEBRip (Compact)'),
+  ('2160p 4KLight Bluray (Compact)'),
+  ('2160p 4KLight WEBRip (Compact)'),
+  ('1080p HDLight Bluray (Compact)'),
+  ('1080p HDLight WEBRip (Compact)'),
   ('1080p WEBRip (Compact)')
 ),
 tags(tag_name) AS (
@@ -403,100 +403,100 @@ CROSS JOIN tags;
 
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 VALUES
-  ('4KLight Bluray (Compact)', '4KLight', 'release_title', 'all', 0, 1),
-  ('4KLight Bluray (Compact)', '2160p', 'resolution', 'all', 0, 1),
-  ('4KLight Bluray (Compact)', 'Bluray', 'source', 'all', 0, 1),
-  ('4KLight WEBRip (Compact)', '4KLight', 'release_title', 'all', 0, 1),
-  ('4KLight WEBRip (Compact)', '2160p', 'resolution', 'all', 0, 1),
-  ('4KLight WEBRip (Compact)', 'WEBRip', 'source', 'all', 0, 1),
-  ('HDLight Bluray (Compact)', 'HDLight', 'release_title', 'all', 0, 1),
-  ('HDLight Bluray (Compact)', '1080p', 'resolution', 'all', 0, 1),
-  ('HDLight Bluray (Compact)', 'Bluray', 'source', 'all', 0, 1),
-  ('HDLight WEBRip (Compact)', 'HDLight', 'release_title', 'all', 0, 1),
-  ('HDLight WEBRip (Compact)', '1080p', 'resolution', 'all', 0, 1),
-  ('HDLight WEBRip (Compact)', 'WEB Source', 'release_title', 'all', 0, 1),
+  ('2160p 4KLight Bluray (Compact)', '4KLight', 'release_title', 'all', 0, 1),
+  ('2160p 4KLight Bluray (Compact)', '2160p', 'resolution', 'all', 0, 1),
+  ('2160p 4KLight Bluray (Compact)', 'Bluray', 'source', 'all', 0, 1),
+  ('2160p 4KLight WEBRip (Compact)', '4KLight', 'release_title', 'all', 0, 1),
+  ('2160p 4KLight WEBRip (Compact)', '2160p', 'resolution', 'all', 0, 1),
+  ('2160p 4KLight WEBRip (Compact)', 'WEBRip', 'source', 'all', 0, 1),
+  ('1080p HDLight Bluray (Compact)', 'HDLight', 'release_title', 'all', 0, 1),
+  ('1080p HDLight Bluray (Compact)', '1080p', 'resolution', 'all', 0, 1),
+  ('1080p HDLight Bluray (Compact)', 'Bluray', 'source', 'all', 0, 1),
+  ('1080p HDLight WEBRip (Compact)', 'HDLight', 'release_title', 'all', 0, 1),
+  ('1080p HDLight WEBRip (Compact)', '1080p', 'resolution', 'all', 0, 1),
+  ('1080p HDLight WEBRip (Compact)', 'WEB Source', 'release_title', 'all', 0, 1),
   ('1080p WEBRip (Compact)', '1080p', 'resolution', 'all', 0, 1),
   ('1080p WEBRip (Compact)', 'WEBRip', 'source', 'all', 0, 1);
 
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 VALUES
-  ('4KLight Bluray (Compact)', '4KLight', '4KLight'),
-  ('4KLight WEBRip (Compact)', '4KLight', '4KLight'),
-  ('HDLight Bluray (Compact)', 'HDLight', 'HDLight'),
-  ('HDLight WEBRip (Compact)', 'HDLight', 'HDLight'),
-  ('HDLight WEBRip (Compact)', 'WEB Source', 'WEB Source');
+  ('2160p 4KLight Bluray (Compact)', '4KLight', '4KLight'),
+  ('2160p 4KLight WEBRip (Compact)', '4KLight', '4KLight'),
+  ('1080p HDLight Bluray (Compact)', 'HDLight', 'HDLight'),
+  ('1080p HDLight WEBRip (Compact)', 'HDLight', 'HDLight'),
+  ('1080p HDLight WEBRip (Compact)', 'WEB Source', 'WEB Source');
 
 INSERT INTO condition_resolutions (custom_format_name, condition_name, resolution)
 VALUES
-  ('4KLight Bluray (Compact)', '2160p', '2160p'),
-  ('4KLight WEBRip (Compact)', '2160p', '2160p'),
-  ('HDLight Bluray (Compact)', '1080p', '1080p'),
-  ('HDLight WEBRip (Compact)', '1080p', '1080p'),
+  ('2160p 4KLight Bluray (Compact)', '2160p', '2160p'),
+  ('2160p 4KLight WEBRip (Compact)', '2160p', '2160p'),
+  ('1080p HDLight Bluray (Compact)', '1080p', '1080p'),
+  ('1080p HDLight WEBRip (Compact)', '1080p', '1080p'),
   ('1080p WEBRip (Compact)', '1080p', '1080p');
 
 INSERT INTO condition_sources (custom_format_name, condition_name, source)
 VALUES
-  ('4KLight Bluray (Compact)', 'Bluray', 'bluray'),
-  ('4KLight WEBRip (Compact)', 'WEBRip', 'webrip'),
-  ('HDLight Bluray (Compact)', 'Bluray', 'bluray'),
+  ('2160p 4KLight Bluray (Compact)', 'Bluray', 'bluray'),
+  ('2160p 4KLight WEBRip (Compact)', 'WEBRip', 'webrip'),
+  ('1080p HDLight Bluray (Compact)', 'Bluray', 'bluray'),
   ('1080p WEBRip (Compact)', 'WEBRip', 'webrip');
 
 WITH compact_cf_team(custom_format_name, condition_name, regular_expression_name) AS (
   VALUES
-  ('4KLight Bluray (Compact)', 'Not AMEN', 'AMEN'),
-  ('4KLight Bluray (Compact)', 'Not AW', 'AW'),
-  ('4KLight Bluray (Compact)', 'Not BONBON', 'BONBON'),
-  ('4KLight Bluray (Compact)', 'Not GHT', 'GHT'),
-  ('4KLight Bluray (Compact)', 'Not LiDHL', 'LiDHL'),
-  ('4KLight Bluray (Compact)', 'Not mHDgz', 'mHDgz'),
-  ('4KLight Bluray (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
-  ('4KLight Bluray (Compact)', 'Not PiXEL', 'PiXEL'),
-  ('4KLight Bluray (Compact)', 'Not PopHD', 'PopHD'),
-  ('4KLight Bluray (Compact)', 'Not QTZ', 'QTZ'),
-  ('4KLight Bluray (Compact)', 'Not RiFiFi', 'RiFiFi'),
-  ('4KLight Bluray (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
-  ('4KLight Bluray (Compact)', 'Not TyHD', 'TyHD'),
-  ('4KLight Bluray (Compact)', 'Not Winks', 'Winks'),
-  ('4KLight Bluray (Compact)', 'Not Xantar', 'Xantar'),
-  ('4KLight WEBRip (Compact)', 'Not AMEN', 'AMEN'),
-  ('4KLight WEBRip (Compact)', 'Not AW', 'AW'),
-  ('4KLight WEBRip (Compact)', 'Not BONBON', 'BONBON'),
-  ('4KLight WEBRip (Compact)', 'Not GHT', 'GHT'),
-  ('4KLight WEBRip (Compact)', 'Not LiDHL', 'LiDHL'),
-  ('4KLight WEBRip (Compact)', 'Not mHDgz', 'mHDgz'),
-  ('4KLight WEBRip (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
-  ('4KLight WEBRip (Compact)', 'Not PiXEL', 'PiXEL'),
-  ('4KLight WEBRip (Compact)', 'Not PopHD', 'PopHD'),
-  ('4KLight WEBRip (Compact)', 'Not QTZ', 'QTZ'),
-  ('4KLight WEBRip (Compact)', 'Not RiFiFi', 'RiFiFi'),
-  ('4KLight WEBRip (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
-  ('4KLight WEBRip (Compact)', 'Not TyHD', 'TyHD'),
-  ('4KLight WEBRip (Compact)', 'Not Winks', 'Winks'),
-  ('4KLight WEBRip (Compact)', 'Not Xantar', 'Xantar'),
-  ('HDLight Bluray (Compact)', 'Not AW', 'AW'),
-  ('HDLight Bluray (Compact)', 'Not GHT', 'GHT'),
-  ('HDLight Bluray (Compact)', 'Not LiDHL', 'LiDHL'),
-  ('HDLight Bluray (Compact)', 'Not mHDgz', 'mHDgz'),
-  ('HDLight Bluray (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
-  ('HDLight Bluray (Compact)', 'Not PiXEL', 'PiXEL'),
-  ('HDLight Bluray (Compact)', 'Not PopHD', 'PopHD'),
-  ('HDLight Bluray (Compact)', 'Not QTZ', 'QTZ'),
-  ('HDLight Bluray (Compact)', 'Not RiFiFi', 'RiFiFi'),
-  ('HDLight Bluray (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
-  ('HDLight Bluray (Compact)', 'Not Winks', 'Winks'),
-  ('HDLight Bluray (Compact)', 'Not Xantar', 'Xantar'),
-  ('HDLight WEBRip (Compact)', 'Not AW', 'AW'),
-  ('HDLight WEBRip (Compact)', 'Not GHT', 'GHT'),
-  ('HDLight WEBRip (Compact)', 'Not LiDHL', 'LiDHL'),
-  ('HDLight WEBRip (Compact)', 'Not mHDgz', 'mHDgz'),
-  ('HDLight WEBRip (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
-  ('HDLight WEBRip (Compact)', 'Not PiXEL', 'PiXEL'),
-  ('HDLight WEBRip (Compact)', 'Not PopHD', 'PopHD'),
-  ('HDLight WEBRip (Compact)', 'Not QTZ', 'QTZ'),
-  ('HDLight WEBRip (Compact)', 'Not RiFiFi', 'RiFiFi'),
-  ('HDLight WEBRip (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
-  ('HDLight WEBRip (Compact)', 'Not Winks', 'Winks'),
-  ('HDLight WEBRip (Compact)', 'Not Xantar', 'Xantar')
+  ('2160p 4KLight Bluray (Compact)', 'Not AMEN', 'AMEN'),
+  ('2160p 4KLight Bluray (Compact)', 'Not AW', 'AW'),
+  ('2160p 4KLight Bluray (Compact)', 'Not BONBON', 'BONBON'),
+  ('2160p 4KLight Bluray (Compact)', 'Not GHT', 'GHT'),
+  ('2160p 4KLight Bluray (Compact)', 'Not LiDHL', 'LiDHL'),
+  ('2160p 4KLight Bluray (Compact)', 'Not mHDgz', 'mHDgz'),
+  ('2160p 4KLight Bluray (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
+  ('2160p 4KLight Bluray (Compact)', 'Not PiXEL', 'PiXEL'),
+  ('2160p 4KLight Bluray (Compact)', 'Not PopHD', 'PopHD'),
+  ('2160p 4KLight Bluray (Compact)', 'Not QTZ', 'QTZ'),
+  ('2160p 4KLight Bluray (Compact)', 'Not RiFiFi', 'RiFiFi'),
+  ('2160p 4KLight Bluray (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
+  ('2160p 4KLight Bluray (Compact)', 'Not TyHD', 'TyHD'),
+  ('2160p 4KLight Bluray (Compact)', 'Not Winks', 'Winks'),
+  ('2160p 4KLight Bluray (Compact)', 'Not Xantar', 'Xantar'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not AMEN', 'AMEN'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not AW', 'AW'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not BONBON', 'BONBON'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not GHT', 'GHT'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not LiDHL', 'LiDHL'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not mHDgz', 'mHDgz'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not PiXEL', 'PiXEL'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not PopHD', 'PopHD'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not QTZ', 'QTZ'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not RiFiFi', 'RiFiFi'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not TyHD', 'TyHD'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not Winks', 'Winks'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not Xantar', 'Xantar'),
+  ('1080p HDLight Bluray (Compact)', 'Not AW', 'AW'),
+  ('1080p HDLight Bluray (Compact)', 'Not GHT', 'GHT'),
+  ('1080p HDLight Bluray (Compact)', 'Not LiDHL', 'LiDHL'),
+  ('1080p HDLight Bluray (Compact)', 'Not mHDgz', 'mHDgz'),
+  ('1080p HDLight Bluray (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
+  ('1080p HDLight Bluray (Compact)', 'Not PiXEL', 'PiXEL'),
+  ('1080p HDLight Bluray (Compact)', 'Not PopHD', 'PopHD'),
+  ('1080p HDLight Bluray (Compact)', 'Not QTZ', 'QTZ'),
+  ('1080p HDLight Bluray (Compact)', 'Not RiFiFi', 'RiFiFi'),
+  ('1080p HDLight Bluray (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
+  ('1080p HDLight Bluray (Compact)', 'Not Winks', 'Winks'),
+  ('1080p HDLight Bluray (Compact)', 'Not Xantar', 'Xantar'),
+  ('1080p HDLight WEBRip (Compact)', 'Not AW', 'AW'),
+  ('1080p HDLight WEBRip (Compact)', 'Not GHT', 'GHT'),
+  ('1080p HDLight WEBRip (Compact)', 'Not LiDHL', 'LiDHL'),
+  ('1080p HDLight WEBRip (Compact)', 'Not mHDgz', 'mHDgz'),
+  ('1080p HDLight WEBRip (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
+  ('1080p HDLight WEBRip (Compact)', 'Not PiXEL', 'PiXEL'),
+  ('1080p HDLight WEBRip (Compact)', 'Not PopHD', 'PopHD'),
+  ('1080p HDLight WEBRip (Compact)', 'Not QTZ', 'QTZ'),
+  ('1080p HDLight WEBRip (Compact)', 'Not RiFiFi', 'RiFiFi'),
+  ('1080p HDLight WEBRip (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
+  ('1080p HDLight WEBRip (Compact)', 'Not Winks', 'Winks'),
+  ('1080p HDLight WEBRip (Compact)', 'Not Xantar', 'Xantar')
 )
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT custom_format_name, condition_name, 'release_group', 'all', 1, 1
@@ -504,60 +504,60 @@ FROM compact_cf_team;
 
 WITH compact_cf_team(custom_format_name, condition_name, regular_expression_name) AS (
   VALUES
-  ('4KLight Bluray (Compact)', 'Not AMEN', 'AMEN'),
-  ('4KLight Bluray (Compact)', 'Not AW', 'AW'),
-  ('4KLight Bluray (Compact)', 'Not BONBON', 'BONBON'),
-  ('4KLight Bluray (Compact)', 'Not GHT', 'GHT'),
-  ('4KLight Bluray (Compact)', 'Not LiDHL', 'LiDHL'),
-  ('4KLight Bluray (Compact)', 'Not mHDgz', 'mHDgz'),
-  ('4KLight Bluray (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
-  ('4KLight Bluray (Compact)', 'Not PiXEL', 'PiXEL'),
-  ('4KLight Bluray (Compact)', 'Not PopHD', 'PopHD'),
-  ('4KLight Bluray (Compact)', 'Not QTZ', 'QTZ'),
-  ('4KLight Bluray (Compact)', 'Not RiFiFi', 'RiFiFi'),
-  ('4KLight Bluray (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
-  ('4KLight Bluray (Compact)', 'Not TyHD', 'TyHD'),
-  ('4KLight Bluray (Compact)', 'Not Winks', 'Winks'),
-  ('4KLight Bluray (Compact)', 'Not Xantar', 'Xantar'),
-  ('4KLight WEBRip (Compact)', 'Not AMEN', 'AMEN'),
-  ('4KLight WEBRip (Compact)', 'Not AW', 'AW'),
-  ('4KLight WEBRip (Compact)', 'Not BONBON', 'BONBON'),
-  ('4KLight WEBRip (Compact)', 'Not GHT', 'GHT'),
-  ('4KLight WEBRip (Compact)', 'Not LiDHL', 'LiDHL'),
-  ('4KLight WEBRip (Compact)', 'Not mHDgz', 'mHDgz'),
-  ('4KLight WEBRip (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
-  ('4KLight WEBRip (Compact)', 'Not PiXEL', 'PiXEL'),
-  ('4KLight WEBRip (Compact)', 'Not PopHD', 'PopHD'),
-  ('4KLight WEBRip (Compact)', 'Not QTZ', 'QTZ'),
-  ('4KLight WEBRip (Compact)', 'Not RiFiFi', 'RiFiFi'),
-  ('4KLight WEBRip (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
-  ('4KLight WEBRip (Compact)', 'Not TyHD', 'TyHD'),
-  ('4KLight WEBRip (Compact)', 'Not Winks', 'Winks'),
-  ('4KLight WEBRip (Compact)', 'Not Xantar', 'Xantar'),
-  ('HDLight Bluray (Compact)', 'Not AW', 'AW'),
-  ('HDLight Bluray (Compact)', 'Not GHT', 'GHT'),
-  ('HDLight Bluray (Compact)', 'Not LiDHL', 'LiDHL'),
-  ('HDLight Bluray (Compact)', 'Not mHDgz', 'mHDgz'),
-  ('HDLight Bluray (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
-  ('HDLight Bluray (Compact)', 'Not PiXEL', 'PiXEL'),
-  ('HDLight Bluray (Compact)', 'Not PopHD', 'PopHD'),
-  ('HDLight Bluray (Compact)', 'Not QTZ', 'QTZ'),
-  ('HDLight Bluray (Compact)', 'Not RiFiFi', 'RiFiFi'),
-  ('HDLight Bluray (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
-  ('HDLight Bluray (Compact)', 'Not Winks', 'Winks'),
-  ('HDLight Bluray (Compact)', 'Not Xantar', 'Xantar'),
-  ('HDLight WEBRip (Compact)', 'Not AW', 'AW'),
-  ('HDLight WEBRip (Compact)', 'Not GHT', 'GHT'),
-  ('HDLight WEBRip (Compact)', 'Not LiDHL', 'LiDHL'),
-  ('HDLight WEBRip (Compact)', 'Not mHDgz', 'mHDgz'),
-  ('HDLight WEBRip (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
-  ('HDLight WEBRip (Compact)', 'Not PiXEL', 'PiXEL'),
-  ('HDLight WEBRip (Compact)', 'Not PopHD', 'PopHD'),
-  ('HDLight WEBRip (Compact)', 'Not QTZ', 'QTZ'),
-  ('HDLight WEBRip (Compact)', 'Not RiFiFi', 'RiFiFi'),
-  ('HDLight WEBRip (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
-  ('HDLight WEBRip (Compact)', 'Not Winks', 'Winks'),
-  ('HDLight WEBRip (Compact)', 'Not Xantar', 'Xantar')
+  ('2160p 4KLight Bluray (Compact)', 'Not AMEN', 'AMEN'),
+  ('2160p 4KLight Bluray (Compact)', 'Not AW', 'AW'),
+  ('2160p 4KLight Bluray (Compact)', 'Not BONBON', 'BONBON'),
+  ('2160p 4KLight Bluray (Compact)', 'Not GHT', 'GHT'),
+  ('2160p 4KLight Bluray (Compact)', 'Not LiDHL', 'LiDHL'),
+  ('2160p 4KLight Bluray (Compact)', 'Not mHDgz', 'mHDgz'),
+  ('2160p 4KLight Bluray (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
+  ('2160p 4KLight Bluray (Compact)', 'Not PiXEL', 'PiXEL'),
+  ('2160p 4KLight Bluray (Compact)', 'Not PopHD', 'PopHD'),
+  ('2160p 4KLight Bluray (Compact)', 'Not QTZ', 'QTZ'),
+  ('2160p 4KLight Bluray (Compact)', 'Not RiFiFi', 'RiFiFi'),
+  ('2160p 4KLight Bluray (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
+  ('2160p 4KLight Bluray (Compact)', 'Not TyHD', 'TyHD'),
+  ('2160p 4KLight Bluray (Compact)', 'Not Winks', 'Winks'),
+  ('2160p 4KLight Bluray (Compact)', 'Not Xantar', 'Xantar'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not AMEN', 'AMEN'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not AW', 'AW'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not BONBON', 'BONBON'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not GHT', 'GHT'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not LiDHL', 'LiDHL'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not mHDgz', 'mHDgz'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not PiXEL', 'PiXEL'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not PopHD', 'PopHD'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not QTZ', 'QTZ'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not RiFiFi', 'RiFiFi'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not TyHD', 'TyHD'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not Winks', 'Winks'),
+  ('2160p 4KLight WEBRip (Compact)', 'Not Xantar', 'Xantar'),
+  ('1080p HDLight Bluray (Compact)', 'Not AW', 'AW'),
+  ('1080p HDLight Bluray (Compact)', 'Not GHT', 'GHT'),
+  ('1080p HDLight Bluray (Compact)', 'Not LiDHL', 'LiDHL'),
+  ('1080p HDLight Bluray (Compact)', 'Not mHDgz', 'mHDgz'),
+  ('1080p HDLight Bluray (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
+  ('1080p HDLight Bluray (Compact)', 'Not PiXEL', 'PiXEL'),
+  ('1080p HDLight Bluray (Compact)', 'Not PopHD', 'PopHD'),
+  ('1080p HDLight Bluray (Compact)', 'Not QTZ', 'QTZ'),
+  ('1080p HDLight Bluray (Compact)', 'Not RiFiFi', 'RiFiFi'),
+  ('1080p HDLight Bluray (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
+  ('1080p HDLight Bluray (Compact)', 'Not Winks', 'Winks'),
+  ('1080p HDLight Bluray (Compact)', 'Not Xantar', 'Xantar'),
+  ('1080p HDLight WEBRip (Compact)', 'Not AW', 'AW'),
+  ('1080p HDLight WEBRip (Compact)', 'Not GHT', 'GHT'),
+  ('1080p HDLight WEBRip (Compact)', 'Not LiDHL', 'LiDHL'),
+  ('1080p HDLight WEBRip (Compact)', 'Not mHDgz', 'mHDgz'),
+  ('1080p HDLight WEBRip (Compact)', 'Not PATOMiEL', 'PATOMiEL'),
+  ('1080p HDLight WEBRip (Compact)', 'Not PiXEL', 'PiXEL'),
+  ('1080p HDLight WEBRip (Compact)', 'Not PopHD', 'PopHD'),
+  ('1080p HDLight WEBRip (Compact)', 'Not QTZ', 'QTZ'),
+  ('1080p HDLight WEBRip (Compact)', 'Not RiFiFi', 'RiFiFi'),
+  ('1080p HDLight WEBRip (Compact)', 'Not SANTACRUZ', 'SANTACRUZ'),
+  ('1080p HDLight WEBRip (Compact)', 'Not Winks', 'Winks'),
+  ('1080p HDLight WEBRip (Compact)', 'Not Xantar', 'Xantar')
 )
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT custom_format_name, condition_name, regular_expression_name
@@ -566,28 +566,28 @@ FROM compact_cf_team;
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT '1080p WEBRip (Compact)', name, type, arr_type, negate, required
 FROM custom_format_conditions
-WHERE custom_format_name = 'HDLight WEBRip (Compact)'
+WHERE custom_format_name = '1080p HDLight WEBRip (Compact)'
   AND type = 'release_group';
 
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT '1080p WEBRip (Compact)', condition_name, regular_expression_name
 FROM condition_patterns
-WHERE custom_format_name = 'HDLight WEBRip (Compact)'
+WHERE custom_format_name = '1080p HDLight WEBRip (Compact)'
   AND condition_name LIKE 'Not %';
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 VALUES
-  ('2160p Compact FR', '4KLight Bluray (Compact)', 'all', 940000),
-  ('2160p Compact FR', '4KLight WEBRip (Compact)', 'all', 900000),
-  ('1080p Compact FR', 'HDLight Bluray (Compact)', 'all', 900000),
-  ('1080p Compact FR', 'HDLight WEBRip (Compact)', 'all', 870000),
+  ('2160p Compact FR', '2160p 4KLight Bluray (Compact)', 'all', 940000),
+  ('2160p Compact FR', '2160p 4KLight WEBRip (Compact)', 'all', 900000),
+  ('1080p Compact FR', '1080p HDLight Bluray (Compact)', 'all', 900000),
+  ('1080p Compact FR', '1080p HDLight WEBRip (Compact)', 'all', 870000),
   ('1080p Compact FR', '1080p WEBRip (Compact)', 'all', 865000),
   ('2160p Compact FR', '1080p WEBRip (Compact)', 'all', 865000);
 
 UPDATE quality_profile_custom_formats
 SET score = 840000
-WHERE quality_profile_name IN ('1080p Compact FR', '2160p Compact FR')
-  AND custom_format_name = '1080p WEB-DL (Efficient)';
+WHERE quality_profile_name = '2160p Compact FR'
+  AND custom_format_name = '1080p WEB-DL AVC';
 
 UPDATE quality_profile_custom_formats
 SET score = 4000
@@ -850,7 +850,7 @@ WHERE quality_profile_name = '2160p Compact FR'
     'FR 1080p Compact Bluray Tier 2',
     'FR 1080p Compact WEB Tier 1',
     'FR 1080p Compact WEB Tier 2',
-    '1080p Bluray (Efficient)'
+    '1080p Bluray AVC'
   );
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -871,8 +871,8 @@ VALUES
   ('2160p Compact FR', 'FR 1080p Compact WEB Tier 1', 'sonarr', 830000),
   ('2160p Compact FR', 'FR 1080p Compact WEB Tier 2', 'radarr', 829000),
   ('2160p Compact FR', 'FR 1080p Compact WEB Tier 2', 'sonarr', 829000),
-  ('2160p Compact FR', '1080p Bluray (Efficient)', 'radarr', 840000),
-  ('2160p Compact FR', '1080p Bluray (Efficient)', 'sonarr', 840000);
+  ('2160p Compact FR', '1080p Bluray AVC', 'radarr', 840000),
+  ('2160p Compact FR', '1080p Bluray AVC', 'sonarr', 840000);
 
 UPDATE quality_profile_custom_formats
 SET score = 50000

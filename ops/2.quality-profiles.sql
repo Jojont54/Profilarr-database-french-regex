@@ -6152,7 +6152,7 @@ WHERE qp.name IN ('1080p Balanced FR', '1080p Compact FR', '1080p Efficient FR',
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 SELECT qp.name, cf.name, 'radarr', 700000 FROM quality_profiles qp, custom_formats cf
-WHERE qp.name IN ('1080p Efficient FR', '2160p Efficient FR') AND cf.name = '1080p Bluray (Efficient)';
+WHERE qp.name IN ('1080p Efficient FR', '2160p Efficient FR') AND cf.name = '1080p Bluray AVC';
 
 -- Streaming-service adjustments from Dictionarry V2 that do not depend on release groups.
 UPDATE quality_profile_custom_formats SET score = 2000

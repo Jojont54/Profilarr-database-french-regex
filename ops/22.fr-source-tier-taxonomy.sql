@@ -742,21 +742,21 @@ VALUES
 -- Efficient 1080p: the HEVC source passes are no longer team-specific. Team
 -- preference is carried separately by the reusable WEB/Bluray tiers below.
 INSERT INTO custom_formats (name, description)
-SELECT 'FR 1080p Bluray HEVC', 'FR 1080p HEVC Bluray source pass without release-group condition.'
-WHERE NOT EXISTS (SELECT 1 FROM custom_formats WHERE name = 'FR 1080p Bluray HEVC');
+SELECT '1080p Bluray HEVC', '1080p HEVC Bluray source pass without release-group condition.'
+WHERE NOT EXISTS (SELECT 1 FROM custom_formats WHERE name = '1080p Bluray HEVC');
 
 INSERT INTO custom_formats (name, description)
-SELECT 'FR 1080p WEB-DL HEVC', 'FR 1080p HEVC WEB-DL source pass without release-group condition.'
-WHERE NOT EXISTS (SELECT 1 FROM custom_formats WHERE name = 'FR 1080p WEB-DL HEVC');
+SELECT '1080p WEB-DL HEVC', '1080p HEVC WEB-DL source pass without release-group condition.'
+WHERE NOT EXISTS (SELECT 1 FROM custom_formats WHERE name = '1080p WEB-DL HEVC');
 
 WITH tag_map(custom_format_name, tag_name) AS (
   VALUES
-  ('FR 1080p Bluray HEVC', 'French'),
-  ('FR 1080p Bluray HEVC', '1080p'),
-  ('FR 1080p Bluray HEVC', 'HEVC'),
-  ('FR 1080p WEB-DL HEVC', 'French'),
-  ('FR 1080p WEB-DL HEVC', '1080p'),
-  ('FR 1080p WEB-DL HEVC', 'HEVC')
+  ('1080p Bluray HEVC', 'French'),
+  ('1080p Bluray HEVC', '1080p'),
+  ('1080p Bluray HEVC', 'HEVC'),
+  ('1080p WEB-DL HEVC', 'French'),
+  ('1080p WEB-DL HEVC', '1080p'),
+  ('1080p WEB-DL HEVC', 'HEVC')
 )
 INSERT INTO custom_format_tags (custom_format_name, tag_name)
 SELECT custom_format_name, tag_name
@@ -770,12 +770,12 @@ WHERE NOT EXISTS (
 
 WITH condition_map(custom_format_name, condition_name, type, negate, required) AS (
   VALUES
-  ('FR 1080p Bluray HEVC', '1080p', 'resolution', 0, 1),
-  ('FR 1080p Bluray HEVC', 'Bluray', 'source', 0, 1),
-  ('FR 1080p Bluray HEVC', 'h265', 'release_title', 0, 1),
-  ('FR 1080p WEB-DL HEVC', '1080p', 'resolution', 0, 1),
-  ('FR 1080p WEB-DL HEVC', 'WEB-DL', 'source', 0, 1),
-  ('FR 1080p WEB-DL HEVC', 'h265', 'release_title', 0, 1)
+  ('1080p Bluray HEVC', '1080p', 'resolution', 0, 1),
+  ('1080p Bluray HEVC', 'Bluray', 'source', 0, 1),
+  ('1080p Bluray HEVC', 'h265', 'release_title', 0, 1),
+  ('1080p WEB-DL HEVC', '1080p', 'resolution', 0, 1),
+  ('1080p WEB-DL HEVC', 'WEB-DL', 'source', 0, 1),
+  ('1080p WEB-DL HEVC', 'h265', 'release_title', 0, 1)
 )
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT custom_format_name, condition_name, type, 'all', negate, required
@@ -788,45 +788,45 @@ WHERE NOT EXISTS (
 );
 
 INSERT INTO condition_resolutions (custom_format_name, condition_name, resolution)
-SELECT 'FR 1080p Bluray HEVC', '1080p', '1080p'
+SELECT '1080p Bluray HEVC', '1080p', '1080p'
 WHERE NOT EXISTS (
   SELECT 1 FROM condition_resolutions
-  WHERE custom_format_name = 'FR 1080p Bluray HEVC' AND condition_name = '1080p'
+  WHERE custom_format_name = '1080p Bluray HEVC' AND condition_name = '1080p'
 );
 
 INSERT INTO condition_resolutions (custom_format_name, condition_name, resolution)
-SELECT 'FR 1080p WEB-DL HEVC', '1080p', '1080p'
+SELECT '1080p WEB-DL HEVC', '1080p', '1080p'
 WHERE NOT EXISTS (
   SELECT 1 FROM condition_resolutions
-  WHERE custom_format_name = 'FR 1080p WEB-DL HEVC' AND condition_name = '1080p'
+  WHERE custom_format_name = '1080p WEB-DL HEVC' AND condition_name = '1080p'
 );
 
 INSERT INTO condition_sources (custom_format_name, condition_name, source)
-SELECT 'FR 1080p Bluray HEVC', 'Bluray', 'bluray'
+SELECT '1080p Bluray HEVC', 'Bluray', 'bluray'
 WHERE NOT EXISTS (
   SELECT 1 FROM condition_sources
-  WHERE custom_format_name = 'FR 1080p Bluray HEVC' AND condition_name = 'Bluray'
+  WHERE custom_format_name = '1080p Bluray HEVC' AND condition_name = 'Bluray'
 );
 
 INSERT INTO condition_sources (custom_format_name, condition_name, source)
-SELECT 'FR 1080p WEB-DL HEVC', 'WEB-DL', 'web_dl'
+SELECT '1080p WEB-DL HEVC', 'WEB-DL', 'web_dl'
 WHERE NOT EXISTS (
   SELECT 1 FROM condition_sources
-  WHERE custom_format_name = 'FR 1080p WEB-DL HEVC' AND condition_name = 'WEB-DL'
+  WHERE custom_format_name = '1080p WEB-DL HEVC' AND condition_name = 'WEB-DL'
 );
 
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'FR 1080p Bluray HEVC', 'h265', 'HEVC'
+SELECT '1080p Bluray HEVC', 'h265', 'HEVC'
 WHERE NOT EXISTS (
   SELECT 1 FROM condition_patterns
-  WHERE custom_format_name = 'FR 1080p Bluray HEVC' AND condition_name = 'h265'
+  WHERE custom_format_name = '1080p Bluray HEVC' AND condition_name = 'h265'
 );
 
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT 'FR 1080p WEB-DL HEVC', 'h265', 'HEVC'
+SELECT '1080p WEB-DL HEVC', 'h265', 'HEVC'
 WHERE NOT EXISTS (
   SELECT 1 FROM condition_patterns
-  WHERE custom_format_name = 'FR 1080p WEB-DL HEVC' AND condition_name = 'h265'
+  WHERE custom_format_name = '1080p WEB-DL HEVC' AND condition_name = 'h265'
 );
 
 UPDATE custom_formats
@@ -838,10 +838,10 @@ WHERE quality_profile_name = '1080p Efficient FR'
   AND custom_format_name IN (
     'FR 1080p Bluray HEVC Tier 1',
     'FR 1080p WEB-DL HEVC Tier 1',
-    'FR 1080p Bluray HEVC',
-    'FR 1080p WEB-DL HEVC',
-    '1080p WEB-DL (Efficient)',
-    '1080p Bluray (Efficient)',
+    '1080p Bluray HEVC',
+    '1080p WEB-DL HEVC',
+    '1080p WEB-DL AVC',
+    '1080p Bluray AVC',
     'FR WEB Top Tier',
     'FR WEB Tier 1',
     'FR WEB Tier 2',
@@ -852,10 +852,11 @@ WHERE quality_profile_name = '1080p Efficient FR'
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 VALUES
-  ('1080p Efficient FR', 'FR 1080p Bluray HEVC', 'all', 960000),
-  ('1080p Efficient FR', 'FR 1080p WEB-DL HEVC', 'all', 940000),
-  ('1080p Efficient FR', '1080p WEB-DL (Efficient)', 'all', 920000),
-  ('1080p Efficient FR', '1080p Bluray (Efficient)', 'all', 900000),
+  ('1080p Compact FR', '1080p WEB-DL HEVC', 'all', 850000),
+  ('1080p Efficient FR', '1080p Bluray HEVC', 'all', 960000),
+  ('1080p Efficient FR', '1080p WEB-DL HEVC', 'all', 940000),
+  ('1080p Efficient FR', '1080p WEB-DL AVC', 'all', 920000),
+  ('1080p Efficient FR', '1080p Bluray AVC', 'all', 900000),
   ('1080p Efficient FR', 'FR WEB Top Tier', 'all', 5000),
   ('1080p Efficient FR', 'FR WEB Tier 1', 'all', 4300),
   ('1080p Efficient FR', 'FR WEB Tier 2', 'all', 4200),
@@ -868,8 +869,8 @@ WHERE quality_profile_name = '2160p Compact FR'
   AND custom_format_name IN (
     'FR 1080p Bluray HEVC Tier 1',
     'FR 1080p WEB-DL HEVC Tier 1',
-    'FR 1080p Bluray HEVC',
-    'FR 1080p WEB-DL HEVC',
+    '1080p Bluray HEVC',
+    '1080p WEB-DL HEVC',
     'FR WEB Top Tier',
     'FR WEB Tier 1',
     'FR WEB Tier 2',
@@ -880,8 +881,8 @@ WHERE quality_profile_name = '2160p Compact FR'
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 VALUES
-  ('2160p Compact FR', 'FR 1080p Bluray HEVC', 'all', 50000),
-  ('2160p Compact FR', 'FR 1080p WEB-DL HEVC', 'all', 50000),
+  ('2160p Compact FR', '1080p Bluray HEVC', 'all', 50000),
+  ('2160p Compact FR', '1080p WEB-DL HEVC', 'all', 50000),
   ('2160p Compact FR', 'FR WEB Top Tier', 'all', 5000),
   ('2160p Compact FR', 'FR WEB Tier 1', 'all', 4300),
   ('2160p Compact FR', 'FR WEB Tier 2', 'all', 4200),
@@ -1317,10 +1318,10 @@ INSERT OR IGNORE INTO condition_patterns (custom_format_name, condition_name, re
 VALUES ('2160p WEB-DL (Balanced)', 'h264', 'h264');
 
 INSERT OR IGNORE INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-VALUES ('2160p WEB-DL (Efficient)', 'h264', 'release_title', 'all', 0, 1);
+VALUES ('2160p WEB-DL AVC', 'h264', 'release_title', 'all', 0, 1);
 
 INSERT OR IGNORE INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-VALUES ('2160p WEB-DL (Efficient)', 'h264', 'h264');
+VALUES ('2160p WEB-DL AVC', 'h264', 'h264');
 
 INSERT INTO custom_formats (name, description)
 VALUES
@@ -1370,11 +1371,11 @@ VALUES
   ('FR 2160p Efficient Bluray h265', 'h265', 'HEVC');
 
 DELETE FROM condition_patterns
-WHERE custom_format_name = '2160p WEB-DL (Efficient)'
+WHERE custom_format_name = '2160p WEB-DL AVC'
   AND condition_name LIKE 'Not %';
 
 DELETE FROM custom_format_conditions
-WHERE custom_format_name = '2160p WEB-DL (Efficient)'
+WHERE custom_format_name = '2160p WEB-DL AVC'
   AND type = 'release_group'
   AND name LIKE 'Not %';
 
@@ -1393,9 +1394,9 @@ WHERE quality_profile_name = '2160p Efficient FR'
     'FR 2160p Efficient TV Bluray Tier 1',
     'FR 2160p Efficient WEB h265',
     'FR 2160p Efficient Bluray h265',
-    'FR 1080p Bluray HEVC',
-    'FR 1080p WEB-DL HEVC',
-    '2160p WEB-DL (Efficient)',
+    '1080p Bluray HEVC',
+    '1080p WEB-DL HEVC',
+    '2160p WEB-DL AVC',
     'FR UHD Bluray Tier 1',
     'FR UHD Bluray Tier 2',
     'FR WEB Top Tier',
@@ -1410,10 +1411,10 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 VALUES
   ('2160p Efficient FR', 'FR 2160p Efficient WEB h265', 'all', 983000),
   ('2160p Efficient FR', 'FR 2160p Efficient Bluray h265', 'all', 982000),
-  ('2160p Efficient FR', '2160p WEB-DL (Efficient)', 'radarr', 980000),
-  ('2160p Efficient FR', '2160p WEB-DL (Efficient)', 'sonarr', 960000),
-  ('2160p Efficient FR', 'FR 1080p WEB-DL HEVC', 'all', 900000),
-  ('2160p Efficient FR', 'FR 1080p Bluray HEVC', 'all', 890000),
+  ('2160p Efficient FR', '2160p WEB-DL AVC', 'radarr', 980000),
+  ('2160p Efficient FR', '2160p WEB-DL AVC', 'sonarr', 960000),
+  ('2160p Efficient FR', '1080p WEB-DL HEVC', 'all', 900000),
+  ('2160p Efficient FR', '1080p Bluray HEVC', 'all', 890000),
   ('2160p Efficient FR', 'FR UHD Bluray Tier 1', 'all', 4200),
   ('2160p Efficient FR', 'FR UHD Bluray Tier 2', 'all', 4100),
   ('2160p Efficient FR', 'FR WEB Top Tier', 'all', 5000),
@@ -1475,7 +1476,7 @@ ON CONFLICT(name) DO UPDATE SET description = excluded.description;
 INSERT OR IGNORE INTO custom_format_tags (custom_format_name, tag_name)
 SELECT '2160p WEBRip', tag_name
 FROM custom_format_tags
-WHERE custom_format_name = '4KLight WEBRip (Compact)';
+WHERE custom_format_name = '2160p 4KLight WEBRip (Compact)';
 
 DELETE FROM condition_patterns
 WHERE custom_format_name = '2160p WEBRip';
@@ -1492,38 +1493,38 @@ WHERE custom_format_name = '2160p WEBRip';
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
 SELECT '2160p WEBRip', name, type, arr_type, negate, required
 FROM custom_format_conditions
-WHERE custom_format_name = '4KLight WEBRip (Compact)'
+WHERE custom_format_name = '2160p 4KLight WEBRip (Compact)'
   AND name <> '4KLight';
 
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 SELECT '2160p WEBRip', condition_name, regular_expression_name
 FROM condition_patterns
-WHERE custom_format_name = '4KLight WEBRip (Compact)'
+WHERE custom_format_name = '2160p 4KLight WEBRip (Compact)'
   AND condition_name <> '4KLight';
 
 INSERT INTO condition_resolutions (custom_format_name, condition_name, resolution)
 SELECT '2160p WEBRip', condition_name, resolution
 FROM condition_resolutions
-WHERE custom_format_name = '4KLight WEBRip (Compact)';
+WHERE custom_format_name = '2160p 4KLight WEBRip (Compact)';
 
 INSERT INTO condition_sources (custom_format_name, condition_name, source)
 SELECT '2160p WEBRip', condition_name, source
 FROM condition_sources
-WHERE custom_format_name = '4KLight WEBRip (Compact)';
+WHERE custom_format_name = '2160p 4KLight WEBRip (Compact)';
 
 DELETE FROM condition_sources
-WHERE custom_format_name = '4KLight WEBRip (Compact)'
+WHERE custom_format_name = '2160p 4KLight WEBRip (Compact)'
   AND condition_name = 'WEBRip';
 
 DELETE FROM custom_format_conditions
-WHERE custom_format_name = '4KLight WEBRip (Compact)'
+WHERE custom_format_name = '2160p 4KLight WEBRip (Compact)'
   AND name = 'WEBRip';
 
 INSERT OR IGNORE INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-VALUES ('4KLight WEBRip (Compact)', 'WEB Source', 'release_title', 'all', 0, 1);
+VALUES ('2160p 4KLight WEBRip (Compact)', 'WEB Source', 'release_title', 'all', 0, 1);
 
 INSERT OR IGNORE INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-VALUES ('4KLight WEBRip (Compact)', 'WEB Source', 'WEB Source');
+VALUES ('2160p 4KLight WEBRip (Compact)', 'WEB Source', 'WEB Source');
 
 DELETE FROM quality_profile_custom_formats
 WHERE quality_profile_name = '2160p Compact FR'
