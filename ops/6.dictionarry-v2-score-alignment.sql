@@ -77,9 +77,9 @@ WHERE quality_profile_name IN ('1080p Efficient FR', '2160p Efficient FR')
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 VALUES
-  ('1080p Efficient FR', '1080p WEB-DL AVC', 'radarr', 880000),
+  ('1080p Efficient FR', '1080p WEB-DL AVC', 'radarr', 860000),
   ('1080p Efficient FR', '1080p WEB-DL AVC', 'sonarr', 860000),
-  ('2160p Efficient FR', '1080p WEB-DL AVC', 'radarr', 880000),
+  ('2160p Efficient FR', '1080p WEB-DL AVC', 'radarr', 860000),
   ('2160p Efficient FR', '1080p WEB-DL AVC', 'sonarr', 860000);
 
 DELETE FROM quality_profile_custom_formats

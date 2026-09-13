@@ -1158,7 +1158,7 @@ SELECT qp.name, cf.name, 'all', -999999
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Balanced FR' AND cf.name = 'French Missing';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 860000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Balanced FR' AND cf.name = '1080p WEB-DL';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -2206,15 +2206,15 @@ SELECT qp.name, cf.name, 'all', -999999
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality FR' AND cf.name = 'French Missing';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 380000
+SELECT qp.name, cf.name, 'all', 860000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality FR' AND cf.name = '1080p WEB-DL';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 880000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality FR' AND cf.name = '1080p Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 850000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality FR' AND cf.name = '1080p WEBRip';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -2558,15 +2558,15 @@ SELECT qp.name, cf.name, 'all', 420000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality HDR FR' AND cf.name = 'UHD Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 380000
+SELECT qp.name, cf.name, 'all', 860000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality HDR FR' AND cf.name = '1080p WEB-DL';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 880000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality HDR FR' AND cf.name = '1080p Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 850000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality HDR FR' AND cf.name = '1080p WEBRip';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -2926,15 +2926,15 @@ SELECT qp.name, cf.name, 'all', 420000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Remux FR' AND cf.name = 'UHD Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 380000
+SELECT qp.name, cf.name, 'all', 860000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Remux FR' AND cf.name = '1080p WEB-DL';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 880000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Remux FR' AND cf.name = '1080p Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 850000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Remux FR' AND cf.name = '1080p WEBRip';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -3326,15 +3326,15 @@ SELECT qp.name, cf.name, 'all', 420000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Balanced FR' AND cf.name = 'UHD Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 380000
+SELECT qp.name, cf.name, 'all', 860000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Balanced FR' AND cf.name = '1080p WEB-DL';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 880000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Balanced FR' AND cf.name = '1080p Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 850000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Balanced FR' AND cf.name = '1080p WEBRip';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -4166,15 +4166,15 @@ SELECT qp.name, cf.name, 'all', 420000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Quality FR' AND cf.name = 'UHD Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 380000
+SELECT qp.name, cf.name, 'all', 860000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Quality FR' AND cf.name = '1080p WEB-DL';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 880000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Quality FR' AND cf.name = '1080p Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 850000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Quality FR' AND cf.name = '1080p WEBRip';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -4618,15 +4618,15 @@ SELECT qp.name, cf.name, 'all', 420000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Remux FR' AND cf.name = 'UHD Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 380000
+SELECT qp.name, cf.name, 'all', 860000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Remux FR' AND cf.name = '1080p WEB-DL';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 880000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Remux FR' AND cf.name = '1080p Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 850000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Remux FR' AND cf.name = '1080p WEBRip';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -6134,10 +6134,11 @@ UPDATE quality_profile_custom_formats SET score = 320000 WHERE quality_profile_n
 UPDATE quality_profile_custom_formats SET score = 420000 WHERE quality_profile_name IN ('1080p Balanced FR', '1080p Compact FR', '1080p Efficient FR', '1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Efficient FR', '2160p Quality FR', '2160p Remux FR', '720p Quality FR') AND custom_format_name = '576p Bluray';
 UPDATE quality_profile_custom_formats SET score = 540000 WHERE quality_profile_name IN ('1080p Balanced FR', '1080p Compact FR', '1080p Efficient FR', '1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Efficient FR', '2160p Quality FR', '2160p Remux FR', '720p Quality FR') AND custom_format_name IN ('720p Bluray', '720p WEBRip');
 UPDATE quality_profile_custom_formats SET score = 660000 WHERE quality_profile_name IN ('1080p Balanced FR', '1080p Compact FR', '1080p Efficient FR', '1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Efficient FR', '2160p Quality FR', '2160p Remux FR', '720p Quality FR') AND custom_format_name = '720p WEB-DL';
-UPDATE quality_profile_custom_formats SET score = 700000 WHERE quality_profile_name IN ('1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Quality FR', '2160p Remux FR') AND custom_format_name IN ('1080p Bluray', '1080p WEBRip');
+UPDATE quality_profile_custom_formats SET score = 880000 WHERE quality_profile_name IN ('1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Quality FR', '2160p Remux FR') AND custom_format_name = '1080p Bluray';
+UPDATE quality_profile_custom_formats SET score = 850000 WHERE quality_profile_name IN ('1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Quality FR', '2160p Remux FR') AND custom_format_name = '1080p WEBRip';
 UPDATE quality_profile_custom_formats SET score = 860000 WHERE quality_profile_name IN ('1080p Balanced FR', '1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Quality FR', '2160p Remux FR') AND custom_format_name = '1080p WEB-DL';
-UPDATE quality_profile_custom_formats SET score = 720000 WHERE quality_profile_name IN ('1080p Remux FR', '2160p Remux FR') AND custom_format_name = '1080p Bluray';
-UPDATE quality_profile_custom_formats SET score = 710000 WHERE quality_profile_name IN ('1080p Remux FR', '2160p Remux FR') AND custom_format_name = '1080p WEB-DL';
+UPDATE quality_profile_custom_formats SET score = 880000 WHERE quality_profile_name IN ('1080p Remux FR', '2160p Remux FR') AND custom_format_name = '1080p Bluray';
+UPDATE quality_profile_custom_formats SET score = 860000 WHERE quality_profile_name IN ('1080p Remux FR', '2160p Remux FR') AND custom_format_name = '1080p WEB-DL';
 UPDATE quality_profile_custom_formats SET score = 860000 WHERE quality_profile_name IN ('1080p Compact FR', '1080p Efficient FR', '2160p Efficient FR') AND custom_format_name = '1080p WEB-DL (h264)';
 UPDATE quality_profile_custom_formats SET score = 840000 WHERE quality_profile_name IN ('1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Quality FR', '2160p Remux FR') AND custom_format_name = 'UHD Bluray';
 UPDATE quality_profile_custom_formats SET score = 920000 WHERE quality_profile_name IN ('2160p Balanced FR', '2160p Quality FR', '2160p Remux FR') AND custom_format_name = '2160p WEB-DL';
@@ -6151,7 +6152,7 @@ WHERE qp.name IN ('1080p Balanced FR', '1080p Compact FR', '1080p Efficient FR',
   AND cf.name = '576p WEB-DL';
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'radarr', 700000 FROM quality_profiles qp, custom_formats cf
+SELECT qp.name, cf.name, 'radarr', 840000 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name IN ('1080p Efficient FR', '2160p Efficient FR') AND cf.name = '1080p Bluray AVC';
 
 -- Streaming-service adjustments from Dictionarry V2 that do not depend on release groups.

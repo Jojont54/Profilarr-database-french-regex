@@ -855,8 +855,8 @@ VALUES
   ('1080p Compact FR', '1080p WEB-DL HEVC', 'all', 850000),
   ('1080p Efficient FR', '1080p Bluray HEVC', 'all', 960000),
   ('1080p Efficient FR', '1080p WEB-DL HEVC', 'all', 940000),
-  ('1080p Efficient FR', '1080p WEB-DL AVC', 'all', 920000),
-  ('1080p Efficient FR', '1080p Bluray AVC', 'all', 900000),
+  ('1080p Efficient FR', '1080p WEB-DL AVC', 'all', 860000),
+  ('1080p Efficient FR', '1080p Bluray AVC', 'all', 840000),
   ('1080p Efficient FR', 'FR WEB Top Tier', 'all', 5000),
   ('1080p Efficient FR', 'FR WEB Tier 1', 'all', 4300),
   ('1080p Efficient FR', 'FR WEB Tier 2', 'all', 4200),
@@ -1010,18 +1010,18 @@ WHERE quality_profile_name IN (
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 VALUES
-  ('1080p Quality FR', '1080p WEBRip', 'all', 700000),
-  ('1080p Quality FR', '1080p Bluray', 'all', 720000),
-  ('1080p Quality HDR FR', '1080p WEBRip', 'all', 700000),
-  ('1080p Quality HDR FR', '1080p Bluray', 'all', 720000),
-  ('1080p Remux FR', '1080p WEBRip', 'all', 700000),
-  ('1080p Remux FR', '1080p Bluray', 'all', 720000),
-  ('2160p Balanced FR', '1080p WEBRip', 'all', 700000),
-  ('2160p Balanced FR', '1080p Bluray', 'all', 720000),
-  ('2160p Quality FR', '1080p WEBRip', 'all', 700000),
-  ('2160p Quality FR', '1080p Bluray', 'all', 720000),
-  ('2160p Remux FR', '1080p WEBRip', 'all', 700000),
-  ('2160p Remux FR', '1080p Bluray', 'all', 720000);
+  ('1080p Quality FR', '1080p WEBRip', 'all', 850000),
+  ('1080p Quality FR', '1080p Bluray', 'all', 880000),
+  ('1080p Quality HDR FR', '1080p WEBRip', 'all', 850000),
+  ('1080p Quality HDR FR', '1080p Bluray', 'all', 880000),
+  ('1080p Remux FR', '1080p WEBRip', 'all', 850000),
+  ('1080p Remux FR', '1080p Bluray', 'all', 880000),
+  ('2160p Balanced FR', '1080p WEBRip', 'all', 850000),
+  ('2160p Balanced FR', '1080p Bluray', 'all', 880000),
+  ('2160p Quality FR', '1080p WEBRip', 'all', 850000),
+  ('2160p Quality FR', '1080p Bluray', 'all', 880000),
+  ('2160p Remux FR', '1080p WEBRip', 'all', 850000),
+  ('2160p Remux FR', '1080p Bluray', 'all', 880000);
 
 DELETE FROM quality_profile_custom_formats
 WHERE quality_profile_name IN (
@@ -1037,13 +1037,13 @@ WHERE quality_profile_name IN (
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 VALUES
-  ('1080p Balanced FR', '1080p WEB-DL', 'all', 710000),
-  ('1080p Quality FR', '1080p WEB-DL', 'all', 710000),
-  ('1080p Quality HDR FR', '1080p WEB-DL', 'all', 710000),
-  ('1080p Remux FR', '1080p WEB-DL', 'all', 710000),
-  ('2160p Balanced FR', '1080p WEB-DL', 'all', 710000),
-  ('2160p Quality FR', '1080p WEB-DL', 'all', 710000),
-  ('2160p Remux FR', '1080p WEB-DL', 'all', 710000);
+  ('1080p Balanced FR', '1080p WEB-DL', 'all', 860000),
+  ('1080p Quality FR', '1080p WEB-DL', 'all', 860000),
+  ('1080p Quality HDR FR', '1080p WEB-DL', 'all', 860000),
+  ('1080p Remux FR', '1080p WEB-DL', 'all', 860000),
+  ('2160p Balanced FR', '1080p WEB-DL', 'all', 860000),
+  ('2160p Quality FR', '1080p WEB-DL', 'all', 860000),
+  ('2160p Remux FR', '1080p WEB-DL', 'all', 860000);
 
 -- 2160p Balanced follows the same split as 1080p: source/base CFs no longer
 -- carry release-group conditions, and team preference is scored separately by

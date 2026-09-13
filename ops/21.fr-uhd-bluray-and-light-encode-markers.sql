@@ -382,7 +382,7 @@ VALUES
   ('2160p 4KLight Bluray (Compact)', 'Matches non-tier 2160p 4KLight Bluray releases for 2160p Compact FR.'),
   ('2160p 4KLight WEBRip (Compact)', 'Matches non-tier 2160p 4KLight WEBRip releases for 2160p Compact FR.'),
   ('1080p HDLight Bluray (Compact)', 'Matches non-tier 1080p HDLight Bluray releases for 1080p Compact FR.'),
-  ('1080p HDLight WEBRip (Compact)', 'Matches non-tier 1080p HDLight WEB releases for 1080p Compact FR.'),
+  ('1080p HDLight WEBRip (Compact)', 'Matches non-tier 1080p HDLight WEB-DL or WEBRip releases for 1080p Compact FR.'),
   ('1080p WEBRip (Compact)', 'Matches non-tier 1080p WEBRip releases for Compact FR fallback.');
 
 WITH compact_light_cf(custom_format_name) AS (
@@ -414,7 +414,8 @@ VALUES
   ('1080p HDLight Bluray (Compact)', 'Bluray', 'source', 'all', 0, 1),
   ('1080p HDLight WEBRip (Compact)', 'HDLight', 'release_title', 'all', 0, 1),
   ('1080p HDLight WEBRip (Compact)', '1080p', 'resolution', 'all', 0, 1),
-  ('1080p HDLight WEBRip (Compact)', 'WEB Source', 'release_title', 'all', 0, 1),
+  ('1080p HDLight WEBRip (Compact)', 'WEB-DL', 'source', 'all', 0, 0),
+  ('1080p HDLight WEBRip (Compact)', 'WEBRip', 'source', 'all', 0, 0),
   ('1080p WEBRip (Compact)', '1080p', 'resolution', 'all', 0, 1),
   ('1080p WEBRip (Compact)', 'WEBRip', 'source', 'all', 0, 1);
 
@@ -423,8 +424,7 @@ VALUES
   ('2160p 4KLight Bluray (Compact)', '4KLight', '4KLight'),
   ('2160p 4KLight WEBRip (Compact)', '4KLight', '4KLight'),
   ('1080p HDLight Bluray (Compact)', 'HDLight', 'HDLight'),
-  ('1080p HDLight WEBRip (Compact)', 'HDLight', 'HDLight'),
-  ('1080p HDLight WEBRip (Compact)', 'WEB Source', 'WEB Source');
+  ('1080p HDLight WEBRip (Compact)', 'HDLight', 'HDLight');
 
 INSERT INTO condition_resolutions (custom_format_name, condition_name, resolution)
 VALUES
@@ -439,6 +439,8 @@ VALUES
   ('2160p 4KLight Bluray (Compact)', 'Bluray', 'bluray'),
   ('2160p 4KLight WEBRip (Compact)', 'WEBRip', 'webrip'),
   ('1080p HDLight Bluray (Compact)', 'Bluray', 'bluray'),
+  ('1080p HDLight WEBRip (Compact)', 'WEB-DL', 'web_dl'),
+  ('1080p HDLight WEBRip (Compact)', 'WEBRip', 'webrip'),
   ('1080p WEBRip (Compact)', 'WEBRip', 'webrip');
 
 WITH compact_cf_team(custom_format_name, condition_name, regular_expression_name) AS (
@@ -585,7 +587,7 @@ VALUES
   ('2160p Compact FR', '1080p WEBRip (Compact)', 'all', 865000);
 
 UPDATE quality_profile_custom_formats
-SET score = 840000
+SET score = 860000
 WHERE quality_profile_name = '2160p Compact FR'
   AND custom_format_name = '1080p WEB-DL AVC';
 

@@ -394,7 +394,7 @@ VALUES
   ('2160p Compact FR', 'FR 1080p WEB-DL HEVC Tier 1', 'sonarr', 830000),
   ('2160p Compact FR', 'FR 1080p Bluray HEVC Tier 1', 'radarr', 830000),
   ('2160p Compact FR', 'FR 1080p Bluray HEVC Tier 1', 'sonarr', 830000),
-  ('2160p Compact FR', '1080p Bluray AVC', 'radarr', 700000),
+  ('2160p Compact FR', '1080p Bluray AVC', 'radarr', 840000),
   ('2160p Compact FR', '1080p HDTV', 'radarr', 80000),
   ('2160p Compact FR', '1080p HDTV', 'sonarr', 80000),
   ('2160p Compact FR', 'FR Scene Tier', 'all', 4000),
