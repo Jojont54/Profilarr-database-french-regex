@@ -86,11 +86,6 @@ DELETE FROM quality_profile_custom_formats
 WHERE quality_profile_name = '2160p Efficient FR'
   AND custom_format_name = '2160p WEB-DL';
 
-INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-VALUES
-  ('2160p Efficient FR', '2160p WEB-DL AVC', 'radarr', 980000),
-  ('2160p Efficient FR', '2160p WEB-DL AVC', 'sonarr', 960000);
-
 -- UHD Bluray x265 uses a negative counterweight in Dictionarry V2 so blessed
 -- groups do not also inherit the full technical UHD Bluray score.
 UPDATE quality_profile_custom_formats

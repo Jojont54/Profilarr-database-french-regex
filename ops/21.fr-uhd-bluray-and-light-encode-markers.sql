@@ -512,8 +512,8 @@ WHERE custom_format_name = '1080p HDLight WEBRip'
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 VALUES
-  ('2160p Compact FR', '2160p 4KLight Bluray', 'all', 940000),
-  ('2160p Compact FR', '2160p 4KLight WEBRip', 'all', 900000),
+  ('2160p Compact FR', '2160p 4KLight Bluray', 'all', 960000),
+  ('2160p Compact FR', '2160p 4KLight WEBRip', 'all', 950000),
   ('1080p Compact FR', '1080p HDLight Bluray', 'all', 900000),
   ('1080p Compact FR', '1080p HDLight WEBRip', 'all', 870000),
   ('1080p Compact FR', '1080p WEBRip (Compact)', 'all', 865000),
