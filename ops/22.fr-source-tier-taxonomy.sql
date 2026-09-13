@@ -876,9 +876,9 @@ WHERE quality_profile_name = '1080p Efficient FR'
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 VALUES
-  ('1080p Compact FR', '1080p WEB-DL HEVC', 'all', 850000),
-  ('1080p Efficient FR', '1080p Bluray HEVC', 'all', 960000),
-  ('1080p Efficient FR', '1080p WEB-DL HEVC', 'all', 940000),
+  ('1080p Compact FR', '1080p WEB-DL HEVC', 'all', 900000),
+  ('1080p Efficient FR', '1080p Bluray HEVC', 'all', 890000),
+  ('1080p Efficient FR', '1080p WEB-DL HEVC', 'all', 900000),
   ('1080p Efficient FR', '1080p WEB-DL AVC', 'all', 860000),
   ('1080p Efficient FR', '1080p Bluray AVC', 'all', 840000),
   ('1080p Efficient FR', 'FR WEB Top Tier', 'all', 5000),
