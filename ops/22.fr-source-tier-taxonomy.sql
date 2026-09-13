@@ -1035,17 +1035,17 @@ WHERE quality_profile_name IN (
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 VALUES
   ('1080p Quality FR', '1080p WEBRip', 'all', 850000),
-  ('1080p Quality FR', '1080p Bluray', 'all', 880000),
+  ('1080p Quality FR', '1080p Bluray', 'all', 890000),
   ('1080p Quality HDR FR', '1080p WEBRip', 'all', 850000),
-  ('1080p Quality HDR FR', '1080p Bluray', 'all', 880000),
+  ('1080p Quality HDR FR', '1080p Bluray', 'all', 890000),
   ('1080p Remux FR', '1080p WEBRip', 'all', 850000),
-  ('1080p Remux FR', '1080p Bluray', 'all', 880000),
+  ('1080p Remux FR', '1080p Bluray', 'all', 890000),
   ('2160p Balanced FR', '1080p WEBRip', 'all', 850000),
-  ('2160p Balanced FR', '1080p Bluray', 'all', 880000),
+  ('2160p Balanced FR', '1080p Bluray', 'all', 890000),
   ('2160p Quality FR', '1080p WEBRip', 'all', 850000),
-  ('2160p Quality FR', '1080p Bluray', 'all', 880000),
+  ('2160p Quality FR', '1080p Bluray', 'all', 890000),
   ('2160p Remux FR', '1080p WEBRip', 'all', 850000),
-  ('2160p Remux FR', '1080p Bluray', 'all', 880000);
+  ('2160p Remux FR', '1080p Bluray', 'all', 890000);
 
 DELETE FROM quality_profile_custom_formats
 WHERE quality_profile_name IN (
