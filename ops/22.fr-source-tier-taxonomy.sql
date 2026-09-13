@@ -1410,7 +1410,7 @@ WHERE quality_profile_name = '2160p Efficient FR'
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 VALUES
-  ('2160p Efficient FR', '2160p WEB-DL HEVC', 'all', 975000),
+  ('2160p Efficient FR', '2160p WEB-DL HEVC', 'all', 920000),
   ('2160p Efficient FR', '1080p WEB-DL HEVC', 'all', 900000),
   ('2160p Efficient FR', '1080p Bluray HEVC', 'all', 890000),
   ('2160p Efficient FR', 'FR UHD Bluray Tier 1', 'all', 4200),

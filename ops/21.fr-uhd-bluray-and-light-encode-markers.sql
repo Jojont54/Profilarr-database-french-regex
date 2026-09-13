@@ -299,14 +299,14 @@ WHERE quality_profile_name IN (
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 VALUES
-  ('1080p Balanced FR', 'HDLight', 'all', -50000),
-  ('1080p Balanced FR', '4KLight', 'all', -50000),
-  ('1080p Efficient FR', 'HDLight', 'all', -50000),
-  ('1080p Efficient FR', '4KLight', 'all', -50000),
-  ('2160p Balanced FR', 'HDLight', 'all', -50000),
-  ('2160p Balanced FR', '4KLight', 'all', -50000),
-  ('2160p Efficient FR', 'HDLight', 'all', -50000),
-  ('2160p Efficient FR', '4KLight', 'all', -50000);
+  ('1080p Balanced FR', 'HDLight', 'all', -30000),
+  ('1080p Balanced FR', '4KLight', 'all', -30000),
+  ('1080p Efficient FR', 'HDLight', 'all', -30000),
+  ('1080p Efficient FR', '4KLight', 'all', -30000),
+  ('2160p Balanced FR', 'HDLight', 'all', -30000),
+  ('2160p Balanced FR', '4KLight', 'all', -30000),
+  ('2160p Efficient FR', 'HDLight', 'all', -30000),
+  ('2160p Efficient FR', '4KLight', 'all', -30000);
 
 -- Generic Compact Light source scores for releases outside the Compact team
 -- tiers. Tiered Compact teams are excluded so they do not double-score.
