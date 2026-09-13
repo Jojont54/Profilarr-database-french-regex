@@ -62,7 +62,7 @@ Les profils classiques priorisent `MULTi` / `French Original` > `VF` > `VOSTFR`.
 
 Les profils anime priorisent `MULTi` / `French Original` > `VOSTFR` > `VF`.
 
-Les teams utilisent la même échelle dans tous les profils: `Tier 1 = 9000`, `Tier 2 = 8000`, `Tier 3 = 7000` et `Tier 4 = 6000`. Les sources, résolutions, codecs et autres détails techniques sont scorés séparément.
+Les teams utilisent la même échelle dans tous les profils: `Tier 1 = 4000`, `Tier 2 = 3000`, `Tier 3 = 2000` et `Tier 4 = 1000`. Les sources, résolutions, codecs et autres détails techniques sont scorés séparément.
 
 ## Documentation
 

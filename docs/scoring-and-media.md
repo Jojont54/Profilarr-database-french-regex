@@ -36,13 +36,13 @@ Les tiers de teams peuvent rester sur une échelle intermédiaire si vous voulez
 La base applique désormais une échelle unique à tous les profils:
 
 ```text
-FR Team Tier 1 =  9000
-FR Team Tier 2 =  8000
-FR Team Tier 3 =  7000
-FR Team Tier 4 =  6000
+FR Team Tier 1 =  4000
+FR Team Tier 2 =  3000
+FR Team Tier 3 =  2000
+FR Team Tier 4 =  1000
 ```
 
-Dans les deux profils Anime, `FR Anime SubFr` vaut `7000` et `FR Anime FanSub` vaut `6000`. Ces catégories sont exclusives des quatre tiers génériques et ne peuvent donc pas se cumuler avec eux.
+Dans les deux profils Anime, `FR Anime SubFr` vaut `2000` et `FR Anime FanSub` vaut `1000`. Ces catégories sont exclusives des quatre tiers génériques et ne peuvent donc pas se cumuler avec eux.
 
 Les teams de `FR LQ` sont exclues des quatre tiers positifs, y compris du Tier 4. Elles conservent uniquement leur score de bannissement.
 

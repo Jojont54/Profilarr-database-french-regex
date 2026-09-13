@@ -24,13 +24,13 @@ INSERT INTO regular_expressions (name, pattern, description)
 VALUES
   (
     'HDLight',
-    '(?<=^|[\s._-])(?:mHD|miniHD|microHD|HD[\s._-]?(?:Light|Lite)|Re[\s._-]?(?:Encode|Enc)|BD[\s._-]?(?:Light|Lite)|BR[\s._-]?(?:Light|Lite)|WEB[\s._-]?(?:Light|Lite))(?=$|[\s._-])',
-    'Matches HDLight, mHD, miniHD, microHD, ReEnc, ReEncode, BDLight, BRLight and WEBLight markers.'
+    '(?<=^|[\s._\[\]-])(?:mHD|miniHD|microHD|HD[\s._-]?(?:Light|Lite)|Re[\s._-]?(?:Encode|Enc)|BD[\s._-]?(?:Light|Lite)|BR[\s._-]?(?:Light|Lite)|WEB[\s._-]?(?:Light|Lite))(?=$|[\s._\[\]-])',
+    'Matches HDLight, mHD, miniHD, microHD, ReEnc, ReEncode, BDLight, BRLight and WEBLight markers, including persisted [HDLight] names.'
   ),
   (
     '4KLight',
-    '(?<=^|[\s._-])(?:(?:4K|UHD)[\s._-]?Light|Re[\s._-]?(?:Encode|Enc)|BD[\s._-]?(?:Light|Lite)|BR[\s._-]?(?:Light|Lite)|WEB[\s._-]?(?:Light|Lite))(?=$|[\s._-])',
-    'Matches 4KLight, UHDLight, ReEnc, ReEncode, BDLight, BRLight and WEBLight markers.'
+    '(?<=^|[\s._\[\]-])(?:(?:4K|UHD)[\s._-]?Light|Re[\s._-]?(?:Encode|Enc)|BD[\s._-]?(?:Light|Lite)|BR[\s._-]?(?:Light|Lite)|WEB[\s._-]?(?:Light|Lite))(?=$|[\s._\[\]-])',
+    'Matches 4KLight, UHDLight, ReEnc, ReEncode, BDLight, BRLight and WEBLight markers, including persisted [4KLight] names.'
   );
 
 INSERT INTO regular_expression_tags (regular_expression_name, tag_name)
@@ -38,10 +38,10 @@ VALUES
   ('HDLight', 'Banned'),
   ('4KLight', 'Banned');
 
-INSERT INTO custom_formats (name, description)
+INSERT INTO custom_formats (name, description, include_in_rename)
 VALUES
-  ('HDLight', 'Matches HDLight and similar light/re-encode markers below 2160p.'),
-  ('4KLight', 'Matches 4KLight and similar light/re-encode markers on 2160p releases.');
+  ('HDLight', 'Matches HDLight and similar light/re-encode markers below 2160p.', 1),
+  ('4KLight', 'Matches 4KLight and similar light/re-encode markers on 2160p releases.', 1);
 
 INSERT INTO custom_format_tags (custom_format_name, tag_name)
 VALUES
@@ -299,14 +299,14 @@ WHERE quality_profile_name IN (
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
 VALUES
-  ('1080p Balanced FR', 'HDLight', 'all', -30000),
-  ('1080p Balanced FR', '4KLight', 'all', -30000),
-  ('1080p Efficient FR', 'HDLight', 'all', -30000),
-  ('1080p Efficient FR', '4KLight', 'all', -30000),
-  ('2160p Balanced FR', 'HDLight', 'all', -30000),
-  ('2160p Balanced FR', '4KLight', 'all', -30000),
-  ('2160p Efficient FR', 'HDLight', 'all', -30000),
-  ('2160p Efficient FR', '4KLight', 'all', -30000);
+  ('1080p Balanced FR', 'HDLight', 'all', -20000),
+  ('1080p Balanced FR', '4KLight', 'all', -20000),
+  ('1080p Efficient FR', 'HDLight', 'all', -20000),
+  ('1080p Efficient FR', '4KLight', 'all', -20000),
+  ('2160p Balanced FR', 'HDLight', 'all', -20000),
+  ('2160p Balanced FR', '4KLight', 'all', -20000),
+  ('2160p Efficient FR', 'HDLight', 'all', -20000),
+  ('2160p Efficient FR', '4KLight', 'all', -20000);
 
 -- Generic Compact Light source scores for releases outside the Compact team
 -- tiers. Tiered Compact teams are excluded so they do not double-score.

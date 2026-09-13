@@ -354,14 +354,14 @@
   },
   "scores": {
     "all_profiles": {
-      "FR Team Tier 1": 9000,
-      "FR Team Tier 2": 8000,
-      "FR Team Tier 3": 7000,
-      "FR Team Tier 4": 6000
+      "FR Team Tier 1": 4000,
+      "FR Team Tier 2": 3000,
+      "FR Team Tier 3": 2000,
+      "FR Team Tier 4": 1000
     },
     "anime_profiles_only": {
-      "FR Anime SubFr": 7000,
-      "FR Anime FanSub": 6000
+      "FR Anime SubFr": 2000,
+      "FR Anime FanSub": 1000
     },
     "profiles": [
       "1080p Balanced FR",

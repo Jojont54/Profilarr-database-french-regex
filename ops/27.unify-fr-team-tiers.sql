@@ -419,10 +419,10 @@ WITH target_profile(name) AS (
     ('Anime 1080p VOSTFR FR')
 ), tier(custom_format_name, score) AS (
   VALUES
-    ('FR Team Tier 1', 9000),
-    ('FR Team Tier 2', 8000),
-    ('FR Team Tier 3', 7000),
-    ('FR Team Tier 4', 6000)
+    ('FR Team Tier 1', 4000),
+    ('FR Team Tier 2', 3000),
+    ('FR Team Tier 3', 2000),
+    ('FR Team Tier 4', 1000)
 )
 INSERT INTO quality_profile_custom_formats (
   quality_profile_name, custom_format_name, arr_type, score
@@ -442,8 +442,8 @@ WITH anime_profile(name) AS (
     ('Anime 1080p VOSTFR FR')
 ), specialist(custom_format_name, score) AS (
   VALUES
-    ('FR Anime SubFr', 7000),
-    ('FR Anime FanSub', 6000)
+    ('FR Anime SubFr', 2000),
+    ('FR Anime FanSub', 1000)
 )
 INSERT INTO quality_profile_custom_formats (
   quality_profile_name, custom_format_name, arr_type, score
