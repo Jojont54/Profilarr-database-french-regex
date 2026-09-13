@@ -25,6 +25,12 @@ L'objectif est simple: garder la base technique Dictionarry, puis ajouter une co
 
 Pour une nouvelle installation, utilisez `stable`.
 
+## Synchronisation
+
+Après certaines mises à jour, il peut être nécessaire de supprimer tous les Custom Formats de Radarr et Sonarr, puis de relancer une synchronisation. Cela permet de retirer les CF qui ne sont plus utilisés et de simplifier la lecture des tags lors du grab.
+
+Cette recommandation vaut pour toutes les bases utilisées avec Profilarr, pas uniquement pour cette DB.
+
 ## Ce que contient la DB
 
 - Regex atomiques pour les teams FR.
