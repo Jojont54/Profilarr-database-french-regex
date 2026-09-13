@@ -419,12 +419,12 @@ WITH target_profile(name) AS (
     ('Anime 1080p VOSTFR FR')
 ), tier(custom_format_name, score) AS (
   VALUES
-    ('FR Team Tier 1', 10000),
+    ('FR Team Tier 1', 9000),
     ('FR Team Tier 2', 8000),
-    ('FR Team Tier 3', 6000),
-    ('FR Team Tier 4', 4000)
+    ('FR Team Tier 3', 7000),
+    ('FR Team Tier 4', 6000)
 )
-INSERT OR IGNORE INTO quality_profile_custom_formats (
+INSERT INTO quality_profile_custom_formats (
   quality_profile_name, custom_format_name, arr_type, score
 )
 SELECT target_profile.name, tier.custom_format_name, 'all', tier.score
@@ -432,21 +432,23 @@ FROM target_profile CROSS JOIN tier
 WHERE EXISTS (
   SELECT 1 FROM quality_profiles qp
   WHERE qp.name = target_profile.name
-);
+)
+ON CONFLICT(quality_profile_name, custom_format_name, arr_type)
+DO UPDATE SET score = excluded.score;
 
 WITH anime_profile(name) AS (
   VALUES
     ('Anime 1080p FR'),
     ('Anime 1080p VOSTFR FR')
-), specialist(custom_format_name) AS (
+), specialist(custom_format_name, score) AS (
   VALUES
-    ('FR Anime SubFr'),
-    ('FR Anime FanSub')
+    ('FR Anime SubFr', 7000),
+    ('FR Anime FanSub', 6000)
 )
 INSERT INTO quality_profile_custom_formats (
   quality_profile_name, custom_format_name, arr_type, score
 )
-SELECT anime_profile.name, specialist.custom_format_name, 'all', 6000
+SELECT anime_profile.name, specialist.custom_format_name, 'all', specialist.score
 FROM anime_profile CROSS JOIN specialist
 WHERE EXISTS (
   SELECT 1 FROM quality_profiles qp
