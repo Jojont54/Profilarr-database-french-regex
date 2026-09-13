@@ -384,6 +384,49 @@
     "French MULTi + Team FR (INTL)": "Uses generic FR teams only. Anime SubFr and FanSub specialists are excluded.",
     "French MultiSub + Team FR (INTL)": "Uses generic FR teams and the Anime SubFr/FanSub specialists."
   },
+  "compact_size_penalties": {
+    "policy": "Exclusive size bands use a small 0 to -700 scale so size only breaks ties between otherwise comparable releases.",
+    "radarr_1080p_gib": {
+      "up_to_2": 0,
+      "2_to_3": -100,
+      "3_to_4": -200,
+      "4_to_6": -300,
+      "6_to_8": -400,
+      "8_to_10": -500,
+      "10_to_15": -600,
+      "over_15": -700
+    },
+    "radarr_2160p_gib": {
+      "up_to_6": 0,
+      "6_to_8": -100,
+      "8_to_10": -200,
+      "10_to_12": -300,
+      "12_to_15": -400,
+      "15_to_18": -500,
+      "18_to_25": -600,
+      "over_25": -700
+    },
+    "sonarr_1080p": {
+      "season_pack_up_to_10_gib": 0,
+      "episode_up_to_800_mib": -100,
+      "season_pack_10_to_20_gib": -200,
+      "episode_800_mib_to_1_2_gib": -300,
+      "season_pack_20_to_35_gib": -400,
+      "episode_1_2_to_2_gib": -500,
+      "season_pack_over_35_gib": -600,
+      "episode_over_2_gib": -700
+    },
+    "sonarr_2160p": {
+      "season_pack_up_to_20_gib": 0,
+      "episode_up_to_2_gib": -100,
+      "season_pack_20_to_30_gib": -200,
+      "episode_2_to_3_gib": -300,
+      "season_pack_30_to_50_gib": -400,
+      "episode_3_to_5_gib": -500,
+      "season_pack_over_50_gib": -600,
+      "episode_over_5_gib": -700
+    }
+  },
   "validation": {
     "pcd_schema": "1.1.0",
     "team_regex_count": 425,

@@ -35,6 +35,7 @@ Pour une nouvelle installation, utilisez `stable`.
 - Les teams Low Quality restent exclusivement dans `FR LQ` et ne sont incluses dans aucun tier positif.
 - Deux catégories Anime spécialisées: `FR Anime SubFr` et `FR Anime FanSub`.
 - Profils FR basés sur la logique Dictionarry V2.
+- Paliers de taille dédiés aux profils Compact, de `0` à `-700`, pour préférer les releases les plus légères sans perturber leur hiérarchie principale.
 - Base technique commune maintenue avec les évolutions utiles de Dictionarry: sources, codecs, HDR/Dolby Vision/SDR, Extras, CAM et plateformes de streaming.
 - Media Management aligné sur Dictionarry et Delay Profiles FR prêts à l'emploi.
 - Profils anglophones et tiers US retirés de la publication V2 FR pour garder une base plus légère.

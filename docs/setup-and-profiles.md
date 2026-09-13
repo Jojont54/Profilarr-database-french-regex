@@ -36,18 +36,19 @@ Anime 1080p VOSTFR FR
 
 ## Quel profil choisir
 
-- `1080p Balanced FR`: usage général 1080p WEB-DL AVC/x264. 
-- `1080p Compact FR`: fichiers plus petits, logique HDLight.
-- `1080p Efficient FR`: 1080p efficace, orienté HEVC/x265 fiable.
-- `1080p Quality FR`: qualité 1080p plus haute.
-- `1080p Remux FR`: priorité aux remux 1080p, fallback qualité.
-- `2160p Balanced FR`: 4K WEB-DL stable, avec fallback 1080p Quality.
-- `2160p Compact FR`: 4KLight en priorité, avec fallback 1080p.
-- `2160p Efficient FR`: 4K efficace, avec fallback 1080p Efficient.
-- `2160p Quality FR`: 4K qualité, avec fallback 1080p Quality.
-- `2160p Remux FR`: priorité aux remux 2160p, avec fallback 2160p Quality et 1080p Remux.
-- `Anime 1080p FR`: anime 1080p sur l'échelle Dictionarry de 1 000 000 points, avec un socle technique proche de `1080p Quality FR` et la priorité `MULTi` / `French Original` > `VOSTFR` > `VF`.
-- `Anime 1080p VOSTFR FR`: même scoring technique et mêmes tiers Anime, avec une sélection strictement VOSTFR.
+- `1080p Balanced FR`: WEB-DL 1080p x264 stable, avec fallback HDLight x264 puis 720p, sans x265 ni Blu-ray.
+- `1080p Compact FR`: HDLight et encodes x265 légers, avec fallback Efficient x265 puis 720p et paliers de taille de 0 à -700.
+- `1080p Efficient FR`: encodes Blu-ray et WEB x265, avec fallback HDLight x265 puis x264.
+- `1080p Quality FR`: encodes x264 transparents, avec fallback Balanced puis 720p pour préserver la compatibilité client.
+- `1080p Quality HDR FR`: encodes x265 transparents uniquement lorsqu'ils sont HDR.
+- `1080p Remux FR`: priorité aux remux 1080p, avec fallback Quality puis Balanced.
+- `2160p Balanced FR`: WEB-DL 2160p stable, sans Blu-ray 2160p, avec fallback Quality 1080p.
+- `2160p Compact FR`: 4KLight en priorité, avec fallback Efficient 1080p x265 et paliers de taille de 0 à -700.
+- `2160p Efficient FR`: WEB-DL 2160p efficace, sans Blu-ray 2160p, avec fallback Efficient 1080p.
+- `2160p Quality FR`: Blu-ray et WEB-DL 2160p sans concession, avec fallback Quality 1080p.
+- `2160p Remux FR`: priorité aux remux 2160p, avec fallback Quality 2160p sans concession.
+- `Anime 1080p FR`: compromis entre Efficient et Quality sans préférence entre x264 et x265, avec la priorité `MULTi` / `French Original` > `VOSTFR` > `VF`.
+- `Anime 1080p VOSTFR FR`: même logique technique et mêmes tiers Anime, sans audio français et avec une sélection strictement VOSTFR.
 
 Les profils sont des bases de départ. Vous pouvez adapter les scores selon vos trackers, votre stockage et vos préférences.
 

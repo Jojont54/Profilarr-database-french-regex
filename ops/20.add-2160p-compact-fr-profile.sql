@@ -295,13 +295,15 @@ SELECT custom_format_name, regular_expression_name, regular_expression_name
 FROM tier_groups;
 
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
-VALUES ('2160p Compact FR', '2160p Compact FR cible des encodes BluRay x265 de type 4K Light,
-avec des fichiers plus legers.
+VALUES ('2160p Compact FR', '2160p Compact FR cible des encodes Blu-ray x265 de type 4KLight,
+avec des fichiers plus légers.
 
-- Taille moyenne film ~ 8 a 18 Go par film
-- Classement qualite film ~ 5/10
-- Taille moyenne serie ~ 3 a 6 Go par episode
-- Classement qualite serie ~ 5/10', 1, 20000, 1000000, 1);
+- Taille moyenne film ~ 8 à 18 Go par film
+- Classement qualité film ~ 5/10
+- Taille moyenne série ~ 3 à 6 Go par épisode
+- Classement qualité série ~ 5/10
+- Fallback : Efficient 1080p x265
+- La taille des releases est départagée par paliers de 0 à -700', 1, 20000, 1000000, 1);
 
 WITH tags(tag_name) AS (
   VALUES ('2160p'), ('Compact Focused'), ('French'), ('Lossy Audio'), ('h265'), ('x265')

@@ -159,29 +159,62 @@ Pour Sonarr, soyez plus souple que pour Radarr: un épisode de 20 minutes, un é
 
 ### Custom Formats de taille
 
-Radarr/Sonarr permettent aussi des Custom Formats basés sur la taille. Ils peuvent donner un bonus si une release tombe dans une plage précise.
+Les profils `1080p Compact FR` et `2160p Compact FR` utilisent des Custom Formats de taille sur une petite échelle allant de `0` à `-700`. Ces malus départagent des releases comparables sans renverser les priorités de source, de résolution ou de team.
 
-Exemple:
+Chaque tranche impose sa résolution. Dans `2160p Compact FR`, les paliers 2160p ne pénalisent donc pas le fallback 1080p.
 
-```text
-Taille parfaite Radarr: 16 Go à 48 Go
-```
+#### Radarr 1080p Compact
 
-Cela peut être utile pour Radarr, car un film est une unité assez stable.
+| Taille du film | Score |
+|---|---:|
+| Jusqu'à 2 Gio | 0 |
+| Plus de 2 à 3 Gio | -100 |
+| Plus de 3 à 4 Gio | -200 |
+| Plus de 4 à 6 Gio | -300 |
+| Plus de 6 à 8 Gio | -400 |
+| Plus de 8 à 10 Gio | -500 |
+| Plus de 10 à 15 Gio | -600 |
+| Plus de 15 Gio | -700 |
 
-Pour Sonarr, c'est plus difficile:
+#### Radarr 2160p Compact
 
-- épisode de 20 minutes;
-- épisode de 55 minutes;
-- double épisode;
-- season pack;
-- saison de 6 épisodes;
-- saison de 24 épisodes.
+| Taille du film | Score |
+|---|---:|
+| Jusqu'à 6 Gio | 0 |
+| Plus de 6 à 8 Gio | -100 |
+| Plus de 8 à 10 Gio | -200 |
+| Plus de 10 à 12 Gio | -300 |
+| Plus de 12 à 15 Gio | -400 |
+| Plus de 15 à 18 Gio | -500 |
+| Plus de 18 à 25 Gio | -600 |
+| Plus de 25 Gio | -700 |
 
-Un seul seuil de taille peut donc être trompeur.
+#### Sonarr 1080p Compact
 
-## Recommandation taille
+| Type et taille | Score de taille | Avec `Season Pack +10` |
+|---|---:|---:|
+| Season Pack jusqu'à 10 Gio | 0 | +10 |
+| Épisode jusqu'à 800 Mio | -100 | -100 |
+| Season Pack de plus de 10 à 20 Gio | -200 | -190 |
+| Épisode de plus de 800 Mio à 1,2 Gio | -300 | -300 |
+| Season Pack de plus de 20 à 35 Gio | -400 | -390 |
+| Épisode de plus de 1,2 à 2 Gio | -500 | -500 |
+| Season Pack de plus de 35 Gio | -600 | -590 |
+| Épisode de plus de 2 Gio | -700 | -700 |
 
-- Utilisez les Quality Definitions pour empêcher les tailles clairement hors cible.
-- Gardez les Custom Formats de taille comme bonus optionnel, surtout côté Radarr.
-- Soyez prudent avec Sonarr, particulièrement pour les season packs.
+#### Sonarr 2160p Compact
+
+| Type et taille | Score de taille | Avec `Season Pack +10` |
+|---|---:|---:|
+| Season Pack jusqu'à 20 Gio | 0 | +10 |
+| Épisode jusqu'à 2 Gio | -100 | -100 |
+| Season Pack de plus de 20 à 30 Gio | -200 | -190 |
+| Épisode de plus de 2 à 3 Gio | -300 | -300 |
+| Season Pack de plus de 30 à 50 Gio | -400 | -390 |
+| Épisode de plus de 3 à 5 Gio | -500 | -500 |
+| Season Pack de plus de 50 Gio | -600 | -590 |
+| Épisode de plus de 5 Gio | -700 | -700 |
+
+Les tranches sont strictement exclusives. Côté Sonarr, chaque CF impose aussi `Season Pack` ou `Not Season Pack`, ce qui empêche le cumul des paliers et conserve le bonus `Season Pack +10` comme simple départage.
+
+Les Quality Definitions restent le garde-fou global pour refuser les fichiers absurdes. Ces Custom Formats servent uniquement à préférer la release la plus légère parmi les choix déjà acceptables.
