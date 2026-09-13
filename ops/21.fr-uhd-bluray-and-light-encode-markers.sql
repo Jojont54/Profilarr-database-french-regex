@@ -316,7 +316,7 @@ VALUES
   ('2160p 4KLight WEBRip', 'Matches non-tier 2160p 4KLight WEBRip releases for 2160p Compact FR.'),
   ('1080p HDLight Bluray', 'Matches non-tier 1080p HDLight Bluray releases for 1080p Compact FR.'),
   ('1080p HDLight WEBRip', 'Matches non-tier 1080p HDLight WEB-DL or WEBRip releases for 1080p Compact FR.'),
-  ('1080p WEBRip (Compact)', 'Matches non-tier 1080p WEBRip releases for Compact FR fallback.');
+  ('1080p WEBRip (Compact)', 'Matches non-tier 1080p WEBRip releases without an HDLight marker for Compact FR fallback.');
 
 WITH compact_light_cf(custom_format_name) AS (
   VALUES
@@ -350,14 +350,16 @@ VALUES
   ('1080p HDLight WEBRip', 'WEB-DL', 'source', 'all', 0, 0),
   ('1080p HDLight WEBRip', 'WEBRip', 'source', 'all', 0, 0),
   ('1080p WEBRip (Compact)', '1080p', 'resolution', 'all', 0, 1),
-  ('1080p WEBRip (Compact)', 'WEBRip', 'source', 'all', 0, 1);
+  ('1080p WEBRip (Compact)', 'WEBRip', 'source', 'all', 0, 1),
+  ('1080p WEBRip (Compact)', 'Not HDLight', 'release_title', 'all', 1, 1);
 
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
 VALUES
   ('2160p 4KLight Bluray', '4KLight', '4KLight'),
   ('2160p 4KLight WEBRip', '4KLight', '4KLight'),
   ('1080p HDLight Bluray', 'HDLight', 'HDLight'),
-  ('1080p HDLight WEBRip', 'HDLight', 'HDLight');
+  ('1080p HDLight WEBRip', 'HDLight', 'HDLight'),
+  ('1080p WEBRip (Compact)', 'Not HDLight', 'HDLight');
 
 INSERT INTO condition_resolutions (custom_format_name, condition_name, resolution)
 VALUES
