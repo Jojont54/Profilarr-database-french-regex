@@ -7722,11 +7722,11 @@ INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, 
 INSERT INTO condition_sources (custom_format_name, condition_name, source) VALUES ('576p WEB-DL', 'WEB-DL', 'web_dl');
 INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = '576p WEB-DL' AND t.name = 'Source';
 
-INSERT INTO custom_formats (name, description) VALUES ('1080p Bluray (Efficient)', 'Matches 1080p x264 Blurays as an Efficient movie fallback.');
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('1080p Bluray (Efficient)', '1080p', 'resolution', 'all', 0, 1);
-INSERT INTO condition_resolutions (custom_format_name, condition_name, resolution) VALUES ('1080p Bluray (Efficient)', '1080p', '1080p');
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('1080p Bluray (Efficient)', 'Bluray', 'source', 'all', 0, 1);
-INSERT INTO condition_sources (custom_format_name, condition_name, source) VALUES ('1080p Bluray (Efficient)', 'Bluray', 'bluray');
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('1080p Bluray (Efficient)', 'x264', 'release_title', 'all', 0, 1);
-INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('1080p Bluray (Efficient)', 'x264', 'AVC');
-INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = '1080p Bluray (Efficient)' AND t.name = 'Source';
+INSERT INTO custom_formats (name, description) VALUES ('1080p Bluray AVC', 'Matches 1080p x264 Blurays as an Efficient movie fallback.');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('1080p Bluray AVC', '1080p', 'resolution', 'all', 0, 1);
+INSERT INTO condition_resolutions (custom_format_name, condition_name, resolution) VALUES ('1080p Bluray AVC', '1080p', '1080p');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('1080p Bluray AVC', 'Bluray', 'source', 'all', 0, 1);
+INSERT INTO condition_sources (custom_format_name, condition_name, source) VALUES ('1080p Bluray AVC', 'Bluray', 'bluray');
+INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES ('1080p Bluray AVC', 'x264', 'release_title', 'all', 0, 1);
+INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name) VALUES ('1080p Bluray AVC', 'x264', 'AVC');
+INSERT INTO custom_format_tags (custom_format_name, tag_name) SELECT cf.name, t.name FROM custom_formats cf, tags t WHERE cf.name = '1080p Bluray AVC' AND t.name = 'Source';

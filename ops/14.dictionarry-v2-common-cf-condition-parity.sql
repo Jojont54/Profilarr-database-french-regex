@@ -115,10 +115,10 @@ SET condition_name = 'AI Movies Upscale'
 WHERE custom_format_name = 'Upscale'
   AND condition_name = 'AI Movie Upscale';
 
--- 2160p WEB-DL (Efficient) keeps Dictionarry's exceptions for high-trust HEVC
+-- 2160p WEB-DL AVC keeps Dictionarry's exceptions for high-trust HEVC
 -- groups so those releases do not double-score with the generic source CF.
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-SELECT '2160p WEB-DL (Efficient)', v.name, v.type, 'all', 1, 1
+SELECT '2160p WEB-DL AVC', v.name, v.type, 'all', 1, 1
 FROM (
   SELECT 'Not QxR' AS name, 'release_group' AS type
   UNION ALL SELECT 'Not QxR Title', 'release_title'
@@ -128,11 +128,11 @@ FROM (
 ) v
 WHERE NOT EXISTS (
   SELECT 1 FROM custom_format_conditions cfc
-  WHERE cfc.custom_format_name = '2160p WEB-DL (Efficient)' AND cfc.name = v.name
+  WHERE cfc.custom_format_name = '2160p WEB-DL AVC' AND cfc.name = v.name
 );
 
 INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expression_name)
-SELECT '2160p WEB-DL (Efficient)', v.condition_name, v.regex_name
+SELECT '2160p WEB-DL AVC', v.condition_name, v.regex_name
 FROM (
   SELECT 'Not QxR' AS condition_name, 'QxR' AS regex_name
   UNION ALL SELECT 'Not QxR Title', 'QxR (Title)'
@@ -142,7 +142,7 @@ FROM (
 ) v
 WHERE NOT EXISTS (
   SELECT 1 FROM condition_patterns cp
-  WHERE cp.custom_format_name = '2160p WEB-DL (Efficient)'
+  WHERE cp.custom_format_name = '2160p WEB-DL AVC'
     AND cp.condition_name = v.condition_name
 );
 -- --- END op 9014

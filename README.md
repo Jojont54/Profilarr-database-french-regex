@@ -25,14 +25,23 @@ L'objectif est simple: garder la base technique Dictionarry, puis ajouter une co
 
 Pour une nouvelle installation, utilisez `stable`.
 
+## Synchronisation
+
+Après certaines mises à jour, il peut être nécessaire de supprimer tous les Custom Formats de Radarr et Sonarr, puis de relancer une synchronisation. Cela permet de retirer les CF qui ne sont plus utilisés et de simplifier la lecture des tags lors du grab.
+
+Cette recommandation vaut pour toutes les bases utilisées avec Profilarr, pas uniquement pour cette DB.
+
 ## Ce que contient la DB
 
 - Regex atomiques pour les teams FR.
 - Custom Formats FR de langue: `French MULTi`, `French Original`, `French VF`, `French VOSTFR`, `French VFQ`, `French Missing`.
 - Custom Formats `INTL` pour les trackers internationaux.
 - Langues MediaInfo conservées sous la forme `[audio]([sous-titres])` au renommage pour que les Custom Formats de langue restent détectables après l'import.
-- Tiers FR inspirés et recoupés avec plusieurs sources francophones.
+- Quatre tiers de teams FR communs à toutes les sources et tous les profils, construits à partir des anciens classements WEB, Bluray, Remux, Anime et Scene.
+- Les teams Low Quality restent exclusivement dans `FR LQ` et ne sont incluses dans aucun tier positif.
+- Deux catégories Anime spécialisées: `FR Anime SubFr` et `FR Anime FanSub`.
 - Profils FR basés sur la logique Dictionarry V2.
+- Paliers de taille dédiés aux profils Compact, de `0` à `-700`, pour préférer les releases les plus légères sans perturber leur hiérarchie principale.
 - Base technique commune maintenue avec les évolutions utiles de Dictionarry: sources, codecs, HDR/Dolby Vision/SDR, Extras, CAM et plateformes de streaming.
 - Media Management aligné sur Dictionarry et Delay Profiles FR prêts à l'emploi.
 - Profils anglophones et tiers US retirés de la publication V2 FR pour garder une base plus légère.
@@ -59,6 +68,8 @@ Anime 1080p VOSTFR FR
 Les profils classiques priorisent `MULTi` / `French Original` > `VF` > `VOSTFR`.
 
 Les profils anime priorisent `MULTi` / `French Original` > `VOSTFR` > `VF`.
+
+Les teams utilisent la même échelle dans tous les profils: `Tier 1 = 4000`, `Tier 2 = 3000`, `Tier 3 = 2000` et `Tier 4 = 1000`. Les sources, résolutions, codecs et autres détails techniques sont scorés séparément.
 
 ## Documentation
 
