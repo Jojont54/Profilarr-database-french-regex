@@ -302,8 +302,8 @@ avec des fichiers plus légers.
 - Classement qualité film ~ 5/10
 - Taille moyenne série ~ 3 à 6 Go par épisode
 - Classement qualité série ~ 5/10
-- Fallback : Efficient 1080p x265
-- La taille des releases est départagée par paliers de 0 à -700', 1, 20000, 1000000, 1);
+
+Fallback 1080p Efficient x265, avec une échelle de score basée sur la taille des releases.', 1, 20000, 1000000, 1);
 
 WITH tags(tag_name) AS (
   VALUES ('2160p'), ('Compact Focused'), ('French'), ('Lossy Audio'), ('h265'), ('x265')

@@ -38,7 +38,7 @@ Anime 1080p VOSTFR FR
 
 - `1080p Balanced FR`: WEB-DL 1080p x264 stable, avec fallback HDLight x264 puis 720p, sans x265 ni Blu-ray.
 - `1080p Compact FR`: HDLight et encodes x265 légers, avec fallback Efficient x265 puis 720p et paliers de taille de 0 à -700.
-- `1080p Efficient FR`: encodes Blu-ray et WEB x265, avec fallback HDLight x265 puis x264.
+- `1080p Efficient FR`: encodes Blu-ray et WEB x265, avec fallback HDLight x265 puis WEB et Blu-ray x264.
 - `1080p Quality FR`: encodes x264 transparents, avec fallback Balanced puis 720p pour préserver la compatibilité client.
 - `1080p Quality HDR FR`: encodes x265 transparents uniquement lorsqu'ils sont HDR.
 - `1080p Remux FR`: priorité aux remux 1080p, avec fallback Quality puis Balanced.
