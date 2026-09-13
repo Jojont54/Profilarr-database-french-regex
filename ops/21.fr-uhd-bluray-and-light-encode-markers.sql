@@ -8,24 +8,9 @@
 -- ============================================================================
 -- French UHD Bluray and Light encode markers
 -- French releases do not commonly use the Dictionarry/US convention where
--- "UHD Bluray" means a 1080p encode sourced from a UHD disc. In this database,
--- UHD Bluray is treated as 2160p UHD Bluray and does not require an explicit
--- HDR marker.
+-- "UHD Bluray" means a 1080p encode sourced from a UHD disc. Keep the 1080p
+-- resolution condition from the base CF, without requiring an explicit HDR marker.
 -- ============================================================================
-
-DELETE FROM condition_resolutions
-WHERE custom_format_name = 'UHD Bluray'
-  AND condition_name = '1080p';
-
-DELETE FROM custom_format_conditions
-WHERE custom_format_name = 'UHD Bluray'
-  AND name = '1080p';
-
-INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required)
-VALUES ('UHD Bluray', '2160p', 'resolution', 'all', 0, 1);
-
-INSERT INTO condition_resolutions (custom_format_name, condition_name, resolution)
-VALUES ('UHD Bluray', '2160p', '2160p');
 
 DELETE FROM condition_patterns
 WHERE custom_format_name = 'UHD Bluray'
