@@ -7,7 +7,7 @@
 -- --- BEGIN op 9017 ( batch align 2160p efficient fr with dictionarry web model )
 -- Align 2160p Efficient FR with Dictionarry V2's WEB model.
 --
--- Dictionarry keeps 2160p WEB-DL (Efficient) as the main WEB score and uses
+-- Dictionarry keeps the 2160p WEB-DL AVC source CF as the main WEB score and uses
 -- high-trust group tiers mainly for Bluray/HEVC exceptions. Keeping separate
 -- TV WEB group tiers creates fragile double scoring with the technical 2160p
 -- WEB-DL score, so remove the TV composite WEB tier and its neutralizer.

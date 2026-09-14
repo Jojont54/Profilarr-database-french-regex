@@ -12,7 +12,9 @@ les sources techniques de Dictionarry avec les tiers de teams Anime FR.
 - Priorise MULTi / French Original, puis VOSTFR, puis VF
 - Accepte les encodes anime HEVC/x265 et HDR
 - Rejette VFQ, les groupes de faible qualité et les releases sans marqueur français explicite
-- Utilise une échelle maximale de 1 000 000 points comme les autres profils FR',
+- Utilise une échelle maximale de 1 000 000 points comme les autres profils FR
+
+Aucune préférence entre x264 et x265, avec un compromis entre Efficient et Quality.',
     minimum_custom_format_score = 20000,
     upgrade_until_score = 1000000,
     upgrade_score_increment = 1
@@ -25,7 +27,9 @@ tiers de teams que le profil Anime 1080p FR, mais impose strictement la VOSTFR.
 - Accepte uniquement les releases détectées VOSTFR
 - Accepte les encodes anime HEVC/x265 et HDR
 - Rejette MULTi, VF, VFQ, French Original et les releases sans marqueur français explicite
-- Utilise une échelle maximale de 1 000 000 points comme les autres profils FR',
+- Utilise une échelle maximale de 1 000 000 points comme les autres profils FR
+
+Logique identique à Anime 1080p FR, sans audio français.',
     minimum_custom_format_score = 20000,
     upgrade_until_score = 1000000,
     upgrade_score_increment = 1

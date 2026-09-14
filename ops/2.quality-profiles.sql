@@ -7,81 +7,101 @@ INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custo
 VALUES ('1080p Balanced FR', '1080p Balanced FR cible des **WEB-DL 1080p** fiables et stables, en utilisant
 la source de streaming et les formats audio pour estimer le niveau de transparence.
 
-- Taille moyenne film ~ 4 a 8 Go par film
-- Classement qualite film ~ 6/10
-- Taille moyenne serie ~ 2 a 4 Go par episode
-- Classement qualite serie ~ 7/10', 1, 20000, 1000000, 1);
-INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
-VALUES ('1080p Compact FR', '1080p Compact FR cible des encodes BluRay et WEB x265 de qualite faible a moyenne,
-avec des fichiers plus legers.
+- Taille moyenne film ~ 4 à 8 Go par film
+- Classement qualité film ~ 6/10
+- Taille moyenne série ~ 2 à 4 Go par épisode
+- Classement qualité série ~ 7/10
 
-- Taille moyenne film ~ 3 a 6 Go par film
-- Classement qualite film ~ 4/10
-- Taille moyenne serie ~ 1 a 2 Go par episode
-- Classement qualite serie ~ 4/10', 1, 20000, 1000000, 1);
+Fallback HDLight x264 et 720p, sans x265 pour la compatibilité ni Blu-ray pour limiter l''espace.', 1, 20000, 1000000, 1);
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
-VALUES ('1080p Efficient FR', '1080p Efficient FR cible des encodes BluRay et WEB x265 de bonne qualite, avec
+VALUES ('1080p Compact FR', '1080p Compact FR cible des encodes Blu-ray et WEB x265 de qualité faible à moyenne,
+avec des fichiers plus légers.
+
+- Taille moyenne film ~ 3 à 6 Go par film
+- Classement qualité film ~ 4/10
+- Taille moyenne série ~ 1 à 2 Go par épisode
+- Classement qualité série ~ 4/10
+
+Fallback Efficient x265 et 720p, avec une échelle de score basée sur la taille des releases.', 1, 20000, 1000000, 1);
+INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
+VALUES ('1080p Efficient FR', '1080p Efficient FR cible des encodes Blu-ray et WEB x265 de bonne qualité, avec
 un bon compromis entre taille et rendu.
 
-- Taille moyenne film ~ 6 a 12 Go par film
-- Classement qualite film ~ 7/10
-- Taille moyenne serie ~ 2 a 3 Go par episode
-- Classement qualite serie ~ 6/10', 1, 20000, 1000000, 1);
+- Taille moyenne film ~ 6 à 12 Go par film
+- Classement qualité film ~ 7/10
+- Taille moyenne série ~ 2 à 3 Go par épisode
+- Classement qualité série ~ 6/10
+
+Fallback HDLight x265, puis WEB et Blu-ray x264.', 1, 20000, 1000000, 1);
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('1080p Quality FR', '1080p Quality FR utilise le [**Golden Popcorn Performance Index**](https://dictionarry.dev/wiki/gppi)
 pour cibler des encodes x264 1080p **transparents**.
 
-- Taille moyenne film ~ 10 a 15 Go par film
-- Classement qualite film ~ 8/10
-- Taille moyenne serie ~ 4 a 8 Go par episode
-- Classement qualite serie ~ 8/10', 1, 20000, 1000000, 1);
+- Taille moyenne film ~ 10 à 15 Go par film
+- Classement qualité film ~ 8/10
+- Taille moyenne série ~ 4 à 8 Go par épisode
+- Classement qualité série ~ 8/10
+
+Fallback Balanced et 720p, uniquement en x264 pour préserver la compatibilité client sans transcodage.', 1, 20000, 1000000, 1);
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('1080p Quality HDR FR', '1080p Quality HDR FR utilise le [**Golden Popcorn Performance Index**](https://dictionarry.dev/wiki/gppi)
 pour cibler des encodes x265 HDR 1080p **transparents**.
 
-- Taille moyenne film ~ 10 a 20 Go par film
-- Classement qualite film ~ 9/10
-- Taille moyenne serie ~ 4 a 10 Go par episode
-- Classement qualite serie ~ 9/10', 1, 20000, 1000000, 1);
-INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
-VALUES ('1080p Remux FR', '1080p Remux FR utilise les **formats audio** pour prioriser les BluRay HD
-lossless de haute qualite, avec un repli vers des encodes BluRay transparents.
+- Taille moyenne film ~ 10 à 20 Go par film
+- Classement qualité film ~ 9/10
+- Taille moyenne série ~ 4 à 10 Go par épisode
+- Classement qualité série ~ 9/10
 
-- Taille moyenne film ~ 20 a 30 Go par film
-- Classement qualite film ~ 10/10
-- Taille moyenne serie ~ 6 a 12 Go par episode
-- Classement qualite serie ~ 10/10', 1, 20000, 1000000, 1);
+x265 est accepté uniquement avec HDR afin d''éviter les réencodes x265 de sources x264.', 1, 20000, 1000000, 1);
+INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
+VALUES ('1080p Remux FR', '1080p Remux FR utilise les **formats audio** pour prioriser les Blu-ray HD
+lossless de haute qualité, avec un repli vers des encodes Blu-ray transparents.
+
+- Taille moyenne film ~ 20 à 30 Go par film
+- Classement qualité film ~ 10/10
+- Taille moyenne série ~ 6 à 12 Go par épisode
+- Classement qualité série ~ 10/10
+
+Fallback Quality, puis Balanced.', 1, 20000, 1000000, 1);
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('2160p Balanced FR', '2160p Balanced FR cible des **WEB-DL 2160p avec audio lossy** fiables et stables.
 
-- Taille moyenne film ~ 15 a 30 Go par film
-- Classement qualite film ~ 8/10
-- Taille moyenne serie ~ 5 a 15 Go par episode
-- Classement qualite serie ~ 8/10', 1, 20000, 1000000, 1);
+- Taille moyenne film ~ 15 à 30 Go par film
+- Classement qualité film ~ 8/10
+- Taille moyenne série ~ 5 à 15 Go par épisode
+- Classement qualité série ~ 8/10
+
+Fallback Quality 1080p, sans Blu-ray 2160p.', 1, 20000, 1000000, 1);
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('2160p Efficient FR', '2160p Efficient FR cible des **WEB-DL 2160p avec audio lossy** fiables et stables,
-avec un repli specialise vers 1080p Efficient.
+avec un repli spécialisé vers 1080p Efficient.
 
-- Taille moyenne film ~ 15 a 30 Go par film
-- Classement qualite film ~ 6/10
-- Taille moyenne serie ~ 4 a 12 Go par episode
-- Classement qualite serie ~ 6/10', 1, 20000, 1000000, 1);
+- Taille moyenne film ~ 15 à 30 Go par film
+- Classement qualité film ~ 6/10
+- Taille moyenne série ~ 4 à 12 Go par épisode
+- Classement qualité série ~ 6/10
+
+Fallback Efficient 1080p, sans Blu-ray 2160p.', 1, 20000, 1000000, 1);
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('2160p Quality FR', '2160p Quality FR utilise l''indice [**Encode Efficiency Index**](https://dictionarry.dev/wiki/eei)
 avec un ratio cible de 60 % pour prioriser des encodes x265 4K **transparents**.
 
-- Taille moyenne film ~ 30 a 50 Go par film
-- Classement qualite film ~ 9/10
-- Taille moyenne serie ~ 10 a 20 Go par episode
-- Classement qualite serie ~ 9/10', 1, 20000, 1000000, 1);
-INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
-VALUES ('2160p Remux FR', '2160p Remux FR utilise les **formats video et audio** pour prioriser les copies
-lossless de haute qualite issues de BluRay UHD.
+- Taille moyenne film ~ 30 à 50 Go par film
+- Classement qualité film ~ 9/10
+- Taille moyenne série ~ 10 à 20 Go par épisode
+- Classement qualité série ~ 9/10
 
-- Taille moyenne film ~ 40 a 60 Go par film
-- Classement qualite film ~ 10/10
-- Taille moyenne serie ~ 15 a 30 Go par episode
-- Classement qualite serie ~ 10/10', 1, 20000, 1000000, 1);
+Fallback Quality 1080p, avec Blu-ray et WEB-DL 2160p sans concession.', 1, 20000, 1000000, 1);
+INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
+VALUES ('2160p Remux FR', '2160p Remux FR utilise les **formats vidéo et audio** pour prioriser les copies
+lossless de haute qualité issues de Blu-ray UHD.
+
+- Taille moyenne film ~ 40 à 60 Go par film
+- Classement qualité film ~ 10/10
+- Taille moyenne série ~ 15 à 30 Go par épisode
+- Classement qualité série ~ 10/10
+
+Fallback Quality 2160p, sans concession.', 1, 20000, 1000000, 1);
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('720p Quality FR', '720p Quality FR utilise le [**Golden Popcorn Performance Index**](https://dictionarry.dev/wiki/gppi)
 pour cibler des encodes x264 720p **transparents**.
@@ -1158,7 +1178,7 @@ SELECT qp.name, cf.name, 'all', -999999
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Balanced FR' AND cf.name = 'French Missing';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 860000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Balanced FR' AND cf.name = '1080p WEB-DL';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -2206,15 +2226,15 @@ SELECT qp.name, cf.name, 'all', -999999
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality FR' AND cf.name = 'French Missing';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 380000
+SELECT qp.name, cf.name, 'all', 860000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality FR' AND cf.name = '1080p WEB-DL';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 880000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality FR' AND cf.name = '1080p Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 850000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality FR' AND cf.name = '1080p WEBRip';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -2558,15 +2578,15 @@ SELECT qp.name, cf.name, 'all', 420000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality HDR FR' AND cf.name = 'UHD Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 380000
+SELECT qp.name, cf.name, 'all', 860000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality HDR FR' AND cf.name = '1080p WEB-DL';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 880000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality HDR FR' AND cf.name = '1080p Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 850000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Quality HDR FR' AND cf.name = '1080p WEBRip';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -2926,15 +2946,15 @@ SELECT qp.name, cf.name, 'all', 420000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Remux FR' AND cf.name = 'UHD Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 380000
+SELECT qp.name, cf.name, 'all', 860000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Remux FR' AND cf.name = '1080p WEB-DL';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 880000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Remux FR' AND cf.name = '1080p Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 850000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '1080p Remux FR' AND cf.name = '1080p WEBRip';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -3326,15 +3346,15 @@ SELECT qp.name, cf.name, 'all', 420000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Balanced FR' AND cf.name = 'UHD Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 380000
+SELECT qp.name, cf.name, 'all', 860000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Balanced FR' AND cf.name = '1080p WEB-DL';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 880000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Balanced FR' AND cf.name = '1080p Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 850000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Balanced FR' AND cf.name = '1080p WEBRip';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -4166,15 +4186,15 @@ SELECT qp.name, cf.name, 'all', 420000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Quality FR' AND cf.name = 'UHD Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 380000
+SELECT qp.name, cf.name, 'all', 860000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Quality FR' AND cf.name = '1080p WEB-DL';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 880000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Quality FR' AND cf.name = '1080p Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 850000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Quality FR' AND cf.name = '1080p WEBRip';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -4618,15 +4638,15 @@ SELECT qp.name, cf.name, 'all', 420000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Remux FR' AND cf.name = 'UHD Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 380000
+SELECT qp.name, cf.name, 'all', 860000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Remux FR' AND cf.name = '1080p WEB-DL';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 880000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Remux FR' AND cf.name = '1080p Bluray';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'all', 280000
+SELECT qp.name, cf.name, 'all', 850000
 FROM quality_profiles qp, custom_formats cf
 WHERE qp.name = '2160p Remux FR' AND cf.name = '1080p WEBRip';
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
@@ -6134,14 +6154,15 @@ UPDATE quality_profile_custom_formats SET score = 320000 WHERE quality_profile_n
 UPDATE quality_profile_custom_formats SET score = 420000 WHERE quality_profile_name IN ('1080p Balanced FR', '1080p Compact FR', '1080p Efficient FR', '1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Efficient FR', '2160p Quality FR', '2160p Remux FR', '720p Quality FR') AND custom_format_name = '576p Bluray';
 UPDATE quality_profile_custom_formats SET score = 540000 WHERE quality_profile_name IN ('1080p Balanced FR', '1080p Compact FR', '1080p Efficient FR', '1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Efficient FR', '2160p Quality FR', '2160p Remux FR', '720p Quality FR') AND custom_format_name IN ('720p Bluray', '720p WEBRip');
 UPDATE quality_profile_custom_formats SET score = 660000 WHERE quality_profile_name IN ('1080p Balanced FR', '1080p Compact FR', '1080p Efficient FR', '1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Efficient FR', '2160p Quality FR', '2160p Remux FR', '720p Quality FR') AND custom_format_name = '720p WEB-DL';
-UPDATE quality_profile_custom_formats SET score = 700000 WHERE quality_profile_name IN ('1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Quality FR', '2160p Remux FR') AND custom_format_name IN ('1080p Bluray', '1080p WEBRip');
+UPDATE quality_profile_custom_formats SET score = 890000 WHERE quality_profile_name IN ('1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Quality FR', '2160p Remux FR') AND custom_format_name = '1080p Bluray';
+UPDATE quality_profile_custom_formats SET score = 850000 WHERE quality_profile_name IN ('1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Quality FR', '2160p Remux FR') AND custom_format_name = '1080p WEBRip';
 UPDATE quality_profile_custom_formats SET score = 860000 WHERE quality_profile_name IN ('1080p Balanced FR', '1080p Quality FR', '1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Quality FR', '2160p Remux FR') AND custom_format_name = '1080p WEB-DL';
-UPDATE quality_profile_custom_formats SET score = 720000 WHERE quality_profile_name IN ('1080p Remux FR', '2160p Remux FR') AND custom_format_name = '1080p Bluray';
-UPDATE quality_profile_custom_formats SET score = 710000 WHERE quality_profile_name IN ('1080p Remux FR', '2160p Remux FR') AND custom_format_name = '1080p WEB-DL';
+UPDATE quality_profile_custom_formats SET score = 890000 WHERE quality_profile_name IN ('1080p Remux FR', '2160p Remux FR') AND custom_format_name = '1080p Bluray';
+UPDATE quality_profile_custom_formats SET score = 860000 WHERE quality_profile_name IN ('1080p Remux FR', '2160p Remux FR') AND custom_format_name = '1080p WEB-DL';
 UPDATE quality_profile_custom_formats SET score = 860000 WHERE quality_profile_name IN ('1080p Compact FR', '1080p Efficient FR', '2160p Efficient FR') AND custom_format_name = '1080p WEB-DL (h264)';
 UPDATE quality_profile_custom_formats SET score = 840000 WHERE quality_profile_name IN ('1080p Quality HDR FR', '1080p Remux FR', '2160p Balanced FR', '2160p Quality FR', '2160p Remux FR') AND custom_format_name = 'UHD Bluray';
 UPDATE quality_profile_custom_formats SET score = 920000 WHERE quality_profile_name IN ('2160p Balanced FR', '2160p Quality FR', '2160p Remux FR') AND custom_format_name = '2160p WEB-DL';
-UPDATE quality_profile_custom_formats SET score = 920000 WHERE quality_profile_name IN ('1080p Remux FR', '2160p Remux FR') AND custom_format_name = '1080p Remux';
+UPDATE quality_profile_custom_formats SET score = 910000 WHERE quality_profile_name IN ('1080p Remux FR', '2160p Remux FR') AND custom_format_name = '1080p Remux';
 UPDATE quality_profile_custom_formats SET score = 980000 WHERE quality_profile_name = '2160p Remux FR' AND custom_format_name = '2160p Remux';
 UPDATE quality_profile_custom_formats SET arr_type = 'radarr' WHERE quality_profile_name IN ('1080p Balanced FR', '1080p Compact FR', '1080p Efficient FR', '1080p Quality FR', '1080p Quality HDR FR', '2160p Balanced FR', '2160p Efficient FR', '2160p Quality FR', '720p Quality FR') AND custom_format_name = '1080p WEBRip' AND arr_type = 'all';
 
@@ -6151,8 +6172,8 @@ WHERE qp.name IN ('1080p Balanced FR', '1080p Compact FR', '1080p Efficient FR',
   AND cf.name = '576p WEB-DL';
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score)
-SELECT qp.name, cf.name, 'radarr', 700000 FROM quality_profiles qp, custom_formats cf
-WHERE qp.name IN ('1080p Efficient FR', '2160p Efficient FR') AND cf.name = '1080p Bluray (Efficient)';
+SELECT qp.name, cf.name, 'radarr', 840000 FROM quality_profiles qp, custom_formats cf
+WHERE qp.name IN ('1080p Efficient FR', '2160p Efficient FR') AND cf.name = '1080p Bluray AVC';
 
 -- Streaming-service adjustments from Dictionarry V2 that do not depend on release groups.
 UPDATE quality_profile_custom_formats SET score = 2000

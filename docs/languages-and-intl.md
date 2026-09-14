@@ -41,6 +41,8 @@ Les CF `INTL` demandent donc une preuve supplémentaire sous la forme d'une team
 
 Les teams sont récupérées automatiquement depuis les regex portant les tags `French` et `Release Group`. Pour `MULTi` comme pour `MultiSub`, les chemins `Team FR` et `Marker FR` sont mutuellement exclusifs afin d'éviter le double score. Une release `MULTi.VFF-TeamFR` utilise uniquement `French MULTi + Marker FR (INTL)`, tandis qu'une release `MultiSub.FR-TeamFR` utilise uniquement `French MultiSub + Marker FR (INTL)`.
 
+Les teams spécialisées de `FR Anime SubFr` et `FR Anime FanSub` ne servent pas de preuve pour `French MULTi + Team FR (INTL)`, car leur spécialité ne garantit pas une piste audio française. Elles restent en revanche des preuves valides pour `French MultiSub + Team FR (INTL)`. Un marqueur français explicite continue naturellement de fonctionner quelle que soit la team.
+
 Pour adapter un profil aux indexeurs internationaux:
 
 1. Retirez `French MULTi`
