@@ -34,7 +34,7 @@ Cette recommandation vaut pour toutes les bases utilisées avec Profilarr, pas u
 ## Ce que contient la DB
 
 - Regex atomiques pour les teams FR.
-- Custom Formats FR de langue: `French MULTi`, `French Original`, `French VF`, `French VOSTFR`, `French VFQ`, `French Missing`.
+- Custom Formats FR de langue: `French MULTi`, `French Original`, `French VF`, `French VOSTFR`, `French VFQ`, `French Missing` et `Dubbed`.
 - Custom Formats `INTL` pour les trackers internationaux.
 - Langues MediaInfo conservées sous la forme `[audio]([sous-titres])` au renommage pour que les Custom Formats de langue restent détectables après l'import.
 - Quatre tiers de teams FR communs à toutes les sources et tous les profils, construits à partir des anciens classements WEB, Bluray, Remux, Anime et Scene.

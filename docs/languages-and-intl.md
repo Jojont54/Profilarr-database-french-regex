@@ -13,6 +13,7 @@ Cette page présente les Custom Formats de langue et leur utilisation selon le t
 - `French VF`: doublage français `VF`, `VFF`, `VFI`, `TRUEFRENCH` ou équivalent
 - `French VOSTFR`: audio original avec sous-titres français
 - `French VFQ`: doublage québécois ou canadien
+- `Dubbed`: release explicitement marquée `DUB`, `DUBBED` ou `ENGLISH` après une année ou un marqueur de saison
 
 ### Pour les indexeurs francophones
 
@@ -133,7 +134,7 @@ EN+FR
 
 Les mots ou codes de langue intermédiaires sont acceptés, ainsi que les séparateurs `.`, `_`, `-`, `+`, `&`, `/` et `,`. Quand une release matche `French MULTi`, les conditions d'exclusion empêchent le cumul avec `French VF` ou `French VOSTFR`.
 
-`French Original` utilise les métadonnées Radarr/Sonarr. Sa détection est volontairement stricte: le français doit être la seule langue détectée et aussi la langue originale. Les marqueurs `VOF` et `VOQ` sont gérés par `French Original Marker` afin de couvrir les titres qui les conservent explicitement.
+`French Original` utilise les métadonnées Radarr/Sonarr. Sa détection est volontairement stricte: le français doit être la seule langue détectée et aussi la langue originale. Une release marquée `DUB`, `DUBBED` ou `ENGLISH` après les informations d'identification du média en est explicitement exclue. Les marqueurs `VOF` et `VOQ` sont gérés par `French Original Marker` afin de couvrir les titres qui les conservent explicitement.
 
 `French VF` reconnaît les marqueurs `VF`, `VFF`, `VFI`, `TRUEFRENCH`, `FRENCH`, `FRANCAIS`, `FRANÇAIS`, `FR`, `FRE` et `FRA`. Les trois codes courts doivent être entourés par le début ou la fin du titre, un point, un tiret ou un espace.
 

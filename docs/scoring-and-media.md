@@ -48,6 +48,12 @@ Les teams de `FR LQ` sont exclues des quatre tiers positifs, y compris du Tier 4
 
 Le score de team est un bonus distinct du score technique. Une release peut ainsi cumuler son tier avec sa source, sa résolution, son codec, son audio et ses formats HDR, sans que la team impose elle-même l'une de ces caractéristiques.
 
+## Freeleech et Halfleech
+
+Les Custom Formats `Freeleech` et `Halfleech` utilisent les drapeaux transmis par l'indexeur. Ils reçoivent respectivement `+4` et `+2` dans tous les profils FR. Ces faibles bonus servent uniquement à départager des releases dont les autres critères sont comparables.
+
+L'incrément minimal d'upgrade est fixé à `5`. Un drapeau Freeleech ou Halfleech ne peut donc pas provoquer seul un nouveau téléchargement après import. Les scores `Repack1`, `Repack2` et `Repack3` sont fixés à `+5`, `+10` et `+15`: chaque niveau de Repack reste ainsi une amélioration valide. `Season Pack`, scoré à `+10`, reste également prioritaire dans Sonarr.
+
 ## Bans
 
 Utilisez un score très négatif pour interdire:
@@ -134,6 +140,8 @@ Avant de toucher aux tailles ou aux scores, il faut distinguer trois couches:
 
 Les Quality Definitions définissent les limites de taille globales par qualité, en Mo/min, pour toute l'instance Radarr ou Sonarr. Ce n'est pas un réglage par profil: si vous changez la limite du `1080p WEB-DL`, elle s'applique à tous les profils qui utilisent cette qualité.
 
+La DB ne peut donc pas appliquer des Quality Definitions différentes selon le Quality Profile sélectionné. Les tailles moyennes indiquées dans la description de chaque profil, par exemple `4 à 8 Go par film` pour `1080p Balanced FR`, sont des objectifs indicatifs. Elles ne deviennent pas automatiquement des limites de téléchargement.
+
 Il vaut donc mieux les utiliser comme garde-fou large, par exemple pour refuser un fichier beaucoup trop petit ou beaucoup trop gros. Le choix fin entre deux bonnes releases doit rester dans les Custom Formats et les scores du profil.
 
 Exemples de réglages de départ, à adapter selon vos trackers et votre stockage:
@@ -155,7 +163,11 @@ Usage Quality / Remux
 Remux                 : laissez très permissif si vous utilisez un profil Remux
 ```
 
-Pour Sonarr, soyez plus souple que pour Radarr: un épisode de 20 minutes, un épisode de 55 minutes, un double épisode et un season pack ne se comportent pas pareil. Des limites trop agressives peuvent rejeter de bonnes releases avant même que les Custom Formats aient pu les classer.
+Pour approcher les tailles annoncées dans la description d'un profil, vous devez régler manuellement les Quality Definitions de l'instance. Comme les limites sont exprimées en Mo/min, Radarr et Sonarr calculent ensuite la taille autorisée en fonction de la durée du film ou de l'épisode.
+
+Si l'instance utilise un seul profil, choisissez des limites assez larges pour couvrir les tailles indiquées dans sa description. Si plusieurs profils sont utilisés, le compromis le plus sûr consiste à prendre une limite minimale adaptée au profil qui accepte les fichiers les plus légers, puis une limite maximale adaptée au profil qui accepte les fichiers les plus volumineux. Par exemple, une instance utilisant à la fois `1080p Compact FR` et `1080p Remux FR` doit laisser passer les petits encodes Compact comme les gros Remux.
+
+Cette enveloppe commune évite les rejets prématurés, mais elle ne peut pas imposer une taille différente à chaque profil. Le classement fin reste assuré par les Custom Formats et leurs scores. Pour obtenir des limites strictement différentes selon les usages, il faut utiliser des Custom Formats de taille propres à chaque profil ou séparer les bibliothèques dans plusieurs instances Radarr/Sonarr.
 
 ### Custom Formats de taille
 
