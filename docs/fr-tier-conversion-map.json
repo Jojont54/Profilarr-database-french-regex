@@ -185,6 +185,7 @@
       "MiniPousses",
       "MiTOU",
       "Monkey D Lulu",
+      "MTLQC",
       "NeoSG",
       "NODA",
       "NYX",
@@ -429,11 +430,11 @@
   },
   "validation": {
     "pcd_schema": "1.1.0",
-    "team_regex_count": 425,
+    "team_regex_count": 426,
     "generic_tier_counts": {
       "FR Team Tier 1": 55,
       "FR Team Tier 2": 66,
-      "FR Team Tier 3": 54,
+      "FR Team Tier 3": 55,
       "FR Team Tier 4": 127
     },
     "anime_specialist_count": 15,
